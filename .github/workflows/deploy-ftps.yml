@@ -41,7 +41,7 @@ jobs:
   build-and-deploy:
     name: Build and deploy via explicit FTPS
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
 
     steps:
       - name: Checkout production branch
@@ -84,7 +84,8 @@ jobs:
           mkdir -p "$release_dir" "$runtime_asset_dir"
 
           # Keep server-owned environment, runtime data, and manually managed
-          # public uploads outside the FTPS release package.
+          # public uploads outside the FTPS release package. vendor/ is included
+          # for the first deployment because FTP cannot run Composer remotely.
           rsync -a --delete \
             --exclude='.git/' \
             --exclude='.github/' \
@@ -112,7 +113,7 @@ jobs:
           fi
 
           test -f "$release_dir/artisan"
-          test -f "$release_dir/vendor/autoload.php"
+
           test -f "$release_dir/public/index.php"
           test -f "$release_dir/public/build/manifest.json"
           test -f "$release_dir/public/build/public/site.min.css"
@@ -171,7 +172,7 @@ jobs:
 
             # No --delete is intentional: public/uploads, .env, and runtime
             # data are owned by the hosting account and must survive releases.
-            printf 'mirror -R --verbose --parallel=4 --no-perms --no-umask "%s" .\n' "$RELEASE_DIR"
+            printf 'mirror -R --verbose --parallel=12 --no-perms --no-umask "%s" .\n' "$RELEASE_DIR"
 
             if [ -d "$RUNTIME_ASSET_DIR/uploads/blog-import" ]; then
               runtime_target='storage/app/public/uploads/blog-import'
@@ -179,7 +180,7 @@ jobs:
                 runtime_target="$FTP_REMOTE_ROOT/$runtime_target"
               fi
               printf 'mkdir -p "%s"\n' "$runtime_target"
-              printf 'mirror -R --verbose --parallel=4 --no-perms --no-umask "%s" "%s"\n' "$RUNTIME_ASSET_DIR/uploads/blog-import" "$runtime_target"
+              printf 'mirror -R --verbose --parallel=12 --no-perms --no-umask "%s" "%s"\n' "$RUNTIME_ASSET_DIR/uploads/blog-import" "$runtime_target"
             fi
           } > "$lftp_config"
 
@@ -189,4 +190,4 @@ jobs:
         run: |
           echo "FTPS release uploaded to ${FTP_HOST:-configured host}:${FTP_PORT}"
           echo "Remote root: ${FTP_REMOTE_ROOT:-FTP home}"
-          echo 'The workflow did not upload .env, SQL dumps, vendor cache, or public/uploads.'
+          echo 'The workflow did not upload .env, SQL dumps, node_modules, or public/uploads.'
