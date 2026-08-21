@@ -177,7 +177,7 @@ jobs:
             fi
           } > "$lftp_config"
 
-          lftp --norc --config="$lftp_config"
+          lftp --norc -f "$lftp_config"
 
       - name: Deployment summary
         run: |
