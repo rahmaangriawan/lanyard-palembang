@@ -108,7 +108,7 @@
           <div class="home-why-us__circle">
             <svg class="home-why-us__icon" viewBox="0 0 24 24" fill="none" stroke="#9E0C17" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="1" y="3" width="15" height="13" rx="1"/>
-              <polygon points="16 8 20 8 23 11 23 16 16 16 8"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
               <circle cx="5.5" cy="18.5" r="2.5"/>
               <circle cx="18.5" cy="18.5" r="2.5"/>
             </svg>

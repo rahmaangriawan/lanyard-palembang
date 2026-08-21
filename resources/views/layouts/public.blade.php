@@ -52,8 +52,8 @@
 
     @if(request()->is('/'))
     <link rel="preload" href="/uploads/hero-lanyard-medan.webp" as="image" type="image/webp" fetchpriority="high"
-      imagesrcset="/uploads/hero-lanyard-medan-320w.webp 320w, /uploads/hero-lanyard-medan-640w.webp 640w, /uploads/hero-lanyard-medan-960w.webp 960w, /uploads/hero-lanyard-medan-1280w.webp 1280w"
-      imagesizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 620px">
+      imagesrcset="/uploads/hero-lanyard-medan-320w.webp 320w, /uploads/hero-lanyard-medan-640w.webp 640w, /uploads/hero-lanyard-medan-960w.webp 960w, /uploads/hero-lanyard-medan-1280w.webp 1280w, /uploads/hero-lanyard-medan.webp 1448w"
+      imagesizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 680px">
     @endif
     @if(request()->routeIs('ordering'))
     <link rel="preload" href="/uploads/hero-cara-pemesanan-lanyard.webp" as="image" type="image/webp" fetchpriority="high">
