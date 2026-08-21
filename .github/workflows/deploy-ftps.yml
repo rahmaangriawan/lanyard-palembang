@@ -1,6 +1,9 @@
 name: Deploy Lanyard Medan via FTPS
 
 on:
+  push:
+    branches:
+      - prod-ready
   workflow_dispatch:
     inputs:
       remote_root:
@@ -15,8 +18,8 @@ on:
         type: boolean
 
 concurrency:
-  group: lanyard-medan-ftps-production
-  cancel-in-progress: false
+  group: lanyard-medan-ftps-production-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
