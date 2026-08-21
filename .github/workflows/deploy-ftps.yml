@@ -1,0 +1,183 @@
+name: Deploy Lanyard Medan via FTPS
+
+on:
+  workflow_dispatch:
+    inputs:
+      remote_root:
+        description: "Path relatif dari FTP home. Pakai lanyardmedan.com jika FTP home=/home/lanyardb; kosongkan jika akun sudah chroot ke folder aplikasi."
+        required: false
+        default: "lanyardmedan.com"
+        type: string
+      allow_invalid_certificate:
+        description: "Izinkan sertifikat FTPS tidak valid (hanya jika sudah dikonfirmasi perlu)."
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: lanyard-medan-ftps-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  PHP_VERSION: "8.3"
+  NODE_VERSION: "22"
+  FTP_PORT: ${{ vars.FTP_PORT || '21' }}
+  FTP_REMOTE_ROOT: ${{ inputs.remote_root || vars.FTP_REMOTE_ROOT || 'lanyardmedan.com' }}
+  FTP_ALLOW_INVALID_CERTIFICATE: ${{ inputs.allow_invalid_certificate || false }}
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy via explicit FTPS
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout production branch
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: dom, fileinfo, gd, mbstring, pdo_mysql, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate Composer files
+        run: composer validate --no-check-publish
+
+      - name: Install production PHP dependencies
+        run: composer install --no-dev --prefer-dist --optimize-autoloader --no-progress --no-interaction
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build production assets
+        run: npm run build
+
+      - name: Prepare release package
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          release_dir="$RUNNER_TEMP/lanyard-medan-release"
+          runtime_asset_dir="$RUNNER_TEMP/lanyard-medan-runtime-assets"
+          rm -rf "$release_dir" "$runtime_asset_dir"
+          mkdir -p "$release_dir" "$runtime_asset_dir"
+
+          # Keep server-owned environment, runtime data, and manually managed
+          # public uploads outside the FTPS release package.
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.agents/' \
+            --exclude='.zcode/' \
+            --exclude='graphify-out/' \
+            --exclude='.env' \
+            --exclude='.env.*' \
+            --exclude='node_modules/' \
+            --exclude='tests/' \
+            --exclude='storage/' \
+            --exclude='bootstrap/cache/' \
+            --exclude='public/hot' \
+            --exclude='public/storage' \
+            --exclude='public/uploads/' \
+            --exclude='database/*.sql' \
+            --exclude='.phpunit.result.cache' \
+            ./ "$release_dir/"
+
+          # These tracked blog thumbnails live below the public storage disk,
+          # so deploy them separately without replacing other server uploads.
+          if [ -d storage/app/public/uploads/blog-import ]; then
+            mkdir -p "$runtime_asset_dir/uploads/blog-import"
+            rsync -a storage/app/public/uploads/blog-import/ "$runtime_asset_dir/uploads/blog-import/"
+          fi
+
+          test -f "$release_dir/artisan"
+          test -f "$release_dir/vendor/autoload.php"
+          test -f "$release_dir/public/index.php"
+          test -f "$release_dir/public/build/manifest.json"
+          test -f "$release_dir/public/build/public/site.min.css"
+          test -f "$release_dir/public/build/public/site.min.js"
+
+          if find "$release_dir" -type f \( -name '.env' -o -name '*.sql' \) -print -quit | grep -q .; then
+            echo 'Release contains a forbidden environment or SQL dump file.' >&2
+            exit 1
+          fi
+
+          echo "RELEASE_DIR=$release_dir" >> "$GITHUB_ENV"
+          echo "RUNTIME_ASSET_DIR=$runtime_asset_dir" >> "$GITHUB_ENV"
+
+      - name: Install lftp
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes lftp
+
+      - name: Upload release over explicit FTPS
+        shell: bash
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          : "${FTP_HOST:?Missing FTP_HOST repository secret}"
+          : "${FTP_USERNAME:?Missing FTP_USERNAME repository secret}"
+          : "${FTP_PASSWORD:?Missing FTP_PASSWORD repository secret}"
+
+          lftp_config="$(mktemp)"
+          cleanup() {
+            rm -f "$lftp_config"
+          }
+          trap cleanup EXIT
+
+          {
+            printf '%s\n' 'set ftp:ssl-force true'
+            printf '%s\n' 'set ftp:ssl-protect-data true'
+            printf '%s\n' 'set ftp:ssl-protect-list true'
+            printf '%s\n' 'set ftp:passive-mode true'
+            printf '%s\n' 'set net:max-retries 2'
+            printf '%s\n' 'set net:timeout 30'
+            if [ "$FTP_ALLOW_INVALID_CERTIFICATE" = 'true' ]; then
+              printf '%s\n' 'set ssl:verify-certificate false'
+            else
+              printf '%s\n' 'set ssl:verify-certificate true'
+            fi
+            printf 'open -u "%s","%s" -p %s ftp://%s\n' "$FTP_USERNAME" "$FTP_PASSWORD" "$FTP_PORT" "$FTP_HOST"
+
+            if [ -n "$FTP_REMOTE_ROOT" ]; then
+              printf 'mkdir -p "%s"\n' "$FTP_REMOTE_ROOT"
+              printf 'cd "%s"\n' "$FTP_REMOTE_ROOT"
+            fi
+
+            # No --delete is intentional: public/uploads, .env, and runtime
+            # data are owned by the hosting account and must survive releases.
+            printf 'mirror -R --verbose --parallel=4 --no-perms --no-umask "%s" .\n' "$RELEASE_DIR"
+
+            if [ -d "$RUNTIME_ASSET_DIR/uploads/blog-import" ]; then
+              runtime_target='storage/app/public/uploads/blog-import'
+              if [ -n "$FTP_REMOTE_ROOT" ]; then
+                runtime_target="$FTP_REMOTE_ROOT/$runtime_target"
+              fi
+              printf 'mkdir -p "%s"\n' "$runtime_target"
+              printf 'mirror -R --verbose --parallel=4 --no-perms --no-umask "%s" "%s"\n' "$RUNTIME_ASSET_DIR/uploads/blog-import" "$runtime_target"
+            fi
+          } > "$lftp_config"
+
+          lftp --norc --config="$lftp_config"
+
+      - name: Deployment summary
+        run: |
+          echo "FTPS release uploaded to ${FTP_HOST:-configured host}:${FTP_PORT}"
+          echo "Remote root: ${FTP_REMOTE_ROOT:-FTP home}"
+          echo 'The workflow did not upload .env, SQL dumps, vendor cache, or public/uploads.'
