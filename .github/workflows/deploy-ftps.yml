@@ -9,7 +9,7 @@ on:
       remote_root:
         description: "Path relatif dari FTP home. Pakai lanyardmedan.com jika FTP home=/home/lanyardb; kosongkan jika akun sudah chroot ke folder aplikasi."
         required: false
-        default: "lanyardmedan.com"
+        default: ""
         type: string
       allow_invalid_certificate:
         description: "Izinkan sertifikat FTPS tidak valid (hanya jika sudah dikonfirmasi perlu)."
