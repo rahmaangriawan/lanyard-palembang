@@ -937,7 +937,7 @@
   }
 }
 
-/* Lanyard Jogja service-page refresh: keep the existing content and routes,
+/* Lanyard Medan service-page refresh: keep the existing content and routes,
  * but bring the public presentation in line with the warm homepage system. */
 .services-page {
   --services-terracotta: var(--brand-primary);
@@ -1439,7 +1439,7 @@
 }
 
 /* Service hero variation: a light editorial split keeps the page distinct
- * from the homepage hero while using the same Jogja color tokens. */
+ * from the homepage hero while using the same Medan color tokens. */
 .services-page .info-hero {
   padding: 58px 0 96px;
   background:

@@ -42,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
 
         RateLimiter::for('login-global', fn (Request $request) => Limit::perMinute(20)
             ->by('login-global|'.$request->ip()));
+        RateLimiter::for('login-identity', fn (Request $request) => Limit::perMinutes(5, 10)
+            ->by('login-identity|'.Str::transliterate(Str::lower(trim((string) $request->input('email'))))));
         RateLimiter::for('password-email', fn (Request $request) => Limit::perMinute(3)
             ->by('password-email|'.Str::lower(trim((string) $request->input('email'))).'|'.$request->ip()));
         RateLimiter::for('password-reset', fn (Request $request) => Limit::perMinute(5)
@@ -58,8 +60,20 @@ class AppServiceProvider extends ServiceProvider
         ]);
         RateLimiter::for('public-api', fn (Request $request) => Limit::perMinute(120)
             ->by('public-api|'.$request->ip()));
+        RateLimiter::for('public-sitemap', fn (Request $request) => Limit::perMinute(30)
+            ->by('public-sitemap|'.$request->ip()));
+        RateLimiter::for('public-product-search', fn (Request $request) => Limit::perMinute(60)
+            ->by('public-product-search|'.$request->ip()));
+        RateLimiter::for('public-posts', fn (Request $request) => Limit::perMinute(60)
+            ->by('public-posts|'.$request->ip()));
         RateLimiter::for('cms-api', fn (Request $request) => Limit::perMinute(120)
             ->by('cms-api|'.($request->user()?->getAuthIdentifier() ?: $request->ip())));
+        RateLimiter::for('cms-web', fn (Request $request) => Limit::perMinute(60)
+            ->by('cms-web|'.($request->user()?->getAuthIdentifier() ?: 'guest').'|'.$request->ip()));
+        RateLimiter::for('auth-confirm', fn (Request $request) => Limit::perMinutes(5, 10)
+            ->by('auth-confirm|'.($request->user()?->getAuthIdentifier() ?: 'guest').'|'.$request->ip()));
+        RateLimiter::for('auth-password', fn (Request $request) => Limit::perMinutes(5, 5)
+            ->by('auth-password|'.($request->user()?->getAuthIdentifier() ?: 'guest').'|'.$request->ip()));
 
         Vite::prefetch(concurrency: 3);
     }

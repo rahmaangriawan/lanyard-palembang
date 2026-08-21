@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login - Lanyard Jogja CMS</title>
+    <title>Login - Lanyard Medan CMS</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -250,13 +250,13 @@
       <div class="auth-panel">
         <section class="auth-brand">
           <a class="auth-brand__top" href="{{ route('dashboard') }}">
-            <img class="auth-brand__logo" src="/uploads/lanyard-jogja-logo.webp" alt="Lanyard Jogja" />
+            <img class="auth-brand__logo" src="/uploads/lanyard-medan-logo.webp" alt="Lanyard Medan" />
           </a>
 
           <div>
             <p class="auth-brand__eyebrow">Dashboard Internal</p>
             <h1 class="auth-brand__title">Kelola CMS tanpa ribet.</h1>
-            <p class="auth-brand__copy">Atur konten, produk, media, inquiry, dan pengaturan website Lanyard Jogja dari satu panel yang rapi.</p>
+            <p class="auth-brand__copy">Atur konten, produk, media, inquiry, dan pengaturan website Lanyard Medan dari satu panel yang rapi.</p>
           </div>
         </section>
 
@@ -264,7 +264,7 @@
           <div class="auth-form-card">
             <p class="auth-form__eyebrow">Login Dashboard</p>
             <h1 class="auth-form__title">Masuk ke Kawruh CMS</h1>
-            <p class="auth-form__copy">Gunakan akun admin Lanyard Jogja untuk mengelola website.</p>
+            <p class="auth-form__copy">Gunakan akun admin Lanyard Medan untuk mengelola website.</p>
 
             @if($status)
               <div class="alert alert--success" style="margin-top: 1.25rem;">{{ $status }}</div>
@@ -298,8 +298,10 @@
                 @endif
               </div>
 
-              @if($turnstileEnabled)
-                <div class="auth-turnstile">
+            @if($turnstileMisconfigured)
+              <div class="alert alert--danger" style="margin-top: 1.25rem;">Verifikasi keamanan belum dikonfigurasi. Hubungi administrator.</div>
+            @elseif($turnstileEnabled)
+              <div class="auth-turnstile">
                   <div class="cf-turnstile" data-sitekey="{{ $turnstileSiteKey }}" data-theme="light" data-language="id"></div>
                 </div>
               @endif

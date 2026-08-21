@@ -21,7 +21,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->admin()->create();
 
         $response = $this->post('/login', [
             'email' => $user->email,
@@ -41,7 +41,7 @@ class AuthenticationTest extends TestCase
 
     public function test_authenticated_users_are_not_sent_to_kawruh_login(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->admin()->create();
 
         $response = $this->actingAs($user)->get('/kawruh/login');
 
@@ -50,7 +50,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_not_authenticate_with_invalid_password(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->admin()->create();
 
         $this->post('/login', [
             'email' => $user->email,
@@ -62,7 +62,7 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_logout(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->admin()->create();
 
         $response = $this->actingAs($user)->post('/logout');
 
@@ -86,7 +86,7 @@ class AuthenticationTest extends TestCase
 
     public function test_login_is_rejected_when_turnstile_is_missing(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->admin()->create();
         SecureSettings::put('turnstile_login_enabled', 'true');
         SecureSettings::put('turnstile_site_key', 'test-site-key');
         SecureSettings::put('turnstile_secret_key', 'test-secret-key');
@@ -104,7 +104,7 @@ class AuthenticationTest extends TestCase
         Http::fake([
             'challenges.cloudflare.com/turnstile/v0/siteverify' => Http::response(['success' => true]),
         ]);
-        $user = User::factory()->create();
+        $user = User::factory()->admin()->create();
         SecureSettings::put('turnstile_login_enabled', 'true');
         SecureSettings::put('turnstile_site_key', 'test-site-key');
         SecureSettings::put('turnstile_secret_key', 'test-secret-key');

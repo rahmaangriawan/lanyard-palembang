@@ -24,6 +24,7 @@ class AuthenticatedSessionController extends Controller
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
             'turnstileEnabled' => $turnstile['enabled'],
+            'turnstileMisconfigured' => $turnstile['misconfigured'],
             'turnstileSiteKey' => $turnstile['siteKey'],
         ]);
     }

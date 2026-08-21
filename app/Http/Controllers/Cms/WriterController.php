@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AuthorSlugRedirect;
 use App\Models\Post;
 use App\Models\User;
+use App\Rules\SafePublicUrl;
 use App\Support\AuthorProfile;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -46,9 +47,9 @@ class WriterController extends Controller
                 'bio' => $data['bio'] ?? null,
                 'avatar' => $data['avatar'] ?? null,
                 'password' => $data['password'],
-                'role' => User::ROLE_WRITER,
                 'email_verified_at' => now(),
             ]);
+            $writer->role = User::ROLE_WRITER;
             $writer->slug = AuthorProfile::nextSlug($writer, $writer->name);
             $writer->save();
         });
@@ -75,9 +76,9 @@ class WriterController extends Controller
                 'email' => $data['email'],
                 'bio' => $data['bio'] ?? null,
                 'avatar' => $data['avatar'] ?? null,
-                'role' => User::ROLE_WRITER,
                 'email_verified_at' => $writer->email_verified_at ?? now(),
             ]);
+            $writer->role = User::ROLE_WRITER;
 
             if (! empty($data['password'])) {
                 $writer->password = $data['password'];
@@ -149,7 +150,7 @@ class WriterController extends Controller
                 Rule::unique(User::class)->ignore($writer?->id),
             ],
             'bio' => ['nullable', 'string', 'max:600'],
-            'avatar' => ['nullable', 'string', 'max:255'],
+            'avatar' => ['nullable', 'string', 'max:255', new SafePublicUrl],
             'password' => [
                 $writer ? 'nullable' : 'required',
                 'confirmed',

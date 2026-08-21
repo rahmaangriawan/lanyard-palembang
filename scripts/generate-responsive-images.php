@@ -26,7 +26,7 @@ $public = dirname(__DIR__).DIRECTORY_SEPARATOR.'public';
 $variants = [
     ['/uploads/hero-lanyard-slider-01.webp', [320, 640], 76],
     ['/uploads/hero-lanyard-slider-02.webp', [320, 640], 76],
-    ['/uploads/hero-lanyard-jogja.webp', [480, 768, 1024], 76],
+    ['/uploads/hero-lanyard-medan.webp', [480, 768, 1024], 76],
     ['/uploads/aset-produk.webp', [320, 640], 76],
     ['/uploads/home-categories/lanyard-id-card-custom.webp', [320, 480, 640], 76],
     ['/uploads/home-categories/cetak-lanyard-warna.webp', [320, 480, 640], 76],

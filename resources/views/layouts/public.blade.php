@@ -40,7 +40,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/webp" sizes="1024x1024" href="/uploads/lanyard-jogja-favicon.webp">
+    <link rel="icon" type="image/webp" sizes="1024x1024" href="/uploads/lanyard-medan-favicon.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     {{-- Web App Manifest --}}
@@ -51,8 +51,8 @@
     <link rel="preload" href="/font-assets/geist-700" as="font" type="font/woff2" crossorigin>
 
     @if(request()->is('/'))
-    <link rel="preload" href="/uploads/hero-lanyard-jogja.webp" as="image" type="image/webp" fetchpriority="high"
-      imagesrcset="/uploads/hero-lanyard-jogja-480w.webp 480w, /uploads/hero-lanyard-jogja-768w.webp 768w, /uploads/hero-lanyard-jogja-1024w.webp 1024w"
+    <link rel="preload" href="/uploads/hero-lanyard-medan.webp" as="image" type="image/webp" fetchpriority="high"
+      imagesrcset="/uploads/hero-lanyard-medan-320w.webp 320w, /uploads/hero-lanyard-medan-640w.webp 640w, /uploads/hero-lanyard-medan-960w.webp 960w, /uploads/hero-lanyard-medan-1280w.webp 1280w"
       imagesizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 620px">
     @endif
     @if(request()->routeIs('ordering'))

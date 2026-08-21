@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardjogja.com';
+    $siteUrl = 'https://lanyardmedan.com';
   }
 
   $canonicalUrl = $siteUrl . '/layanan';
@@ -9,7 +9,7 @@
     '@context' => 'https://schema.org',
     '@type' => 'Service',
     '@id' => $canonicalUrl . '/#service',
-    'name' => 'Layanan Cetak Lanyard Custom Lanyard Jogja',
+    'name' => 'Layanan Cetak Lanyard Custom Lanyard Medan',
     'description' => 'Konsultasi spesifikasi, desain dan mockup, pemilihan bahan serta aksesori, produksi, quality control, dan pengiriman lanyard custom.',
     'url' => $canonicalUrl,
     'serviceType' => 'Cetak lanyard custom',
@@ -19,7 +19,7 @@
     ],
     'provider' => [
       '@type' => 'Organization',
-      'name' => 'Lanyard Jogja',
+      'name' => 'Lanyard Medan',
       'url' => $siteUrl,
     ],
   ];

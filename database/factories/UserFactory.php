@@ -27,9 +27,19 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
-            'role' => 'ADMIN',
+            'role' => User::ROLE_USER,
             'email_verified_at' => now(),
         ];
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn () => ['role' => User::ROLE_ADMIN]);
+    }
+
+    public function writer(): static
+    {
+        return $this->state(fn () => ['role' => User::ROLE_WRITER]);
     }
 
     /**

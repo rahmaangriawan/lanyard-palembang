@@ -13,19 +13,19 @@ class CityPageController extends Controller
 {
     public function index()
     {
-        return ['success' => true, 'cities' => CityPage::with('parent:id,title,slug')->latest('createdAt')->paginate(50)];
+        return ['success' => true, 'cities' => CityPage::with('parent:id,title,slug')->latest('createdAt')->paginate(50)->through(fn (CityPage $city) => $this->sanitize($city))];
     }
 
     public function store(Request $request)
     {
         $city = CityPage::create($this->validated($request));
 
-        return response()->json(['success' => true, 'city' => $city], 201);
+        return response()->json(['success' => true, 'city' => $this->sanitize($city)], 201);
     }
 
     public function show(CityPage $city)
     {
-        return ['success' => true, 'city' => $city];
+        return ['success' => true, 'city' => $this->sanitize($city)];
     }
 
     public function update(Request $request, CityPage $city)
@@ -37,7 +37,7 @@ class CityPageController extends Controller
 
         $city->update($data);
 
-        return ['success' => true, 'city' => $city->refresh()];
+        return ['success' => true, 'city' => $this->sanitize($city->refresh())];
     }
 
     public function destroy(CityPage $city)
@@ -52,12 +52,12 @@ class CityPageController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:citypage,slug'.($ignoreId ? ','.$ignoreId : '')],
-            'content' => ['required', 'string'],
+            'content' => ['required', 'string', 'max:60000'],
             'published' => ['nullable', 'boolean'],
             'featuredImage' => ['nullable', 'string', 'max:255', new SafePublicUrl],
             'parentId' => ['nullable', 'integer', 'exists:citypage,id'],
             'metaTitle' => ['nullable', 'string', 'max:255'],
-            'metaDescription' => ['nullable', 'string'],
+            'metaDescription' => ['nullable', 'string', 'max:1000'],
         ]);
 
         $data['slug'] = $data['slug'] ?? Str::slug($data['title']);
@@ -65,5 +65,10 @@ class CityPageController extends Controller
         $data['content'] = HtmlSanitizer::clean($data['content']);
 
         return $data;
+    }
+
+    private function sanitize(CityPage $city): CityPage
+    {
+        return \App\Support\PublicApi::sanitizeContent($city);
     }
 }

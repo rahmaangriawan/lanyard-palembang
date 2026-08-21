@@ -39,7 +39,7 @@ class PortfolioController extends Controller
     {
         return $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'description' => ['required', 'string', 'max:5000'],
             'imageUrl' => ['required', 'string', 'max:255', new SafePublicUrl],
             'logoUrl' => ['nullable', 'string', 'max:255', new SafePublicUrl],
             'logoText' => ['nullable', 'string', 'max:255'],

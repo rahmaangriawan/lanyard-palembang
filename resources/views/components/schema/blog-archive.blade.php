@@ -7,9 +7,9 @@
 ])
 
 @php
-  $siteUrl = rtrim((string) config('app.url', 'https://lanyardjogja.com'), '/');
+  $siteUrl = rtrim((string) config('app.url', 'https://lanyardmedan.com'), '/');
   if ($siteUrl === '' || str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardjogja.com';
+    $siteUrl = 'https://lanyardmedan.com';
   }
 
   $canonicalUrl = $siteUrl.'/'.ltrim($canonicalPath, '/');

@@ -19,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public const UPDATED_AT = 'updatedAt';
     public const ROLE_ADMIN = 'ADMIN';
     public const ROLE_WRITER = 'WRITER';
+    public const ROLE_USER = 'USER';
 
     protected $table = 'user';
 
@@ -34,7 +35,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'email',
         'password',
-        'role',
         'email_verified_at',
     ];
 
@@ -103,6 +103,11 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return $resource === 'media' && ! $mutating;
+    }
+
+    public function canManagePost(Post $post): bool
+    {
+        return $this->isAdmin() || ($this->isWriter() && (int) $post->authorId === (int) $this->id);
     }
 
     public function getAvatarAttribute(?string $value): ?string

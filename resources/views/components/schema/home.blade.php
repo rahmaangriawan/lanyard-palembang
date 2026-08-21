@@ -2,14 +2,14 @@
   $siteUrlRaw = config('app.url');
   if (empty($siteUrlRaw)) { $siteUrlRaw = url('/'); }
   $siteUrl = rtrim($siteUrlRaw, '/');
-  $logoUrl = $siteUrl . '/uploads/lanyard-jogja-logo.webp';
-  $logoHeaderUrl = $siteUrl . '/uploads/lanyard-jogja-logo.webp';
+  $logoUrl = $siteUrl . '/uploads/lanyard-medan-logo.webp';
+  $logoHeaderUrl = $siteUrl . '/uploads/lanyard-medan-logo.webp';
 
   $orgSchema = [
     '@context' => 'https://schema.org',
     '@type' => 'Organization',
     '@id' => $siteUrl . '/#organization',
-    'name' => 'Lanyard Jogja',
+    'name' => 'Lanyard Medan',
     'url' => $siteUrl . '/',
     'logo' => [
       '@type' => 'ImageObject',
@@ -19,15 +19,16 @@
     ],
     'image' => $logoUrl,
     'telephone' => '+6282210200700',
-    'email' => 'info@lanyardjogja.com',
+    'email' => 'info@lanyardmedan.com',
     'description' => 'Cetak lanyard custom premium di Indonesia dengan pilihan bahan berkualitas, desain profesional, dan layanan pemesanan mudah. Bebas ongkir Indonesia Raya.',
     'sameAs' => [
       'https://wa.me/6282210200700',
     ],
     'address' => [
       '@type' => 'PostalAddress',
-      'addressLocality' => 'Indonesia',
-      'addressRegion' => 'Banten',
+      'streetAddress' => 'Jl. Soekarno-Hatta, Medan',
+      'addressLocality' => 'Medan',
+      'addressRegion' => 'Sumatera Utara',
       'addressCountry' => 'ID',
     ],
   ];
@@ -36,33 +37,33 @@
     '@context' => 'https://schema.org',
     '@type' => 'LocalBusiness',
     '@id' => $siteUrl . '/#localbusiness',
-    'name' => 'Lanyard Jogja',
+    'name' => 'Lanyard Medan',
     'url' => $siteUrl . '/',
     'logo' => $logoUrl,
     'image' => $logoHeaderUrl,
     'telephone' => '+6282210200700',
     'priceRange' => 'Rp 1000 - Rp 50000',
-    'description' => 'Cetak lanyard custom premium dengan pengiriman ke seluruh Indonesia dan cakupan layanan utama Jabodetabek.',
+    'description' => 'Cetak lanyard custom premium dari Medan, Sumatera Utara dengan pengiriman ke seluruh Indonesia.',
     'address' => [
       '@type' => 'PostalAddress',
-      'streetAddress' => 'Jl. Sudirman No. 123',
-      'addressLocality' => 'Indonesia',
-      'addressRegion' => 'Banten',
-      'postalCode' => '15111',
+      'streetAddress' => 'Jl. Soekarno-Hatta, Medan',
+      'addressLocality' => 'Medan',
+      'addressRegion' => 'Sumatera Utara',
+      'postalCode' => '20125',
       'addressCountry' => 'ID',
     ],
     'geo' => [
       '@type' => 'GeoCoordinates',
-      'latitude' => -6.1765,
-      'longitude' => 106.63,
+      'latitude' => 3.5952,
+      'longitude' => 98.6722,
     ],
     'openingHours' => 'Mo-Sa 08:00-20:00',
     'areaServed' => [
-      ['@type' => 'City', 'name' => 'Jakarta'],
-      ['@type' => 'City', 'name' => 'Bogor'],
-      ['@type' => 'City', 'name' => 'Depok'],
-      ['@type' => 'City', 'name' => 'Tangerang'],
-      ['@type' => 'City', 'name' => 'Yogyakarta'],
+      ['@type' => 'City', 'name' => 'Medan'],
+      ['@type' => 'City', 'name' => 'Deli Serdang'],
+      ['@type' => 'City', 'name' => 'Binjai'],
+      ['@type' => 'City', 'name' => 'Percut Sei Tuan'],
+      ['@type' => 'City', 'name' => 'Lubuk Pakam'],
     ],
   ];
 
@@ -71,7 +72,7 @@
     '@type' => 'WebSite',
     '@id' => $siteUrl . '/#website',
     'url' => $siteUrl . '/',
-    'name' => 'Lanyard Jogja',
+    'name' => 'Lanyard Medan',
     'publisher' => ['@id' => $siteUrl . '/#organization'],
     'inLanguage' => 'id-ID',
     'potentialAction' => [

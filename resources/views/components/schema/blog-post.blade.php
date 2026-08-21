@@ -4,10 +4,10 @@
   $siteUrl = rtrim($siteUrlRaw, '/');
   // Force prod domain if localhost / 127 / local
   if (preg_match('/^(https?:\/\/)?(localhost|127\.0\.0\.1)/i', $siteUrl) || str_contains($siteUrl, '.local') || str_contains($siteUrl, ':800')) {
-    $siteUrl = 'https://lanyardjogja.com';
+    $siteUrl = 'https://lanyardmedan.com';
   }
 
-  $title = isset($post->title) ? $post->title : 'Artikel Lanyard Jogja';
+  $title = isset($post->title) ? $post->title : 'Artikel Lanyard Medan';
   $descRaw = isset($post->metaDescription) ? $post->metaDescription : '';
   if (empty($descRaw)) {
     $descRaw = strip_tags(isset($post->content) ? $post->content : '');
@@ -32,12 +32,12 @@
   } elseif (!empty($featuredImageRaw)) {
     $featuredImage = preg_replace('/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/', $siteUrl, $featuredImageRaw);
   } else {
-    $featuredImage = $siteUrl . '/uploads/lanyard-jogja-logo.webp';
+    $featuredImage = $siteUrl . '/uploads/lanyard-medan-logo.webp';
   }
 
   $authorName = isset($post->author) && !empty($post->author?->name)
     ? $post->author->name
-    : 'Tim Lanyard Jogja';
+    : 'Tim Lanyard Medan';
   $authorSlug = $post->author?->slug ?: \Illuminate\Support\Str::slug($authorName);
 
   $datePub = null;
@@ -69,10 +69,10 @@
     'publisher' => [
       '@type' => 'Organization',
       '@id' => $siteUrl . '/#organization',
-      'name' => 'Lanyard Jogja',
+      'name' => 'Lanyard Medan',
       'logo' => [
         '@type' => 'ImageObject',
-        'url' => $siteUrl . '/uploads/lanyard-jogja-logo.webp',
+        'url' => $siteUrl . '/uploads/lanyard-medan-logo.webp',
       ],
     ],
     'inLanguage' => 'id-ID',

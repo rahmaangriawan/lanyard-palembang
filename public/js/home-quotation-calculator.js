@@ -31,7 +31,7 @@
     breakdown.textContent = `${amount.toLocaleString('id-ID')} pcs × ${formatter.format(price)}`;
     packageInputs.forEach((input) => input.closest('.home-quotation-calculator__package')?.classList.toggle('is-selected', input === selected));
     const message = [
-      'Halo Lanyard Jogja, saya ingin meminta quotation.',
+      'Halo Lanyard Medan, saya ingin meminta quotation.',
       `Ukuran: ${label}`,
       `Jumlah: ${amount.toLocaleString('id-ID')} pcs`,
       `Bahan: ${material.value}`,

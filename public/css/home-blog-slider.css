@@ -1,0 +1,95 @@
+/* Mobile-only horizontal article rail and its lightweight progress control. */
+.home-blog__slider-controls {
+  display: none;
+}
+
+@media (max-width: 620px) {
+  .public-site.home-page .home-blog .home-blog__grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(278px, 84vw);
+    grid-template-columns: none;
+    align-items: stretch;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    padding: 0 14px 14px 0;
+    scroll-padding-inline: 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-color: transparent transparent;
+    touch-action: pan-x;
+  }
+
+  .public-site.home-page .home-blog .home-blog__grid::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+  }
+
+  .public-site.home-page .home-blog .home-blog__grid::-webkit-scrollbar-track,
+  .public-site.home-page .home-blog .home-blog__grid::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .public-site.home-page .home-blog .home-blog__card {
+    grid-column: auto;
+    scroll-snap-align: start;
+  }
+
+  .home-blog__slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .home-blog__slider-track {
+    position: relative;
+    flex: 1 1 auto;
+    height: 5px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #d9e3db;
+    cursor: grab;
+    touch-action: pan-x;
+  }
+
+  .home-blog__slider-track:focus-visible {
+    outline: 3px solid rgb(11 75 54 / 0.28);
+    outline-offset: 4px;
+  }
+
+  .home-blog__slider-track.is-dragging {
+    cursor: grabbing;
+  }
+
+  .home-blog__slider-thumb {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    min-width: 28px;
+    border-radius: inherit;
+    background: #0b4b36;
+    transition: left 120ms ease, width 120ms ease;
+  }
+
+  .home-blog__slider-hint {
+    flex: 0 0 auto;
+    color: #5a6c63;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-blog__slider-thumb {
+    transition: none;
+  }
+}

@@ -1,7 +1,13 @@
 @extends('layouts.public')
 
-@section('title', 'Promo Lanyard Custom Indonesia - Diskon & Bundling Hemat')
-@section('meta_description', 'Promo cetak lanyard custom Indonesia: diskon 20% pelanggan baru, gratis ongkir Jabodetabek, paket hemat corporate, bundling ID card holder. Terbatas!')
+@section('title', 'Promo Lanyard Custom Medan - Diskon & Bundling Hemat')
+@section('meta_description', 'Promo cetak lanyard custom Medan: diskon 20% pelanggan baru, gratis ongkir Kota Medan, paket hemat corporate, bundling ID card holder. Terbatas!')
+@section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/promo')
+@section('seo_og_image', '/uploads/promo-diskon-20-lanyard-custom.webp')
+
+@push('schema')
+  @include('components.schema.promo')
+@endpush
 
 @section('content')
 @php
@@ -17,9 +23,9 @@
       'highlight' => 'DISKON 20%',
     ],
     [
-      'title' => 'Gratis Ongkir Jabodetabek',
+      'title' => 'Gratis Ongkir Kota Medan',
       'subtitle' => 'Tanpa Minimum Order',
-      'desc' => 'Bebas ongkir ke seluruh area Jabodetabek tanpa minimal transaksi. Hemat pengiriman untuk kebutuhan lanyard Anda.',
+      'desc' => 'Bebas ongkir ke seluruh area Kota Medan tanpa minimal transaksi. Hemat pengiriman untuk kebutuhan lanyard Anda.',
       'image' => '/uploads/promo-gratis-ongkir-jabodetabek.webp',
       'color' => 'from-slate-700 to-slate-800',
       'highlight' => 'GRATIS ONGKIR',

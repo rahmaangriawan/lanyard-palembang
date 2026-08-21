@@ -4,9 +4,9 @@
   $siteUrl = rtrim($siteUrlRaw, '/');
   // Force prod domain if localhost / 127 / local
   if (preg_match('/^(https?:\/\/)?(localhost|127\.0\.0\.1)/i', $siteUrl) || str_contains($siteUrl, '.local') || str_contains($siteUrl, ':800')) {
-    $siteUrl = rtrim(config('app.prod_url', 'https://lanyardjogja.com'), '/');
+    $siteUrl = rtrim(config('app.prod_url', 'https://lanyardmedan.com'), '/');
     if (empty($siteUrl) || $siteUrl === $siteUrlRaw) {
-      $siteUrl = 'https://lanyardjogja.com';
+      $siteUrl = 'https://lanyardmedan.com';
     }
   }
 
@@ -15,7 +15,7 @@
     $plain = html_entity_decode(strip_tags((string) $value), ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $plain = str_replace(
       ['IndoLanyard', 'Pusat Tali Lanyard', 'PusatTaliLanyard', '—', '–'],
-      ['Lanyard Jogja', 'Lanyard Jogja', 'Lanyard Jogja', '-', '-'],
+      ['Lanyard Medan', 'Lanyard Medan', 'Lanyard Medan', '-', '-'],
       $plain
     );
 
@@ -23,7 +23,7 @@
   };
 
   $prodName = $normalizeProductCopy($product->name ?? 'Produk Lanyard');
-  $prodDesc = $normalizeProductCopy($product->shortDescription ?? $product->description ?? 'Lanyard custom dari Lanyard Jogja.');
+  $prodDesc = $normalizeProductCopy($product->shortDescription ?? $product->description ?? 'Lanyard custom dari Lanyard Medan.');
   
   $featImg = '';
   if (!empty($product->featuredImage)) {
@@ -49,7 +49,7 @@
     'url' => $prodUrl,
     'brand' => [
       '@type' => 'Brand',
-      'name' => 'Lanyard Jogja',
+      'name' => 'Lanyard Medan',
     ],
   ];
 
@@ -71,7 +71,7 @@
         'price' => $priceStr,
         'seller' => [
           '@type' => 'Organization',
-          'name' => 'Lanyard Jogja'
+          'name' => 'Lanyard Medan'
         ]
       ];
     }

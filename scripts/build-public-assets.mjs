@@ -12,12 +12,15 @@ const bundles = {
     'public/vendor/scroll/scroll-reveal.css',
     'public/css/header.css',
     'public/css/footer.css',
+    'public/css/home-cta.css',
+    'public/css/testimonials-page.css',
     'public/css/floating-whatsapp.css',
     'public/css/button-motion.css',
   ],
   'public/build/public/home.min.css': [
     'public/css/homepage.css',
     'public/css/home-quotation-calculator.css',
+    'public/css/home-blog.css',
   ],
   'public/build/public/site.min.js': [
     'public/js/public-site.js',
@@ -28,6 +31,9 @@ const bundles = {
   'public/build/public/home.min.js': [
     'public/js/home-marquee.js',
     'public/js/home-product-fan.js',
+    'public/js/home-blog-preview.js',
+    'public/js/home-metrics-scroll.js',
+    'public/js/home-quotation-calculator.js',
   ],
 };
 

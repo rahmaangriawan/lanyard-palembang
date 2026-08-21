@@ -12,26 +12,26 @@ class PageController extends Controller
 {
     public function index()
     {
-        return ['success' => true, 'pages' => Page::latest('updatedAt')->paginate(50)];
+        return ['success' => true, 'pages' => Page::latest('updatedAt')->paginate(50)->through(fn (Page $page) => $this->sanitize($page))];
     }
 
     public function store(Request $request)
     {
         $page = Page::create($this->validated($request));
 
-        return response()->json(['success' => true, 'page' => $page], 201);
+        return response()->json(['success' => true, 'page' => $this->sanitize($page)], 201);
     }
 
     public function show(Page $page)
     {
-        return ['success' => true, 'page' => $page];
+        return ['success' => true, 'page' => $this->sanitize($page)];
     }
 
     public function update(Request $request, Page $page)
     {
         $page->update($this->validated($request, $page->id));
 
-        return ['success' => true, 'page' => $page->refresh()];
+        return ['success' => true, 'page' => $this->sanitize($page->refresh())];
     }
 
     public function destroy(Page $page)
@@ -46,10 +46,10 @@ class PageController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:page,slug'.($ignoreId ? ','.$ignoreId : '')],
-            'content' => ['required', 'string'],
+            'content' => ['required', 'string', 'max:60000'],
             'published' => ['nullable', 'boolean'],
             'metaTitle' => ['nullable', 'string', 'max:255'],
-            'metaDescription' => ['nullable', 'string'],
+            'metaDescription' => ['nullable', 'string', 'max:1000'],
         ]);
 
         $data['slug'] = $data['slug'] ?? Str::slug($data['title']);
@@ -57,5 +57,10 @@ class PageController extends Controller
         $data['content'] = HtmlSanitizer::clean($data['content']);
 
         return $data;
+    }
+
+    private function sanitize(Page $page): Page
+    {
+        return \App\Support\PublicApi::sanitizeContent($page);
     }
 }

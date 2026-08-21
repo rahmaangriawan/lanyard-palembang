@@ -1,4 +1,4 @@
-<section class="home-text-marquee" aria-label="Layanan unggulan Lanyard Jogja" data-home-marquee>
+<section class="home-text-marquee" aria-label="Layanan unggulan Lanyard Medan" data-home-marquee>
   <div class="home-text-marquee__viewport">
     <div class="home-text-marquee__track" data-home-marquee-track>
       <div class="home-text-marquee__group" data-home-marquee-group>

@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     private const ASSET_FALLBACKS = [
-        'site_logo' => '/uploads/lanyard-jogja-logo.webp',
-        'logo_url' => '/uploads/lanyard-jogja-logo.webp',
-        'site_logo_header' => '/uploads/lanyard-jogja-logo.webp',
-        'site_logo_mobile' => '/uploads/lanyard-jogja-logo.webp',
-        'site_favicon' => '/uploads/lanyard-jogja-favicon.webp',
-        'favicon_url' => '/uploads/lanyard-jogja-favicon.webp',
-        'og_image' => '/uploads/lanyard-jogja-logo.webp',
+        'site_logo' => '/uploads/lanyard-medan-logo.webp',
+        'logo_url' => '/uploads/lanyard-medan-logo.webp',
+        'site_logo_header' => '/uploads/lanyard-medan-logo.webp',
+        'site_logo_mobile' => '/uploads/lanyard-medan-logo.webp',
+        'site_favicon' => '/uploads/lanyard-medan-favicon.webp',
+        'favicon_url' => '/uploads/lanyard-medan-favicon.webp',
+        'og_image' => '/uploads/lanyard-medan-logo.webp',
     ];
 
     public const CREATED_AT = 'createdAt';
@@ -26,10 +26,10 @@ class Setting extends Model
 
     public function getValueAttribute(?string $value): string
     {
-        $key = (string) ($this->attributes['key'] ?? '');
+        $fallback = $this->assetFallback();
 
-        if (array_key_exists($key, self::ASSET_FALLBACKS)) {
-            return AssetUrl::relative($value, self::ASSET_FALLBACKS[$key]) ?? self::ASSET_FALLBACKS[$key];
+        if ($fallback !== null) {
+            return AssetUrl::relative($value, $fallback) ?? $fallback;
         }
 
         return (string) $value;
@@ -37,9 +37,16 @@ class Setting extends Model
 
     public function setValueAttribute(?string $value): void
     {
-        $key = (string) ($this->attributes['key'] ?? '');
-        $this->attributes['value'] = array_key_exists($key, self::ASSET_FALLBACKS)
-            ? AssetUrl::relative($value, self::ASSET_FALLBACKS[$key])
+        $fallback = $this->assetFallback();
+        $this->attributes['value'] = $fallback !== null
+            ? AssetUrl::relative($value, $fallback)
             : (string) $value;
+    }
+
+    private function assetFallback(): ?string
+    {
+        $key = (string) ($this->attributes['key'] ?? '');
+
+        return self::ASSET_FALLBACKS[$key] ?? null;
     }
 }

@@ -13,9 +13,18 @@ use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return ['success' => true, 'posts' => Post::with(['category:id,name,slug', 'author:id,name,slug'])->latest('updatedAt')->paginate(50)];
+        $query = Post::with(['category:id,name,slug', 'author:id,name,slug'])->latest('updatedAt');
+
+        if ($request->user()?->isWriter()) {
+            $query->where('authorId', $request->user()->id);
+        }
+
+        return [
+            'success' => true,
+            'posts' => $query->paginate(50)->through(fn (Post $post) => $this->sanitize($post)),
+        ];
     }
 
     public function store(Request $request)
@@ -26,26 +35,35 @@ class PostController extends Controller
         }
         $post = Post::create($data);
 
-        return response()->json(['success' => true, 'post' => $post], 201);
+        return response()->json(['success' => true, 'post' => $this->sanitize($post)], 201);
     }
 
-    public function show(Post $post)
+    public function show(Request $request, Post $post)
     {
-        return ['success' => true, 'post' => $post->load('category:id,name,slug')];
+        abort_unless($request->user()?->canManagePost($post), 403);
+
+        return ['success' => true, 'post' => $this->sanitize($post->load('category:id,name,slug'))];
     }
 
     public function update(Request $request, Post $post)
     {
+        abort_unless($request->user()?->canManagePost($post), 403);
         $post->update($this->validated($request, $post->id));
 
-        return ['success' => true, 'post' => $post->refresh()];
+        return ['success' => true, 'post' => $this->sanitize($post->refresh())];
     }
 
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
+        abort_unless($request->user()?->canManagePost($post), 403);
         $post->delete();
 
         return ['success' => true];
+    }
+
+    private function sanitize(Post $post): Post
+    {
+        return \App\Support\PublicApi::sanitizeContent($post);
     }
 
     private function validated(Request $request, ?int $ignoreId = null): array
@@ -53,13 +71,13 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:post,slug'.($ignoreId ? ','.$ignoreId : '')],
-            'content' => ['required', 'string'],
+            'content' => ['required', 'string', 'max:60000'],
             'published' => ['nullable', 'boolean'],
             'featuredImage' => ['nullable', 'string', 'max:255', new SafePublicUrl],
             'categoryId' => ['nullable', 'integer', 'exists:category,id'],
             'createdAt' => ['nullable', 'date'],
             'metaTitle' => ['nullable', 'string', 'max:255'],
-            'metaDescription' => ['nullable', 'string'],
+            'metaDescription' => ['nullable', 'string', 'max:1000'],
             'authorId' => $request->user()?->isAdmin()
                 ? [
                     'nullable',

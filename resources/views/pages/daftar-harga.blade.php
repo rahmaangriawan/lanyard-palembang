@@ -1,7 +1,13 @@
 @extends('layouts.public')
 
-@section('title', 'Daftar Harga Lanyard Custom Indonesia 2026 - Transparan')
-@section('meta_description', 'Estimasi harga lanyard tissue, polyester, sablon full color & aksesoris di Indonesia. Transparan per kuantitas, makin banyak makin murah. Minta quotation resmi.')
+@section('title', 'Daftar Harga Lanyard Custom Medan - Transparan')
+@section('meta_description', 'Estimasi harga lanyard tissue, polyester, sablon full color & aksesoris di Medan. Transparan per kuantitas, makin banyak makin murah. Minta quotation resmi.')
+@section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/daftar-harga')
+@section('seo_og_image', '/uploads/hero-lanyard-medan.webp')
+
+@push('schema')
+  @include('components.schema.daftar-harga')
+@endpush
 
 @section('content')
 @php

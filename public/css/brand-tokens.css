@@ -16,15 +16,32 @@
 }
 
 body.public-site {
-  background: var(--brand-cream);
-  color: var(--brand-ink);
+  background: #ffffff;
+  color: #0f172a;
 }
 
 .public-site main {
-  background: var(--brand-cream);
+  background: #ffffff;
 }
 
 .public-site ::selection {
-  background: var(--brand-tan);
-  color: var(--brand-ink);
+  background: #fee2e2;
+  color: #9E0C17;
+}
+
+.home-shell {
+  width: min(calc(100% - 40px), 1180px);
+  margin-inline: auto;
+}
+
+.home-shell--wide {
+  width: min(calc(100% - 48px), 1240px);
+  margin-inline: auto;
+}
+
+@media (max-width: 640px) {
+  .home-shell,
+  .home-shell--wide {
+    width: min(calc(100% - 32px), 100%);
+  }
 }

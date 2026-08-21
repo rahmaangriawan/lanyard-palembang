@@ -79,15 +79,14 @@ class ImportInitialContent extends Command
             return false;
         }
 
-        $admin = User::updateOrCreate(
-            ['email' => $email],
-            [
-                'name' => trim((string) env('CMS_ADMIN_NAME')) ?: 'Administrator',
-                'password' => Hash::make($password),
-                'role' => User::ROLE_ADMIN,
-                'email_verified_at' => now(),
-            ],
-        );
+        $admin = User::query()->firstOrNew(['email' => $email]);
+        $admin->fill([
+            'name' => trim((string) env('CMS_ADMIN_NAME')) ?: 'Administrator',
+            'password' => Hash::make($password),
+            'email_verified_at' => now(),
+        ]);
+        $admin->role = User::ROLE_ADMIN;
+        $admin->save();
 
         if (! $admin->slug) {
             $admin->slug = AuthorProfile::nextSlug($admin, $admin->name);

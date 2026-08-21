@@ -4,21 +4,13 @@
   $page = $posts->currentPage();
   $total = $posts->total();
   $latestPost = $posts->first();
-  $defaultDescription = 'Artikel seputar produksi lanyard, desain, branding, material, dan kebutuhan event untuk membantu Anda memilih produk yang tepat.';
-  $ogImage = $latestPost?->featuredImage ?: '/uploads/lanyard-jogja-logo.webp';
+  $defaultDescription = 'Kumpulan artikel, tips desain, panduan bahan tissue vs polyester, dan wawasan cetak tali lanyard custom dari workshop Lanyard Medan.';
+  $ogImage = $latestPost?->featuredImage ?: '/uploads/lanyard-medan-logo.webp';
   $archiveCssPath = public_path('css/blog-archive.css');
   $archiveCssVersion = file_exists($archiveCssPath) ? filemtime($archiveCssPath) : 1;
-  $homeCssPath = public_path('css/blog-home.css');
-  $homeCssVersion = file_exists($homeCssPath) ? filemtime($homeCssPath) : 1;
-  $visiblePostCount = $posts->count();
-  $gridDensityClass = $visiblePostCount <= 1
-    ? 'blog-home-page--count-1'
-    : ($visiblePostCount === 2
-      ? 'blog-home-page--count-2'
-      : ($visiblePostCount === 3 ? 'blog-home-page--count-3' : 'blog-home-page--count-many'));
 @endphp
 
-@section('title', 'Blog dan Wawasan Lanyard | Lanyard Jogja')
+@section('title', 'Blog & Wawasan Tali Lanyard Custom | Lanyard Medan')
 @section('meta_description', $defaultDescription)
 @section('seo_canonical', route('blog.index'))
 @section('seo_og_image', $ogImage)
@@ -28,61 +20,104 @@
 
 @push('head')
   <link rel="stylesheet" href="/css/blog-archive.css?v={{ $archiveCssVersion }}">
-  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
-  <link rel="stylesheet" href="/css/blog-home.css?v={{ $homeCssVersion }}">
 @endpush
+
 @push('schema')
   @include('components.schema.blog-index', ['posts' => $posts])
 @endpush
 
 @section('content')
-<div class="blog-archive-page blog-home-page {{ $gridDensityClass }}">
+<div class="blog-archive-page">
+  {{-- 1. HERO SECTION --}}
   <section class="blog-archive-hero" aria-labelledby="blog-page-title">
     <div class="blog-archive-shell blog-archive-hero__layout">
       <div class="blog-archive-hero__copy">
-        <p class="blog-archive-eyebrow">Blog &amp; Wawasan</p>
-        <h1 id="blog-page-title">Panduan Praktis Seputar Lanyard Custom</h1>
-        <p>Pelajari bahan, aksesori, desain, dan proses produksi sebelum menentukan lanyard yang tepat.</p>
+        <div class="blog-archive-eyebrow">
+          <span class="blog-archive-sparkle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/>
+            </svg>
+          </span>
+          <span>BLOG &amp; WAWASAN LANYARD</span>
+        </div>
+
+        <h1 id="blog-page-title">
+          Panduan Praktis &amp; Wawasan <span class="blog-title-accent">Lanyard Custom.</span>
+        </h1>
+
+        <p>
+          Pelajari perbandingan bahan, tips layout desain logo, rekomendasi aksesoris, dan alur produksi sebelum Anda memesan tali lanyard kantor atau event.
+        </p>
       </div>
 
+      {{-- Search Panel --}}
       <div class="blog-archive-search-panel">
         <form class="blog-archive-search" role="search" method="GET" action="{{ route('blog.index') }}">
-          <label for="blog-search-input">Cari dari {{ $total }} artikel</label>
+          <label for="blog-search-input">Cari dari {{ $total }} artikel terbit</label>
           <div class="blog-archive-search__control">
-            <input id="blog-search-input" type="search" name="q" value="{{ $search }}" maxlength="255" placeholder="Cari bahan, aksesori, atau desain" autocomplete="off">
-            <button type="submit">Cari</button>
+            <span class="blog-archive-search__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </span>
+            <input
+              id="blog-search-input"
+              type="search"
+              name="q"
+              value="{{ $search }}"
+              maxlength="255"
+              placeholder="Cari bahan, aksesoris, atau tips desain..."
+              autocomplete="off"
+            >
+            <button type="submit">
+              <span>Cari</span>
+            </button>
           </div>
         </form>
+
         @if($search !== '')
           <div class="blog-archive-search__status">
-            <p>{{ $total }} hasil untuk “{{ $search }}”</p>
-            <a href="{{ route('blog.index') }}">Hapus pencarian</a>
+            <p>Menampilkan {{ $total }} hasil untuk “{{ $search }}”</p>
+            <a href="{{ route('blog.index') }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+              <span>Hapus pencarian</span>
+            </a>
           </div>
         @else
-          <p class="blog-archive-search__hint">Arsip diperbarui berdasarkan artikel terbaru yang diterbitkan.</p>
+          <p class="blog-archive-search__hint">Wawasan selalu diperbarui oleh tim produksi &amp; desainer Lanyard Medan.</p>
         @endif
       </div>
     </div>
   </section>
 
+  {{-- 2. LISTING SECTION --}}
   <section class="blog-archive-section" aria-labelledby="blog-listing-title">
     <div class="blog-archive-shell">
       <header class="blog-archive-heading">
         <div>
-          <h2 id="blog-listing-title">{{ $search !== '' ? 'Hasil Pencarian' : 'Artikel Terbaru' }}</h2>
-          <p>{{ $search !== '' ? 'Artikel yang sesuai dengan kata kunci Anda.' : 'Wawasan terbaru dari tim Lanyard Jogja.' }}</p>
+          <h2 id="blog-listing-title">
+            {{ $search !== '' ? 'Hasil Pencarian Artikel' : 'Artikel & Wawasan Terbaru' }}
+          </h2>
+          <p>
+            {{ $search !== '' ? 'Kumpulan panduan yang sesuai dengan kata kunci pencarian Anda.' : 'Panduan informatif seputar material, desain grafis, dan teknik cetak tali lanyard.' }}
+          </p>
         </div>
-        <p class="blog-archive-heading__count">{{ $total }} artikel</p>
+        <span class="blog-archive-heading__count">{{ $total }} Artikel</span>
       </header>
 
       <x-blog.archive-list
         :posts="$posts"
         empty-title="Artikel tidak ditemukan"
-        empty-text="Coba gunakan kata kunci yang lebih umum atau kembali ke seluruh arsip blog."
+        empty-text="Coba gunakan kata kunci yang lebih umum atau kembali ke seluruh daftar arsip blog."
       />
     </div>
   </section>
 
+  {{-- 3. CLOSING CTA --}}
   <x-blog.archive-cta />
 </div>
 

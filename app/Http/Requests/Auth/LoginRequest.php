@@ -43,10 +43,12 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+        $this->ensureIdentityIsNotRateLimited();
         $this->validateTurnstile();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
+            RateLimiter::hit($this->identityThrottleKey(), 300);
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
@@ -54,11 +56,18 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+        RateLimiter::clear($this->identityThrottleKey());
     }
 
     private function validateTurnstile(): void
     {
         $turnstile = LoginTurnstile::config();
+        if ($turnstile['misconfigured']) {
+            throw ValidationException::withMessages([
+                'cf-turnstile-response' => 'Verifikasi keamanan belum dikonfigurasi dengan benar. Hubungi administrator.',
+            ]);
+        }
+
         if (! $turnstile['enabled']) {
             return;
         }
@@ -82,9 +91,23 @@ class LoginRequest extends FormRequest
             return;
         }
 
+        $this->throwThrottleValidationException($this->throttleKey());
+    }
+
+    private function ensureIdentityIsNotRateLimited(): void
+    {
+        if (! RateLimiter::tooManyAttempts($this->identityThrottleKey(), 10)) {
+            return;
+        }
+
+        $this->throwThrottleValidationException($this->identityThrottleKey());
+    }
+
+    private function throwThrottleValidationException(string $key): never
+    {
         event(new Lockout($this));
 
-        $seconds = RateLimiter::availableIn($this->throttleKey());
+        $seconds = RateLimiter::availableIn($key);
 
         throw ValidationException::withMessages([
             'email' => trans('auth.throttle', [
@@ -100,5 +123,10 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+    }
+
+    private function identityThrottleKey(): string
+    {
+        return 'login-identity|'.Str::transliterate(Str::lower(trim((string) $this->input('email'))));
     }
 }

@@ -19,8 +19,8 @@ $images = [
         'widths' => [192, 320, 480, 640],
     ],
     [
-        'source' => $publicPath.'/uploads/lanyard-jogja-logo.webp',
-        'prefix' => 'lanyard-jogja-logo',
+        'source' => $publicPath.'/uploads/lanyard-medan-logo.webp',
+        'prefix' => 'lanyard-medan-logo',
         'widths' => [160, 256],
     ],
 ];

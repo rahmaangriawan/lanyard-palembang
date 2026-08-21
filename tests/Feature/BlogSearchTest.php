@@ -13,7 +13,7 @@ class BlogSearchTest extends TestCase
 
     public function test_blog_search_treats_sql_wildcards_as_literal_characters(): void
     {
-        $author = User::factory()->create();
+        $author = User::factory()->admin()->create();
 
         foreach ([
             ['title' => 'Promo_2026 Resmi', 'slug' => 'promo-2026-resmi'],

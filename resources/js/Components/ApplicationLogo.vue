@@ -1,3 +1,3 @@
 <template>
-    <img src="/uploads/lanyard-jogja-logo.webp" alt="Lanyard Jogja" />
+    <img src="/uploads/lanyard-medan-logo.webp" alt="Lanyard Medan" />
 </template>

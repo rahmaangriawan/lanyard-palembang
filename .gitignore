@@ -19,8 +19,10 @@
 /storage/*.key
 /storage/pail
 /vendor
-/database/lanyard-bekasi-cloudpanel-*.sql
-/database/lanyard-jogja-cloudpanel-*.sql
+/database/*.sql
+.agents/
+.zcode/
+graphify-out/
 Homestead.json
 Homestead.yaml
 Thumbs.db

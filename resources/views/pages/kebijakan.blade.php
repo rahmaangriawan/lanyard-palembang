@@ -1,80 +1,51 @@
 @extends('layouts.public')
 
-@section('title', 'Kebijakan Privasi | Lanyard Jogja')
-@section('meta_description', 'Pelajari cara Lanyard Jogja mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi serta file desain pelanggan.')
+@section('title', 'Kebijakan Privasi | Lanyard Medan')
+@section('meta_description', 'Pelajari cara Lanyard Medan mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi serta file desain pelanggan.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/kebijakan')
+@section('seo_og_image', '/uploads/lanyard-medan-logo.webp')
 @section('seo_noindex', '1')
 
 @push('head')
-  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
-  <link rel="stylesheet" href="/css/service-pages.css?v={{ file_exists(public_path('css/service-pages.css')) ? filemtime(public_path('css/service-pages.css')) : 1 }}">
-  <link rel="stylesheet" href="/css/privacy-index.css?v={{ file_exists(public_path('css/privacy-index.css')) ? filemtime(public_path('css/privacy-index.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/legal-pages.css?v={{ file_exists(public_path('css/legal-pages.css')) ? filemtime(public_path('css/legal-pages.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $privacyWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Jogja, saya ingin bertanya mengenai kebijakan privasi dan data saya.');
-
-  $privacyTrust = [
-    ['icon' => 'verified', 'title' => 'Data Dilindungi', 'description' => 'Akses dibatasi sesuai kebutuhan'],
-    ['icon' => 'design_services', 'title' => 'File untuk Produksi', 'description' => 'Digunakan sesuai tujuan pesanan'],
-    ['icon' => 'delete', 'title' => 'Retensi Terbatas', 'description' => 'File desain disimpan 30 hari'],
-    ['icon' => 'chat', 'title' => 'Permintaan Data', 'description' => 'Dapat diajukan kepada tim'],
-  ];
-
-  $securityMeasures = [
-    ['icon' => 'lock', 'title' => 'Saluran Terenkripsi', 'description' => 'Komunikasi data website dilindungi melalui HTTPS.'],
-    ['icon' => 'admin_panel_settings', 'title' => 'Akses Terbatas', 'description' => 'Data hanya diakses oleh staf yang menangani pesanan.'],
-    ['icon' => 'inventory', 'title' => 'Proteksi File', 'description' => 'File desain disimpan dengan pembatasan akses.'],
-    ['icon' => 'policy', 'title' => 'Evaluasi Berkala', 'description' => 'Praktik keamanan ditinjau dan disesuaikan secara berkala.'],
-  ];
+  $privacyWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Medan, saya ingin bertanya mengenai kebijakan privasi dan data saya.');
+  $lastUpdated = '08 Agustus 2026';
 @endphp
 
-<div class="info-page privacy-page">
-  <section class="privacy-hero" id="privacy-hero" aria-labelledby="privacy-title">
-    <div class="info-shell privacy-hero__grid">
-      <div class="privacy-hero__content">
-        <p class="info-eyebrow info-eyebrow--badge">Privasi Pelanggan</p>
-        <h1 id="privacy-title">Kebijakan Privasi yang Jelas dan Transparan</h1>
-        <p class="privacy-hero__lead">Ketahui data yang kami perlukan, tujuan penggunaannya, serta cara kami menjaga informasi dan file desain Anda.</p>
-        <div class="info-actions">
-          <a class="info-button info-button--primary" href="#isi-kebijakan">
-            <span>Baca Kebijakan</span>
-            <span class="material-symbols-outlined" aria-hidden="true">expand_more</span>
-          </a>
-          <a class="info-button info-button--secondary" href="{{ $privacyWhatsappUrl }}" target="_blank" rel="noopener noreferrer">
-            <img src="/images/whatsapp.svg" alt="" width="19" height="19" aria-hidden="true">
-            <span>Tanya Tim Kami</span>
-          </a>
+<div class="legal-page">
+  {{-- Hero --}}
+  <section class="legal-hero" id="privacy-hero" aria-labelledby="privacy-title">
+    <div class="legal-shell">
+      <div class="legal-hero__grid">
+        <div class="legal-hero__content">
+          <p class="legal-eyebrow">Kebijakan Privasi</p>
+          <h1 id="privacy-title">Kebijakan privasi yang jelas dan transparan</h1>
+          <p class="legal-hero__lead">Ketahui data yang kami perlukan, tujuan penggunaannya, serta cara kami menjaga informasi dan file desain Anda.</p>
+          <div class="legal-actions">
+            <a class="legal-button legal-button--primary" href="#isi-kebijakan">Baca kebijakan</a>
+            <a class="legal-button legal-button--secondary" href="{{ $privacyWhatsappUrl }}" target="_blank" rel="noopener noreferrer">Tanya Tim Kami</a>
+          </div>
+          <p class="legal-meta"><span class="legal-meta__dot" aria-hidden="true"></span> Terakhir diperbarui: {{ $lastUpdated }}</p>
         </div>
-        <p class="privacy-hero__updated">
-          <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
-          Terakhir diperbarui: Juli 2025
-        </p>
+        <aside class="legal-hero__statement" aria-label="Komitmen privasi singkat">
+          <p>Komitmen privasi</p>
+          <strong>Data tidak dijual. File desain hanya dipakai untuk pesanan Anda.</strong>
+          <span>Retensi file desain maksimal 30 hari setelah serah terima, dengan opsi hapus lebih awal via WhatsApp.</span>
+        </aside>
       </div>
-
     </div>
   </section>
 
-  <section class="privacy-commitments" aria-labelledby="privacy-commitments-title">
-    <div class="info-shell">
-      <div class="privacy-commitments__header">
-        <p class="info-eyebrow">Komitmen Privasi</p>
-        <h2 id="privacy-commitments-title">Hal yang Kami Jaga dalam Setiap Pesanan</h2>
-      </div>
-      <ul class="privacy-commitments__list">
-        <li><span class="material-symbols-outlined" aria-hidden="true">verified_user</span><span>Data tidak dijual untuk pemasaran pihak ketiga.</span></li>
-        <li><span class="material-symbols-outlined" aria-hidden="true">lock</span><span>File desain tidak dijadikan sampel tanpa izin.</span></li>
-        <li><span class="material-symbols-outlined" aria-hidden="true">delete</span><span>Permintaan penghapusan dapat diajukan kepada tim.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="privacy-content" id="isi-kebijakan" aria-labelledby="privacy-content-title">
-    <div class="info-shell privacy-content__layout">
-      <aside class="privacy-toc" aria-label="Daftar isi kebijakan privasi">
-        <div class="privacy-toc__inner">
-          <p>Daftar Isi</p>
+  {{-- Dokumen + TOC --}}
+  <section class="legal-document" id="isi-kebijakan" aria-labelledby="document-title">
+    <div class="legal-shell">
+      <div class="legal-document__layout">
+        <aside class="legal-toc" aria-label="Daftar isi kebijakan privasi">
+          <p class="legal-toc__label">Daftar isi</p>
           <nav>
             <a href="#pendahuluan">Pendahuluan</a>
             <a href="#data-dikumpulkan">Data yang dikumpulkan</a>
@@ -84,139 +55,85 @@
             <a href="#cookie">Cookie dan pelacakan</a>
             <a href="#pembaruan">Pembaruan kebijakan</a>
           </nav>
-          <p class="privacy-toc__updated">Terakhir diperbarui: Juli 2025</p>
-          <a class="privacy-toc__contact" href="{{ $privacyWhatsappUrl }}" target="_blank" rel="noopener noreferrer">Tanya tim privasi</a>
-        </div>
-      </aside>
+        </aside>
 
-      <div class="privacy-document">
-        <details class="legal-mobile-toc">
-          <summary>Daftar isi kebijakan <span class="material-symbols-outlined" aria-hidden="true">expand_more</span></summary>
-          <nav>
-            <a href="#pendahuluan">Pendahuluan</a><a href="#data-dikumpulkan">Data yang dikumpulkan</a><a href="#penggunaan-data">Penggunaan data</a><a href="#file-desain">Perlindungan file desain</a><a href="#keamanan-data">Keamanan data</a><a href="#cookie">Cookie dan pelacakan</a><a href="#pembaruan">Pembaruan kebijakan</a>
-          </nav>
-        </details>
-        <header class="privacy-document__header">
-          <h2 id="privacy-content-title">Bagaimana Kami Mengelola Informasi Anda</h2>
-          <p>Penjelasan berikut berlaku untuk interaksi melalui website, WhatsApp, email, dan komunikasi langsung dengan Lanyard Jogja.</p>
-        </header>
+        <div>
+          <details class="legal-mobile-toc">
+            <summary>Daftar isi kebijakan <span aria-hidden="true">+</span></summary>
+            <nav>
+              <a href="#pendahuluan">Pendahuluan</a><a href="#data-dikumpulkan">Data yang dikumpulkan</a><a href="#penggunaan-data">Penggunaan data</a><a href="#file-desain">Perlindungan file desain</a><a href="#keamanan-data">Keamanan data</a><a href="#cookie">Cookie dan pelacakan</a><a href="#pembaruan">Pembaruan kebijakan</a>
+            </nav>
+          </details>
 
-        <article class="privacy-section" id="pendahuluan">
-          <span class="privacy-section__marker" aria-hidden="true">01</span>
-          <div>
-            <h2>Pendahuluan</h2>
-            <p>Selamat datang di Lanyard Jogja. Kebijakan Privasi ini menjelaskan komitmen kami dalam menjaga kerahasiaan data dan informasi yang Anda berikan saat menggunakan layanan kami, baik melalui website, WhatsApp, email, maupun komunikasi langsung.</p>
-            <p>Dengan menggunakan layanan Lanyard Jogja, Anda menyetujui pengumpulan dan penggunaan informasi sesuai dengan kebijakan ini. Jika Anda tidak setuju, mohon untuk tidak menggunakan layanan kami.</p>
-          </div>
-        </article>
+          <header class="legal-document__header">
+            <h2 id="document-title">Bagaimana kami mengelola informasi Anda</h2>
+            <p>Penjelasan ini berlaku untuk interaksi melalui website, WhatsApp, email, dan komunikasi langsung dengan Lanyard Medan.</p>
+          </header>
 
-        <article class="privacy-section" id="data-dikumpulkan">
-          <span class="privacy-section__marker" aria-hidden="true">02</span>
-          <div>
-            <h2>Informasi yang Kami Kumpulkan</h2>
-            <p>Dalam proses pemesanan lanyard custom, kami dapat mengumpulkan informasi berikut:</p>
-            <ul class="privacy-list">
-              <li><span class="material-symbols-outlined" aria-hidden="true">mail</span><span><strong>Data pribadi.</strong> Nama lengkap, nomor WhatsApp atau telepon, alamat email, dan alamat pengiriman.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">domain</span><span><strong>Data bisnis atau organisasi.</strong> Nama perusahaan, instansi, sekolah, atau komunitas yang tercantum dalam desain.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">image</span><span><strong>File desain.</strong> Logo, artwork, mockup, dan file lain yang dikirimkan untuk produksi.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">receipt_long</span><span><strong>Data pemesanan.</strong> Jenis bahan, kuantitas, warna, aksesori, dan riwayat transaksi.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">web</span><span><strong>Data teknis.</strong> Alamat IP, jenis browser, halaman yang dikunjungi, dan durasi kunjungan melalui cookie.</span></li>
-            </ul>
-          </div>
-        </article>
+          <article class="legal-article" id="pendahuluan">
+            <span class="legal-article__number" aria-hidden="true">01</span>
+            <div><h2>Pendahuluan</h2><p>Selamat datang di Lanyard Medan. Kebijakan Privasi ini menjelaskan komitmen kami dalam menjaga kerahasiaan data dan informasi yang Anda berikan saat menggunakan layanan kami, baik melalui website, WhatsApp, email, maupun komunikasi langsung. Dengan menggunakan layanan kami, Anda menyetujui pengumpulan dan penggunaan informasi sesuai kebijakan ini.</p></div>
+          </article>
 
-        <article class="privacy-section" id="penggunaan-data">
-          <span class="privacy-section__marker" aria-hidden="true">03</span>
-          <div>
-            <h2>Penggunaan Data</h2>
-            <p>Informasi yang kami kumpulkan digunakan untuk:</p>
-            <ul class="privacy-list privacy-list--compact">
-              <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right_alt</span><span>Memproses dan mengelola pesanan lanyard custom dari konsultasi hingga pengiriman.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right_alt</span><span>Berkomunikasi terkait status pesanan, konfirmasi desain, dan estimasi produksi.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right_alt</span><span>Mengirim informasi promo atau pembaruan layanan hanya jika Anda menyetujuinya.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right_alt</span><span>Meningkatkan kualitas layanan dan pengalaman pengguna website.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">arrow_right_alt</span><span>Memenuhi kewajiban hukum yang berlaku di Republik Indonesia.</span></li>
-            </ul>
-            <div class="privacy-note">
-              <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
-              <p><strong>Komitmen kami.</strong> Kami tidak menjual, menyewakan, atau membagikan data pribadi Anda kepada pihak ketiga untuk pemasaran tanpa izin eksplisit.</p>
+          <article class="legal-article" id="data-dikumpulkan">
+            <span class="legal-article__number" aria-hidden="true">02</span>
+            <div><h2>Informasi yang kami kumpulkan</h2><p>Dalam proses pemesanan lanyard custom, kami dapat mengumpulkan:</p>
+              <ul class="legal-list"><li><span aria-hidden="true"></span><p><strong>Data pribadi:</strong> nama lengkap, nomor WhatsApp/telepon, email, dan alamat pengiriman.</p></li><li><span aria-hidden="true"></span><p><strong>Data bisnis:</strong> nama perusahaan, instansi, sekolah, atau komunitas pada desain.</p></li><li><span aria-hidden="true"></span><p><strong>File desain:</strong> logo, artwork, dan mockup untuk produksi.</p></li><li><span aria-hidden="true"></span><p><strong>Data pemesanan:</strong> bahan, kuantitas, warna, aksesori, dan riwayat transaksi.</p></li><li><span aria-hidden="true"></span><p><strong>Data teknis:</strong> alamat IP, jenis browser, halaman yang dikunjungi, dan durasi kunjungan melalui cookie.</p></li></ul></div>
+          </article>
+
+          <article class="legal-article" id="penggunaan-data">
+            <span class="legal-article__number" aria-hidden="true">03</span>
+            <div><h2>Penggunaan data</h2><p>Informasi digunakan untuk:</p>
+              <ul class="legal-list">
+                <li><span aria-hidden="true"></span><p>Memproses dan mengelola pesanan dari konsultasi hingga pengiriman.</p></li>
+                <li><span aria-hidden="true"></span><p>Berkomunikasi terkait status pesanan, konfirmasi desain, dan estimasi produksi.</p></li>
+                <li><span aria-hidden="true"></span><p>Mengirim promo atau pembaruan layanan hanya bila Anda menyetujuinya.</p></li>
+                <li><span aria-hidden="true"></span><p>Meningkatkan kualitas layanan dan pengalaman website.</p></li>
+                <li><span aria-hidden="true"></span><p>Memenuhi kewajiban hukum yang berlaku.</p></li>
+              </ul>
+              <div class="legal-note"><span class="legal-note__mark" aria-hidden="true">✓</span><p><strong>Komitmen kami:</strong> Kami tidak menjual, menyewakan, atau membagikan data pribadi kepada pihak ketiga untuk pemasaran tanpa izin eksplisit.</p></div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="privacy-section" id="file-desain">
-          <span class="privacy-section__marker" aria-hidden="true">04</span>
-          <div>
-            <h2>Perlindungan File Desain dan Kekayaan Intelektual</h2>
-            <p>Kami memahami bahwa logo dan desain yang Anda kirimkan adalah aset berharga.</p>
-            <ul class="privacy-list">
-              <li><span class="material-symbols-outlined" aria-hidden="true">lock</span><span>File logo, artwork, dan mockup hanya digunakan untuk keperluan produksi pesanan Anda.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">lock</span><span>File tidak digunakan kembali, diperbanyak, atau dijadikan sampel tanpa izin tertulis.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">schedule</span><span>Setelah serah terima, file disimpan selama 30 hari untuk keperluan garansi lalu dihapus dari sistem.</span></li>
-              <li><span class="material-symbols-outlined" aria-hidden="true">delete</span><span>Anda dapat meminta penghapusan file lebih awal melalui WhatsApp.</span></li>
-            </ul>
-          </div>
-        </article>
+          <article class="legal-article" id="file-desain">
+            <span class="legal-article__number" aria-hidden="true">04</span>
+            <div><h2>Perlindungan file desain</h2><p>Logo dan desain Anda adalah aset berharga.</p>
+              <ul class="legal-check-list"><li><span aria-hidden="true">✓</span><div><h3>Hanya untuk produksi</h3><p>File logo, artwork, dan mockup hanya digunakan untuk pesanan Anda.</p></div></li><li><span aria-hidden="true">✓</span><div><h3>Tidak dipakai ulang</h3><p>Tidak diperbanyak atau dijadikan sampel tanpa izin tertulis.</p></div></li><li><span aria-hidden="true">✓</span><div><h3>Retensi 30 hari</h3><p>Setelah serah terima, file disimpan 30 hari lalu dihapus. Anda dapat meminta penghapusan lebih awal via WhatsApp.</p></div></li></ul>
+            </div>
+          </article>
 
-        <article class="privacy-section" id="keamanan-data">
-          <span class="privacy-section__marker" aria-hidden="true">05</span>
-          <div>
-            <h2>Keamanan Data</h2>
-            <p>Kami menerapkan langkah teknis dan organisasional untuk mengurangi risiko akses, perubahan, pengungkapan, atau perusakan data tanpa izin.</p>
-            <ul class="privacy-security">
-              @foreach($securityMeasures as $item)
-                <li>
-                  <span class="material-symbols-outlined" aria-hidden="true">{{ $item['icon'] }}</span>
-                  <h3>{{ $item['title'] }}</h3>
-                  <p>{{ $item['description'] }}</p>
-                </li>
-              @endforeach
-            </ul>
-            <p>Meskipun kami berupaya maksimal, tidak ada metode transmisi data melalui internet yang sepenuhnya aman. Kami tidak dapat menjamin keamanan absolut, namun terus meningkatkan sistem proteksi yang digunakan.</p>
-          </div>
-        </article>
+          <article class="legal-article" id="keamanan-data">
+            <span class="legal-article__number" aria-hidden="true">05</span>
+            <div><h2>Keamanan data</h2><p>Kami menerapkan langkah teknis dan organisasional untuk mengurangi risiko akses atau perusakan data tanpa izin. Komunikasi website dilindungi melalui HTTPS dan akses file desain dibatasi.</p>
+              <ul class="legal-check-list"><li><span aria-hidden="true">✓</span><div><h3>Saluran terenkripsi</h3><p>HTTPS aktif untuk website dan transfer file.</p></div></li><li><span aria-hidden="true">✓</span><div><h3>Akses terbatas</h3><p>Hanya staf yang menangani pesanan memiliki akses.</p></div></li><li><span aria-hidden="true">✓</span><div><h3>Proteksi file</h3><p>Penyimpanan dengan pembatasan akses dan audit berkala.</p></div></li></ul>
+              <p class="legal-article__footnote">Tidak ada metode transmisi yang sepenuhnya aman; kami terus meningkatkan sistem proteksi.</p>
+            </div>
+          </article>
 
-        <article class="privacy-section" id="cookie">
-          <span class="privacy-section__marker" aria-hidden="true">06</span>
-          <div>
-            <h2>Cookie dan Teknologi Pelacakan</h2>
-            <p>Website Lanyard Jogja dapat menggunakan cookie untuk mengingat preferensi kunjungan, menganalisis trafik, dan memastikan fungsi esensial website berjalan dengan baik.</p>
-            <p>Anda dapat menonaktifkan cookie melalui pengaturan browser. Beberapa fitur website mungkin tidak berfungsi optimal setelah cookie dinonaktifkan.</p>
-          </div>
-        </article>
+          <article class="legal-article" id="cookie">
+            <span class="legal-article__number" aria-hidden="true">06</span>
+            <div><h2>Cookie dan teknologi pelacakan</h2><p>Website dapat menggunakan cookie untuk mengingat preferensi, menganalisis trafik, dan menjaga fungsi esensial. Anda dapat menonaktifkannya melalui pengaturan browser, namun beberapa fitur mungkin tidak berfungsi optimal.</p></div>
+          </article>
 
-        <article class="privacy-section" id="pembaruan">
-          <span class="privacy-section__marker" aria-hidden="true">07</span>
-          <div>
-            <h2>Pembaruan Kebijakan Privasi</h2>
-            <p>Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Setiap perubahan akan diumumkan melalui halaman ini dengan mencantumkan tanggal pembaruan di bagian atas.</p>
-            <p>Kami mendorong Anda meninjau halaman ini secara berkala agar mengetahui bagaimana data dilindungi. Penggunaan layanan setelah perubahan berarti Anda menyetujui kebijakan yang telah diperbarui.</p>
-          </div>
-        </article>
-
+          <article class="legal-article" id="pembaruan">
+            <span class="legal-article__number" aria-hidden="true">07</span>
+            <div><h2>Pembaruan kebijakan</h2><p>Kami dapat memperbarui kebijakan ini dari waktu ke waktu. Perubahan diumumkan di halaman ini dengan mencantumkan tanggal pembaruan. Silakan meninjau secara berkala; penggunaan layanan setelah perubahan berarti Anda menyetujui kebijakan yang diperbarui.</p></div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="info-cta privacy-cta" aria-labelledby="privacy-cta-title">
-    <div class="info-shell">
-      <div class="info-cta__panel">
-        <div>
-          <h2 id="privacy-cta-title">Masih Memiliki Pertanyaan tentang Data Anda?</h2>
-          <p>Sampaikan pertanyaan atau permintaan Anda. Tim Lanyard Jogja akan membantu memberikan informasi yang relevan.</p>
-        </div>
-        <a href="{{ $privacyWhatsappUrl }}" target="_blank" rel="noopener noreferrer">
-          <img src="/images/whatsapp.svg" alt="" width="20" height="20" aria-hidden="true">
-          <span>Hubungi via WhatsApp</span>
-          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-        </a>
+  <section class="legal-cta" aria-labelledby="privacy-cta-title">
+    <div class="legal-shell">
+      <div class="legal-cta__panel">
+        <div><p class="legal-eyebrow">Tanya jawab privasi</p><h2 id="privacy-cta-title">Masih ada pertanyaan tentang data Anda?</h2><p>Sampaikan pertanyaan atau permintaan Anda, tim kami akan membantu dengan informasi yang relevan.</p></div>
+        <a class="legal-button legal-button--light" href="{{ $privacyWhatsappUrl }}" target="_blank" rel="noopener noreferrer">Hubungi via WhatsApp →</a>
       </div>
     </div>
   </section>
 </div>
-
 @include('components.footer')
-
 @push('schema')
   @include('components.schema.privacy')
 @endpush

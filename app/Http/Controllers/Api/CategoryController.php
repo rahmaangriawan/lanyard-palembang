@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -19,8 +20,8 @@ class CategoryController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:190'],
             'slug' => ['nullable', 'string', 'max:190', 'unique:category,slug'],
-            'description' => ['nullable', 'string'],
-            'type' => ['nullable', 'string', 'max:50'],
+            'description' => ['nullable', 'string', 'max:5000'],
+            'type' => ['nullable', Rule::in(['PRODUCT', 'BLOG'])],
         ]);
 
         $category = Category::create([
@@ -38,8 +39,8 @@ class CategoryController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:190'],
             'slug' => ['nullable', 'string', 'max:190', 'unique:category,slug,'.$category->id],
-            'description' => ['nullable', 'string'],
-            'type' => ['nullable', 'string', 'max:50'],
+            'description' => ['nullable', 'string', 'max:5000'],
+            'type' => ['nullable', Rule::in(['PRODUCT', 'BLOG'])],
         ]);
 
         $category->update([

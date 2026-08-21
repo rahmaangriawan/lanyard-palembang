@@ -32,7 +32,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
-Route::get('/health', fn () => ['ok' => true, 'app' => 'lanyardjogja-laravel']);
+Route::get('/health', fn () => ['ok' => true, 'app' => 'lanyardmedan-laravel']);
 
 Route::middleware('throttle:public-api')->group(function () {
     Route::get('/turnstile-config', function () {
@@ -104,7 +104,7 @@ Route::middleware('throttle:public-api')->group(function () {
                     ->get(['slug', 'updatedAt']),
             ],
         ]);
-    });
+    })->middleware('throttle:public-sitemap');
 
     Route::get('/products', function (Request $request) {
         $filters = $request->validate([
@@ -142,7 +142,7 @@ Route::middleware('throttle:public-api')->group(function () {
                     $product->metaTitle = PublicApi::normalizeText($product->metaTitle);
                     $product->metaDescription = PublicApi::normalizeText($product->metaDescription);
 
-                    return $product;
+                    return PublicApi::sanitizeProduct($product);
                 });
 
             return [
@@ -160,7 +160,7 @@ Route::middleware('throttle:public-api')->group(function () {
         ], false);
 
         return PublicApi::noStoreJson(['success' => true, ...$result]);
-    });
+    })->middleware('throttle:public-product-search');
 
     Route::get('/products/{slug}', function (string $slug) {
         $product = Product::query()
@@ -211,18 +211,19 @@ Route::middleware('throttle:public-api')->group(function () {
         return PublicApi::noStoreJson([
             'success' => true,
             'posts' => rescue(
-                fn () => Post::query()
+                    fn () => Post::query()
                     ->select($columns)
                     ->with(['category:id,name,slug', 'author:id,name,slug,bio,avatar'])
                     ->where('published', true)
                     ->when($filters['category'] ?? null, fn ($query, $slug) => $query->whereHas('category', fn ($category) => $category->where('slug', $slug)->where('type', 'BLOG')))
                     ->orderByDesc('createdAt')
-                    ->paginate($limit),
+                    ->paginate($limit)
+                    ->through(fn (Post $post) => PublicApi::sanitizeContent($post)),
                 [],
                 false,
             ),
         ]);
-    });
+    })->middleware('throttle:public-posts');
 
     Route::get('/authors/{slug}', function (string $slug, Request $request) {
         $filters = $request->validate([
@@ -330,6 +331,7 @@ Route::post('/comments', function (Request $request) {
     ]);
 
     $data = $request->validate([
+        'website' => ['nullable', 'prohibited'],
         'postId' => [
             'required',
             'integer',
@@ -351,7 +353,7 @@ Route::post('/comments', function (Request $request) {
     return response()->json([
         'success' => true,
         'message' => 'Komentar berhasil dikirim dan menunggu persetujuan admin.',
-        'comment' => $comment,
+        'id' => $comment->id,
     ], 201);
 })->middleware('throttle:comment-submit');
 
@@ -364,6 +366,7 @@ Route::post('/inquiries', function (Request $request) {
     ]);
 
     $data = $request->validate([
+        'website' => ['nullable', 'prohibited'],
         'name' => ['required', 'string', 'min:3', 'max:160'],
         'email' => ['required', 'email', 'max:190'],
         'phone' => ['required', 'string', 'min:8', 'max:25'],
@@ -372,11 +375,17 @@ Route::post('/inquiries', function (Request $request) {
     ]);
 
     $settings = SecureSettings::getMany(['turnstile_homepage_enabled', 'turnstile_secret_key']);
-    if (($settings['turnstile_homepage_enabled'] ?? 'false') === 'true') {
+    $turnstileEnabled = ($settings['turnstile_homepage_enabled'] ?? 'false') === 'true';
+    $turnstileSecret = trim((string) ($settings['turnstile_secret_key'] ?? ''));
+    if ($turnstileEnabled && $turnstileSecret === '') {
+        return response()->json(['error' => 'Verifikasi keamanan belum dikonfigurasi.'], 503);
+    }
+
+    if ($turnstileEnabled) {
         if (! Turnstile::verify(
             trim((string) ($data['turnstileToken'] ?? '')),
             $request->ip(),
-            trim((string) ($settings['turnstile_secret_key'] ?? '')),
+            $turnstileSecret,
         )) {
             return response()->json(['error' => 'Verifikasi keamanan gagal. Silakan coba lagi.'], 400);
         }
@@ -389,10 +398,14 @@ Route::post('/inquiries', function (Request $request) {
         'message' => $data['message'],
     ]);
 
-    return response()->json(['success' => true, 'inquiry' => $inquiry], 201);
+    return response()->json([
+        'success' => true,
+        'message' => 'Inquiry berhasil dikirim. Tim kami akan segera menghubungi Anda.',
+        'id' => $inquiry->id,
+    ], 201);
 })->middleware('throttle:inquiry-submit');
 
-Route::middleware(['auth:sanctum', 'cms', 'throttle:cms-api'])->prefix('cms')->group(function () {
+Route::middleware(['auth:sanctum', 'verified', 'cms', 'throttle:cms-api'])->prefix('cms')->group(function () {
     Route::apiResource('/posts', PostController::class);
     Route::get('/media', fn () => ['success' => true, 'mediaList' => Media::latest('createdAt')->paginate(24)]);
 });
@@ -452,7 +465,7 @@ Route::middleware(['auth:sanctum', 'admin', 'throttle:cms-api'])->prefix('cms')-
         $data = $request->validate([
             'featuredImage' => ['nullable', 'string', 'max:255'],
             'categoryId' => ['nullable', 'integer', 'exists:category,id'],
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:60000'],
             'published' => ['nullable', 'boolean'],
             'metaTitle' => ['nullable', 'string', 'max:255'],
             'metaDescription' => ['nullable', 'string', 'max:1000'],

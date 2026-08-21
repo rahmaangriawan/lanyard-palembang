@@ -18,15 +18,14 @@ final class PublicApi
             ->pluck('value', 'key')
             ->all();
 
-        foreach (['site_logo', 'site_favicon', 'og_image', 'logo_url', 'favicon_url', 'site_logo_header', 'site_logo_mobile'] as $key) {
-            if (array_key_exists($key, $settings)) {
-                $fallback = str_contains($key, 'favicon')
-                    ? '/uploads/lanyard-jogja-favicon.webp'
-                    : (str_contains($key, 'header')
-                        ? '/uploads/lanyard-jogja-logo.webp'
-                        : (str_contains($key, 'mobile') ? '/uploads/lanyard-jogja-logo.webp' : '/uploads/lanyard-jogja-logo.webp'));
-                $settings[$key] = AssetUrl::relative($settings[$key], $fallback) ?? $fallback;
-            }
+        $assetKeys = ['site_logo', 'site_favicon', 'og_image', 'logo_url', 'favicon_url', 'site_logo_header', 'site_logo_mobile'];
+        $assetSettings = array_intersect_key($settings, array_flip($assetKeys));
+
+        foreach ($assetSettings as $key => $value) {
+            $fallback = str_contains($key, 'favicon')
+                ? '/uploads/lanyard-medan-favicon.webp'
+                : '/uploads/lanyard-medan-logo.webp';
+            $settings[$key] = AssetUrl::relative($value, $fallback) ?? $fallback;
         }
 
         return $settings;
@@ -80,11 +79,11 @@ final class PublicApi
                     'pusattalilanyard',
                 ],
                 [
-                    'www.lanyardjogja.com',
-                    'lanyardjogja.com',
-                    'LanyardJogja',
-                    'Lanyard Jogja',
-                    'lanyardjogja',
+                    'www.lanyardmedan.com',
+                    'lanyardmedan.com',
+                    'LanyardMedan',
+                    'Lanyard Medan',
+                    'lanyardmedan',
                 ],
                 $value,
             )

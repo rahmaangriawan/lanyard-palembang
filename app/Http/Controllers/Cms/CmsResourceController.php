@@ -46,7 +46,7 @@ class CmsResourceController extends Controller
         $request->validate([
             'q' => ['nullable', 'string', 'max:200'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:500'],
-            'type' => ['nullable', 'string', 'max:50'],
+            'type' => ['nullable', Rule::in(['PRODUCT', 'BLOG'])],
             'published' => ['nullable', 'boolean'],
         ]);
         $config = $this->config($resource);
@@ -60,6 +60,10 @@ class CmsResourceController extends Controller
         }
 
         $query = $config['model']::query();
+
+        if ($resource === 'posts' && $request->user()?->isWriter()) {
+            $query->where('authorId', $request->user()->id);
+        }
 
         foreach ($config['with'] ?? [] as $relation) {
             $relationColumns = collect($config['columns'] ?? [])
@@ -183,6 +187,7 @@ class CmsResourceController extends Controller
         $this->authorizeResource($request, $resource, true);
         $config = $this->config($resource);
         $item = $config['model']::query()->findOrFail($id);
+        $this->authorizeItem($request, $resource, $item);
 
         return view('cms.form', [
             'resource' => $resource,
@@ -242,6 +247,7 @@ class CmsResourceController extends Controller
         $this->authorizeResource($request, $resource, true);
         $config = $this->config($resource);
         $item = $config['model']::query()->findOrFail($id);
+        $this->authorizeItem($request, $resource, $item);
         $item->update($this->validated($request, $config, $item));
 
         return redirect()
@@ -254,6 +260,7 @@ class CmsResourceController extends Controller
         $this->authorizeResource($request, $resource, true);
         $config = $this->config($resource);
         $item = $config['model']::query()->findOrFail($id);
+        $this->authorizeItem($request, $resource, $item);
 
         if ($resource === 'media' && $item instanceof Media) {
             if ($item->disk_path !== '') {
@@ -286,6 +293,7 @@ class CmsResourceController extends Controller
             default => 'active',
         };
         $item = $config['model']::query()->findOrFail($id);
+        $this->authorizeItem($request, $resource, $item);
 
         if ($item instanceof PublicRedirect && ! (bool) $item->active) {
             $this->assertRedirectGraph($item->sourcePath, $item->targetUrl, true, $item, $request);
@@ -308,6 +316,9 @@ class CmsResourceController extends Controller
         ]);
 
         $query = $config['model']::query()->whereIn('id', $validated['selected']);
+        if ($resource === 'posts' && $request->user()?->isWriter()) {
+            $query->where('authorId', $request->user()->id);
+        }
         $count = (clone $query)->count();
         abort_if($count === 0, 404);
 
@@ -378,7 +389,7 @@ class CmsResourceController extends Controller
                 'datetime' => ['nullable', 'date'],
                 'select' => ['nullable', 'string'],
                 'email' => ['nullable', 'email', 'max:191'],
-                'textarea', 'richtext' => ['nullable', 'string'],
+                'textarea', 'richtext' => ['nullable', 'string', 'max:60000'],
                 default => ['nullable', 'string', 'max:191'],
             };
 
@@ -393,6 +404,42 @@ class CmsResourceController extends Controller
 
             if ($name === 'slug') {
                 $rule[] = Rule::unique($config['table'], 'slug')->ignore($item?->getKey());
+            }
+
+            if (($field['options'] ?? null) && is_array($field['options'])) {
+                $fieldOptions = $field['options'];
+                $allowedValues = array_is_list($fieldOptions)
+                    ? collect($fieldOptions)
+                        ->map(fn ($option) => is_array($option) ? ($option['value'] ?? null) : $option)
+                        ->filter(fn ($value) => $value !== null)
+                        ->values()
+                        ->all()
+                    : array_keys($fieldOptions);
+                $rule[] = Rule::in($allowedValues);
+            }
+
+            if (($field['optionsKey'] ?? null) === 'categories' || $name === 'categoryId') {
+                $rule = [
+                    'nullable',
+                    'integer',
+                    Rule::exists('category', 'id'),
+                ];
+            }
+
+            if (($field['optionsKey'] ?? null) === 'posts' || $name === 'postId') {
+                $rule = [
+                    'nullable',
+                    'integer',
+                    Rule::exists('post', 'id'),
+                ];
+            }
+
+            if (($field['optionsKey'] ?? null) === 'cityPages' || $name === 'parentId') {
+                $rule = [
+                    'nullable',
+                    'integer',
+                    Rule::exists('citypage', 'id'),
+                ];
             }
 
             if ($name === 'authorId') {
@@ -1165,7 +1212,7 @@ class CmsResourceController extends Controller
                 'label' => 'Umum',
                 'description' => 'Identitas utama website dan teks dasar brand.',
                 'fields' => [
-                    ['key' => 'site_title', 'label' => 'Site Title', 'type' => 'text', 'placeholder' => 'Lanyard Jogja'],
+                    ['key' => 'site_title', 'label' => 'Site Title', 'type' => 'text', 'placeholder' => 'Lanyard Medan'],
                     ['key' => 'site_description', 'label' => 'Site Description', 'type' => 'textarea', 'placeholder' => 'Cetak lanyard custom untuk kebutuhan brand dan event.'],
                     ['key' => 'footer_text', 'label' => 'Footer Text', 'type' => 'textarea'],
                 ],
@@ -1174,11 +1221,11 @@ class CmsResourceController extends Controller
                 'label' => 'Brand Media',
                 'description' => 'Logo, favicon, dan gambar preview untuk kebutuhan brand/SEO.',
                 'fields' => [
-                    ['key' => 'site_logo', 'label' => 'Logo Utama', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-logo.webp'],
-                    ['key' => 'site_logo_header', 'label' => 'Logo Header', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-logo.webp'],
-                    ['key' => 'site_logo_mobile', 'label' => 'Logo Mobile', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-logo.webp'],
-                    ['key' => 'site_favicon', 'label' => 'Favicon', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-favicon.webp'],
-                    ['key' => 'og_image', 'label' => 'Open Graph Image', 'type' => 'image', 'fallback' => '/uploads/lanyard-jogja-logo.webp'],
+                    ['key' => 'site_logo', 'label' => 'Logo Utama', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-logo.webp'],
+                    ['key' => 'site_logo_header', 'label' => 'Logo Header', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-logo.webp'],
+                    ['key' => 'site_logo_mobile', 'label' => 'Logo Mobile', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-logo.webp'],
+                    ['key' => 'site_favicon', 'label' => 'Favicon', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-favicon.webp'],
+                    ['key' => 'og_image', 'label' => 'Open Graph Image', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-logo.webp'],
                 ],
             ],
             'kontak' => [
@@ -1187,7 +1234,7 @@ class CmsResourceController extends Controller
                 'fields' => [
                     ['key' => 'contact_phone', 'label' => 'Telepon', 'type' => 'text', 'placeholder' => '+62 822-1020-0700'],
                     ['key' => 'contact_whatsapp', 'label' => 'WhatsApp', 'type' => 'text', 'placeholder' => '6282210200700'],
-                    ['key' => 'contact_email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'info@lanyardjogja.com'],
+                    ['key' => 'contact_email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'info@lanyardmedan.com'],
                     ['key' => 'contact_address', 'label' => 'Alamat', 'type' => 'textarea', 'placeholder' => 'Depok, Indonesia'],
                 ],
             ],
@@ -1283,5 +1330,12 @@ class CmsResourceController extends Controller
     private function authorizeResource(Request $request, string $resource, bool $mutating = false): void
     {
         abort_unless($request->user()?->canAccessCmsResource($resource, $mutating), 403);
+    }
+
+    private function authorizeItem(Request $request, string $resource, Model $item): void
+    {
+        if ($resource === 'posts' && $item instanceof Post) {
+            abort_unless($request->user()?->canManagePost($item), 403);
+        }
     }
 }

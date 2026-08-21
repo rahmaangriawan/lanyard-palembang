@@ -140,13 +140,28 @@ class SecurityRegressionTest extends TestCase
         $request = Request::create('/login', 'POST', server: ['REMOTE_ADDR' => '203.0.113.40']);
 
         $this->assertLimiter('login-global', $request, 20);
+        $this->assertLimiter('login-identity', $request, 10, 300);
         $this->assertLimiter('password-email', $request, 3);
         $this->assertLimiter('password-reset', $request, 5);
         $this->assertLimiter('public-api', $request, 120);
+        $this->assertLimiter('public-sitemap', $request, 30);
+        $this->assertLimiter('public-product-search', $request, 60);
+        $this->assertLimiter('public-posts', $request, 60);
+        $this->assertLimiter('cms-web', $request, 60);
+        $this->assertLimiter('auth-confirm', $request, 10);
+        $this->assertLimiter('auth-password', $request, 5);
 
         $user = User::factory()->create();
         $request->setUserResolver(fn () => $user);
         $this->assertLimiter('cms-api', $request, 120);
+    }
+
+    public function test_writer_factory_defaults_are_non_privileged(): void
+    {
+        $user = User::factory()->create();
+
+        $this->assertSame(User::ROLE_USER, $user->role);
+        $this->assertFalse($user->canAccessCms());
     }
 
     public function test_public_and_cms_api_limiters_return_429_with_retry_after(): void
@@ -179,6 +194,74 @@ class SecurityRegressionTest extends TestCase
 
         Sanctum::actingAs($staff);
         $this->getJson('/api/cms/posts')->assertForbidden();
+    }
+
+    public function test_writer_cannot_mutate_another_writers_post(): void
+    {
+        $owner = User::factory()->writer()->create();
+        $otherWriter = User::factory()->writer()->create();
+        $post = Post::query()->create([
+            'title' => 'Post milik owner',
+            'slug' => 'post-milik-owner',
+            'content' => '<p>Isi.</p>',
+            'authorId' => $owner->id,
+            'published' => true,
+            'createdAt' => now(),
+        ]);
+
+        $this->actingAs($otherWriter)
+            ->patch('/kawruh/posts/'.$post->id, [
+                'title' => 'Percobaan ubah',
+                'slug' => $post->slug,
+                'content' => '<p>Jahat.</p>',
+            ])
+            ->assertForbidden();
+
+        $this->assertSame('Post milik owner', $post->fresh()->title);
+    }
+
+    public function test_public_mutation_response_does_not_expose_comment_or_inquiry_pii(): void
+    {
+        $post = Post::query()->create([
+            'title' => 'Artikel publik',
+            'slug' => 'artikel-publik',
+            'content' => '<p>Isi.</p>',
+            'published' => true,
+            'createdAt' => now(),
+        ]);
+
+        $this->postJson('/api/comments', [
+            'postId' => $post->id,
+            'name' => 'Pengunjung',
+            'email' => 'private@example.com',
+            'content' => 'Komentar aman.',
+        ])->assertCreated()->assertJsonMissingPath('comment.email');
+
+        $this->postJson('/api/inquiries', [
+            'name' => 'Calon Pelanggan',
+            'email' => 'private@example.com',
+            'phone' => '081234567890',
+            'message' => 'Pesan privat.',
+        ])->assertCreated()->assertJsonMissingPath('inquiry.email');
+    }
+
+    public function test_honeypot_rejects_public_comment_mutations(): void
+    {
+        $post = Post::query()->create([
+            'title' => 'Artikel honeypot',
+            'slug' => 'artikel-honeypot',
+            'content' => '<p>Isi.</p>',
+            'published' => true,
+            'createdAt' => now(),
+        ]);
+
+        $this->postJson('/api/comments', [
+            'website' => 'bot',
+            'postId' => $post->id,
+            'name' => 'Bot',
+            'email' => 'bot@example.com',
+            'content' => 'Spam.',
+        ])->assertUnprocessable();
     }
 
     public function test_sql_injection_payload_is_treated_as_search_text(): void
@@ -218,6 +301,23 @@ class SecurityRegressionTest extends TestCase
             ->assertDontSee('Artikel Rahasia');
     }
 
+    public function test_login_identity_limiter_blocks_distributed_failures_for_same_email(): void
+    {
+        $email = 'target@example.com';
+
+        for ($attempt = 0; $attempt < 10; $attempt++) {
+            $this->post('/login', [
+                'email' => $email,
+                'password' => 'wrong-password',
+            ]);
+        }
+
+        $this->post('/login', [
+            'email' => $email,
+            'password' => 'wrong-password',
+        ])->assertStatus(429);
+    }
+
     public function test_product_rich_text_is_sanitized_on_write_and_public_read(): void
     {
         $admin = User::factory()->create(['role' => User::ROLE_ADMIN]);
@@ -247,13 +347,13 @@ class SecurityRegressionTest extends TestCase
             ->assertJsonPath('product.description', $stored);
     }
 
-    private function assertLimiter(string $name, Request $request, int $expectedAttempts): void
+    private function assertLimiter(string $name, Request $request, int $expectedAttempts, int $expectedDecay = 60): void
     {
         $callback = RateLimiter::limiter($name);
         $this->assertNotNull($callback);
         $limit = $callback($request);
         $this->assertInstanceOf(Limit::class, $limit);
         $this->assertSame($expectedAttempts, $limit->maxAttempts);
-        $this->assertSame(60, $limit->decaySeconds);
+        $this->assertSame($expectedDecay, $limit->decaySeconds);
     }
 }

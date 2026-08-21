@@ -495,6 +495,7 @@ Route::post('/blog/{slug}/comments', function (Request $request, string $slug) {
     ]);
 
     $data = $request->validate([
+        'website' => ['nullable', 'prohibited'],
         'name' => ['required', 'string', 'max:100'],
         'email' => ['required', 'email', 'max:190'],
         'content' => ['required', 'string', 'max:2000'],
@@ -543,29 +544,51 @@ Route::middleware(['auth', 'verified', 'cms'])->prefix('kawruh')->group(function
         Route::redirect('/komentar', '/kawruh/comments');
         Route::redirect('/formulir', '/kawruh/inquiries');
         Route::redirect('/portofolio', '/kawruh/portfolio');
-        Route::post('/products/sync', ProductSyncController::class)->name('cms.products.sync');
+        Route::post('/products/sync', ProductSyncController::class)
+            ->middleware('throttle:cms-web')
+            ->name('cms.products.sync');
         Route::get('/writers', [WriterController::class, 'index'])->name('cms.writers.index');
         Route::get('/writers/create', [WriterController::class, 'create'])->name('cms.writers.create');
-        Route::post('/writers', [WriterController::class, 'store'])->name('cms.writers.store');
+        Route::post('/writers', [WriterController::class, 'store'])
+            ->middleware('throttle:cms-web')
+            ->name('cms.writers.store');
         Route::get('/writers/{writer}/edit', [WriterController::class, 'edit'])->name('cms.writers.edit');
-        Route::patch('/writers/{writer}', [WriterController::class, 'update'])->name('cms.writers.update');
-        Route::delete('/writers/{writer}', [WriterController::class, 'destroy'])->name('cms.writers.destroy');
+        Route::patch('/writers/{writer}', [WriterController::class, 'update'])
+            ->middleware('throttle:cms-web')
+            ->name('cms.writers.update');
+        Route::delete('/writers/{writer}', [WriterController::class, 'destroy'])
+            ->middleware('throttle:cms-web')
+            ->name('cms.writers.destroy');
     });
 
     Route::get('/{resource}', [CmsResourceController::class, 'index'])->name('cms.index');
     Route::get('/{resource}/create', [CmsResourceController::class, 'create'])->name('cms.create');
-    Route::post('/{resource}/bulk', [CmsResourceController::class, 'bulk'])->name('cms.bulk');
-    Route::post('/{resource}', [CmsResourceController::class, 'store'])->name('cms.store');
+    Route::post('/{resource}/bulk', [CmsResourceController::class, 'bulk'])
+        ->middleware('throttle:cms-web')
+        ->name('cms.bulk');
+    Route::post('/{resource}', [CmsResourceController::class, 'store'])
+        ->middleware('throttle:cms-web')
+        ->name('cms.store');
     Route::get('/{resource}/{id}/edit', [CmsResourceController::class, 'edit'])->name('cms.edit');
-    Route::patch('/{resource}/{id}', [CmsResourceController::class, 'update'])->name('cms.update');
-    Route::delete('/{resource}/{id}', [CmsResourceController::class, 'destroy'])->name('cms.destroy');
-    Route::post('/{resource}/{id}/toggle', [CmsResourceController::class, 'toggle'])->name('cms.toggle');
+    Route::patch('/{resource}/{id}', [CmsResourceController::class, 'update'])
+        ->middleware('throttle:cms-web')
+        ->name('cms.update');
+    Route::delete('/{resource}/{id}', [CmsResourceController::class, 'destroy'])
+        ->middleware('throttle:cms-web')
+        ->name('cms.destroy');
+    Route::post('/{resource}/{id}/toggle', [CmsResourceController::class, 'toggle'])
+        ->middleware('throttle:cms-web')
+        ->name('cms.toggle');
 });
 
 Route::middleware(['auth', 'cms'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile', [ProfileController::class, 'update'])
+        ->middleware('throttle:cms-web')
+        ->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+        ->middleware('throttle:cms-web')
+        ->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

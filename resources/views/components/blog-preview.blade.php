@@ -9,7 +9,24 @@
       ->get();
   });
 
-  $asset = fn ($source) => \App\Support\AssetUrl::relative($source) ?: '/uploads/hero-lanyard-jogja.webp';
+  $resolvePostImage = function ($post) {
+    if (!empty($post->featuredImage)) {
+      $rel = \App\Support\AssetUrl::relative($post->featuredImage);
+      if ($rel && file_exists(public_path(ltrim(parse_url($rel, PHP_URL_PATH), '/')))) {
+        return $rel;
+      }
+    }
+
+    if (!empty($post->content) && preg_match('/<img[^>]+src=[\"\']([^\"\']+)[\"\']/', (string) $post->content, $m)) {
+      $rel = \App\Support\AssetUrl::relative($m[1]);
+      if ($rel && file_exists(public_path(ltrim(parse_url($rel, PHP_URL_PATH), '/')))) {
+        return $rel;
+      }
+    }
+
+    return '/uploads/hero-lanyard-medan.webp';
+  };
+
   $formatDate = function ($value): string {
     try {
       return \Carbon\Carbon::parse($value)->locale('id')->translatedFormat('d F Y');
@@ -20,51 +37,52 @@
 @endphp
 
 @if ($posts->isNotEmpty())
-<section class="home-blog" id="blog" aria-labelledby="home-blog-title">
-  <div class="home-shell">
+<section class="home-blog" id="blog" aria-labelledby="home-blog-title" data-blog-showcase>
+  <div class="home-shell home-shell--wide">
     <header class="home-blog__header">
-      <div class="home-section-heading home-section-heading--left">
-        <p>Artikel Terbaru</p>
+      <div class="home-blog__heading">
+        <p>ARTIKEL TERBARU</p>
         <h2 id="home-blog-title">Panduan Seputar Lanyard</h2>
       </div>
-      <a href="{{ route('blog.index') }}">
-        Lihat Semua Artikel
-        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+      <a class="home-blog__all-link" href="{{ route('blog.index') }}">
+        <span>Lihat Semua Artikel</span>
+        <svg class="home-blog__all-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </header>
 
-    <div class="home-blog__grid {{ $posts->count() === 2 ? 'home-blog__grid--two' : '' }}">
-      @foreach ($posts as $post)
+    <div class="home-blog__list" role="list">
+      @foreach ($posts as $index => $post)
         @php
-          $image = $asset($post->featuredImage ?? null);
+          $image = $resolvePostImage($post);
           $excerpt = trim(preg_replace('/\s+/', ' ', strip_tags((string) ($post->content ?? ''))));
-          $category = trim((string) ($post->category->name ?? 'Artikel')) ?: 'Artikel';
+          $number = str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT);
         @endphp
-        <article class="home-blog__card {{ $loop->first ? 'home-blog__card--featured' : 'home-blog__card--compact' }}">
-          <a href="/blog/{{ $post->slug }}">
-            <img
-              src="{{ $image }}"
-              @if ($srcset = \App\Support\ResponsiveImage::srcset($image))
-                srcset="{{ $srcset }}"
-                sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 92vw"
-              @endif
-              alt="{{ $post->title }}"
-              width="640"
-              height="400"
-              loading="lazy"
-              decoding="async"
-            >
-            <div class="home-blog__body">
-              <span>{{ $category }}</span>
-              <h3>{{ $post->title }}</h3>
+        <article class="home-blog__item" role="listitem" data-blog-item data-image="{{ $image }}" data-title="{{ $post->title }}">
+          <a class="home-blog__item-link" href="/blog/{{ $post->slug }}">
+            <span class="home-blog__item-num">{{ $number }}</span>
+            <div class="home-blog__item-main">
+              <h3 class="home-blog__item-title">{{ $post->title }}</h3>
               @if ($excerpt !== '')
-                <p>{{ \Illuminate\Support\Str::limit($excerpt, 105) }}</p>
+                <p class="home-blog__item-excerpt">{{ \Illuminate\Support\Str::limit($excerpt, 120) }}</p>
               @endif
-              <small>{{ $formatDate($post->createdAt ?? $post->created_at ?? null) }}</small>
+            </div>
+            <div class="home-blog__item-meta">
+              <time class="home-blog__item-date">{{ $formatDate($post->createdAt ?? $post->created_at ?? null) }}</time>
+              <span class="home-blog__item-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </span>
             </div>
           </a>
         </article>
       @endforeach
+    </div>
+
+    {{-- Floating Cursor-Following Image Preview (Desktop Only) --}}
+    <div class="home-blog__preview" data-blog-preview aria-hidden="true">
+      <img class="home-blog__preview-img" data-blog-preview-img src="" alt="" loading="eager">
     </div>
   </div>
 </section>

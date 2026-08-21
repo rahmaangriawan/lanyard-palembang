@@ -1,118 +1,303 @@
-﻿/* Homepage closing CTA. One message, one conversion path. */
-
-.home-cta,
-.home-cta *,
-.home-cta *::before,
-.home-cta *::after {
-  box-sizing: border-box;
-}
+/* ==========================================================================
+   Home CTA — Modern Minimal Editorial 2-Column Card (#9E0C17 on White)
+   ========================================================================== */
 
 .home-cta {
-  --cta-ink: #172033;
-  --cta-muted: #5d626a;
-  --cta-green: #0c7f2a;
-  --cta-green-hover: #096c23;
+  padding: 72px 0 88px;
   background: #ffffff;
-  padding: clamp(82px, 9vw, 128px) 0;
-  color: var(--cta-ink);
+  border-top: 1px solid #f1f5f9;
 }
 
-.home-cta__container {
-  display: flex;
-  width: min(calc(100% - 40px), 760px);
-  margin-inline: auto;
-  flex-direction: column;
+.home-cta__card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   align-items: center;
-  text-align: center;
+  gap: clamp(32px, 4vw, 56px);
+  border: 1px solid #e8e8e8;
+  border-radius: 28px;
+  background: #ffffff;
+  padding: clamp(32px, 4.5vw, 52px);
+  box-shadow: 0 16px 44px rgb(15 23 42 / 0.05);
+  overflow: hidden;
 }
 
-.home-cta h2 {
-  margin: 0;
-  color: var(--cta-ink);
-  font-weight: 780;
-  text-wrap: balance;
+/* --------------------------------------------------------------------------
+   Left Column: Copy, Actions, Benefits
+   -------------------------------------------------------------------------- */
+.home-cta__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 520px;
 }
 
-.home-cta h2 span,
-.home-cta h2 strong {
-  display: block;
-}
-
-.home-cta h2 strong {
-  color: var(--cta-green);
-  font: inherit;
-}
-
-.home-cta p {
-  max-width: 650px;
-  margin: 20px auto 0;
-  color: var(--cta-muted);
-  font-size: clamp(15px, 1.35vw, 17px);
-  line-height: 1.65;
-  text-wrap: balance;
-}
-
-.home-cta__button {
+/* Eyebrow with Sparkle */
+.home-cta__eyebrow-wrap {
   display: inline-flex;
-  min-height: 54px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 9999px;
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+}
+
+.home-cta__sparkle-icon {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 26px;
-  border: 1px solid var(--cta-green);
-  border-radius: 11px;
-  background: var(--cta-green);
-  padding: 14px 24px;
-  color: #ffffff;
-  box-shadow: none;
-  font-size: 14px;
-  font-weight: 720;
-  line-height: 1.3;
+  width: 18px;
+  height: 18px;
+  color: #9E0C17;
+}
+
+.home-cta__sparkle-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.home-cta__eyebrow {
+  color: #9E0C17;
+  font-size: 11.5px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* Headline */
+.home-cta__title {
+  margin: 0 0 14px;
+  color: #0f172a;
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.18;
+}
+
+.home-cta__title-accent {
+  color: #9E0C17;
+}
+
+/* Description */
+.home-cta__desc {
+  margin: 0 0 28px;
+  color: #475569;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+/* Buttons */
+.home-cta__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.home-cta__btn {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 0 22px;
+  font-size: 14.5px;
+  font-weight: 800;
+  line-height: 1;
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 160ms ease, border-color 160ms ease, transform 140ms ease;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
-.home-cta__button:hover {
-  border-color: var(--cta-green-hover);
-  background: var(--cta-green-hover);
+.home-cta__btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
 }
 
-.home-cta__button:active {
-  transform: scale(0.98);
+.home-cta__btn-icon svg {
+  width: 18px;
+  height: 18px;
 }
 
-.home-cta__button:focus-visible {
-  outline: 3px solid rgb(12 127 42 / 0.24);
-  outline-offset: 4px;
+.home-cta__btn-arrow {
+  font-size: 16px;
+  transition: transform 180ms ease;
 }
 
-.home-cta__button .material-symbols-outlined {
-  font-size: 19px;
+.home-cta__btn:hover .home-cta__btn-arrow {
+  transform: translateX(3px);
 }
 
-@media (max-width: 767px) {
+/* Primary Button (WhatsApp Red) */
+.home-cta__btn--primary {
+  background: #9E0C17;
+  color: #ffffff;
+  border: 1.5px solid #9E0C17;
+  box-shadow: none;
+}
+
+.home-cta__btn--primary:hover {
+  background: #800a12;
+  border-color: #800a12;
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+/* Secondary Button (Cek Harga Outline) */
+.home-cta__btn--secondary {
+  background: #ffffff;
+  color: #9E0C17;
+  border: 1.5px solid #9E0C17;
+}
+
+.home-cta__btn--secondary:hover {
+  background: #fff5f5;
+  transform: translateY(-2px);
+}
+
+/* Benefits Row */
+.home-cta__benefits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding-top: 6px;
+}
+
+.home-cta__benefit-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #334155;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.home-cta__check-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: #9E0C17;
+}
+
+.home-cta__check-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.home-cta__benefit-divider {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: #cbd5e1;
+}
+
+/* --------------------------------------------------------------------------
+   Right Column: Product Visual (Clean Card with Subtle Soft Arc)
+   -------------------------------------------------------------------------- */
+.home-cta__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: radial-gradient(circle at 75% 50%, #fff8f8 0%, #ffffff 70%);
+}
+
+.home-cta__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+  transition: transform 300ms ease;
+}
+
+.home-cta__card:hover .home-cta__img {
+  transform: scale(1.02);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 980px) {
+  .home-cta__card {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 36px 28px;
+  }
+  .home-cta__content {
+    max-width: 100%;
+  }
+  .home-cta__visual {
+    order: 2;
+  }
+}
+
+@media (max-width: 640px) {
   .home-cta {
-    padding: 72px 0;
+    padding: 56px 0 68px;
   }
-
-  .home-cta__container {
-    width: min(calc(100% - 40px), 520px);
+  .home-cta__card {
+    border-radius: 20px;
+    padding: 24px 18px 20px;
   }
-
-  .home-cta p {
-    margin-top: 18px;
+  .home-cta__title {
+    font-size: 24px;
   }
-
-  .home-cta__button {
+  .home-cta__desc {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .home-cta__buttons {
+    flex-direction: column;
     width: 100%;
-    max-width: 330px;
-    margin-top: 24px;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .home-cta__btn {
+    width: 100%;
+  }
+  .home-cta__benefits {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px;
+    width: 100%;
+    padding-top: 4px;
+  }
+  .home-cta__benefit-divider {
+    display: none !important;
+  }
+  .home-cta__benefit-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+  .home-cta__benefit-item:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-cta__button {
+  .home-cta__btn,
+  .home-cta__btn-arrow,
+  .home-cta__img {
     transition: none;
   }
 }

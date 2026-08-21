@@ -5,7 +5,7 @@ namespace App\Support;
 final class LoginTurnstile
 {
     /**
-     * @return array{enabled: bool, siteKey: string, secretKey: string}
+     * @return array{enabled: bool, misconfigured: bool, siteKey: string, secretKey: string}
      */
     public static function config(): array
     {
@@ -20,9 +20,11 @@ final class LoginTurnstile
             : ($settings['turnstile_homepage_enabled'] ?? 'false');
         $siteKey = trim($settings['turnstile_site_key'] ?? '');
         $secretKey = trim($settings['turnstile_secret_key'] ?? '');
+        $configured = $siteKey !== '' && $secretKey !== '';
 
         return [
-            'enabled' => $enabledValue === 'true' && $siteKey !== '' && $secretKey !== '',
+            'enabled' => $enabledValue === 'true' && $configured,
+            'misconfigured' => $enabledValue === 'true' && ! $configured,
             'siteKey' => $siteKey,
             'secretKey' => $secretKey,
         ];

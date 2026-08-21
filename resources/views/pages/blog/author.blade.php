@@ -4,7 +4,7 @@
   use App\Support\AssetUrl;
   use App\Support\ResponsiveImage;
 
-  $displayName = $author->name ?: 'Tim Lanyard Jogja';
+  $displayName = $author->name ?: 'Tim Lanyard Medan';
   $bioText = $author->bio;
   $avatar = AssetUrl::relative($author->avatar);
   $avatarSrcset = ResponsiveImage::srcset($avatar);
@@ -13,17 +13,16 @@
   $archiveCssVersion = file_exists($archiveCssPath) ? filemtime($archiveCssPath) : 1;
 @endphp
 
-@section('title', $displayName.' | Penulis Lanyard Jogja')
-@section('meta_description', 'Lihat artikel yang ditulis oleh '.$displayName.' di blog Lanyard Jogja tentang desain, produksi, dan penggunaan lanyard custom.')
+@section('title', $displayName.' | Penulis Lanyard Medan')
+@section('meta_description', 'Lihat kumpulan artikel dan panduan yang ditulis oleh '.$displayName.' di blog Lanyard Medan seputar desain, spesifikasi bahan, dan produksi tali lanyard custom.')
 @section('seo_canonical', route('blog.author', ['slug' => $authorSlug]))
-@section('seo_og_image', $author->avatar ?: '/uploads/lanyard-jogja-logo.webp')
+@section('seo_og_image', $author->avatar ?: '/uploads/lanyard-medan-logo.webp')
 @if($posts->currentPage() > 1)
   @section('seo_noindex', '1')
 @endif
 
 @push('head')
   <link rel="stylesheet" href="/css/blog-archive.css?v={{ $archiveCssVersion }}">
-  <link rel="stylesheet" href="/css/public-info.css?v={{ file_exists(public_path('css/public-info.css')) ? filemtime(public_path('css/public-info.css')) : 1 }}">
 @endpush
 @push('schema')
   @include('components.schema.author')
@@ -31,46 +30,93 @@
 
 @section('content')
 <div class="blog-archive-page">
+  {{-- 1. AUTHOR HERO 2-COLUMN SECTION --}}
   <section class="blog-author-hero" aria-labelledby="author-page-title">
     <div class="blog-archive-shell blog-author-hero__layout">
       <div class="blog-author-hero__copy">
         <nav class="blog-archive-breadcrumb" aria-label="Breadcrumb">
+          <a href="{{ route('home') }}">Beranda</a>
+          <span aria-hidden="true">/</span>
           <a href="{{ route('blog.index') }}">Blog</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">Penulis</span>
+          <span aria-current="page">{{ $displayName }}</span>
         </nav>
-        <p class="blog-archive-eyebrow">Profil Penulis</p>
+
+        <div class="blog-archive-eyebrow">
+          <span class="blog-archive-sparkle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/>
+            </svg>
+          </span>
+          <span>PROFIL PENULIS &amp; KONTRIBUTOR</span>
+        </div>
+
         <h1 id="author-page-title">{{ $displayName }}</h1>
+        
         @if($bioText)
-          <p>{{ $bioText }}</p>
+          <p class="blog-author-hero__bio">{{ $bioText }}</p>
         @else
-          <p>Berbagi wawasan tentang produksi, desain, dan penggunaan lanyard custom.</p>
+          <p class="blog-author-hero__bio">
+            Spesialis produksi dan materi edukasi seputar teknologi cetak tali lanyard custom, bahan sublimasi digital, dan perlengkapan event di Lanyard Medan.
+          </p>
         @endif
-        <div class="blog-author-hero__count">
-          <strong>{{ $articleCount }}</strong>
-          <span>artikel diterbitkan</span>
+
+        <div class="blog-author-hero__actions">
+          <div class="blog-author-hero__count">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <span><strong>{{ $articleCount }}</strong> Artikel Diterbitkan</span>
+          </div>
+
+          <a class="blog-archive-back-link" href="{{ route('blog.index') }}" style="margin-top: 0;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+              <line x1="19" y1="12" x2="5" y2="12"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            <span>Semua Artikel</span>
+          </a>
         </div>
       </div>
 
-      <div class="blog-author-portrait" aria-label="Foto {{ $displayName }}">
-        @if($avatar)
-          <img src="{{ $avatar }}" @if($avatarSrcset) srcset="{{ $avatarSrcset }}" sizes="(min-width: 768px) 240px, 180px" @endif alt="{{ $displayName }}, penulis Lanyard Jogja" width="560" height="560" loading="eager" decoding="async">
-        @else
-          <span aria-hidden="true">{{ strtoupper(mb_substr($displayName, 0, 1)) }}</span>
-        @endif
+      <div class="blog-author-portrait-wrap">
+        <div class="blog-author-portrait" aria-label="Foto profil {{ $displayName }}">
+          @if($avatar)
+            <img
+              src="{{ $avatar }}"
+              @if($avatarSrcset) srcset="{{ $avatarSrcset }}" sizes="(min-width: 768px) 240px, 180px" @endif
+              alt="{{ $displayName }}, penulis Lanyard Medan"
+              width="560"
+              height="560"
+              loading="eager"
+              decoding="async"
+            >
+          @else
+            <span class="blog-author-portrait__initial" aria-hidden="true">
+              {{ strtoupper(mb_substr($displayName, 0, 1)) }}
+            </span>
+          @endif
+        </div>
+        <div class="blog-author-badge">
+          <span class="blog-author-badge__dot" aria-hidden="true"></span>
+          <span>Penulis Terverifikasi</span>
+        </div>
       </div>
     </div>
   </section>
 
+  {{-- 2. LISTING ARTIKEL SECTION --}}
   <section class="blog-archive-section" aria-labelledby="author-listing-title">
     <div class="blog-archive-shell">
       <header class="blog-archive-heading">
         <div>
           <h2 id="author-listing-title">Tulisan dari {{ $displayName }}</h2>
-          <p>Artikel terbaru yang diterbitkan oleh penulis ini.</p>
+          <p>Kumpulan panduan dan wawasan terbaru yang disusun oleh penulis ini.</p>
         </div>
-        <p class="blog-archive-heading__count">{{ $articleCount }} artikel</p>
+        <span class="blog-archive-heading__count">{{ $articleCount }} Artikel</span>
       </header>
+
       <x-blog.archive-list
         :posts="$posts"
         empty-title="Belum ada artikel"
@@ -79,6 +125,7 @@
     </div>
   </section>
 
+  {{-- 3. CLOSING CTA --}}
   <x-blog.archive-cta />
 </div>
 

@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardjogja.com';
+    $siteUrl = 'https://lanyardmedan.com';
   }
 
   $canonicalUrl = $siteUrl . '/garansi';
@@ -10,11 +10,11 @@
     '@type' => 'WebPage',
     '@id' => $canonicalUrl . '/#webpage',
     'name' => 'Garansi Kualitas Lanyard Custom',
-    'description' => 'Cakupan garansi produksi, batas waktu pengajuan klaim, bukti yang diperlukan, dan proses validasi Lanyard Jogja.',
+    'description' => 'Cakupan garansi produksi, batas waktu pengajuan klaim, bukti yang diperlukan, dan proses validasi Lanyard Medan.',
     'url' => $canonicalUrl,
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Jogja',
+      'name' => 'Lanyard Medan',
       'url' => $siteUrl,
     ],
   ];
