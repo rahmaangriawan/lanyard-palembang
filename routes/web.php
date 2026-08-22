@@ -28,6 +28,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -350,14 +351,18 @@ Route::get('/blog', function (Request $request) {
     $posts = Post::query()
         ->with(['category', 'author'])
         ->where('published', true)
-        ->when($search !== '', function ($query) use ($escapedSearch) {
-            $term = "%{$escapedSearch}%";
+        ->when($search !== '', function ($query) use ($search, $escapedSearch) {
+            if (DB::connection()->getDriverName() === 'mysql') {
+                $query->whereRaw('MATCH(title, content, metaDescription) AGAINST(? IN BOOLEAN MODE)', [$search]);
+            } else {
+                $term = "%{$escapedSearch}%";
 
-            $query->where(function ($query) use ($term) {
-                $query->whereRaw("title LIKE ? ESCAPE '!'", [$term])
-                    ->orWhereRaw("metaDescription LIKE ? ESCAPE '!'", [$term])
-                    ->orWhereRaw("content LIKE ? ESCAPE '!'", [$term]);
-            });
+                $query->where(function ($query) use ($term) {
+                    $query->whereRaw("title LIKE ? ESCAPE '!'", [$term])
+                        ->orWhereRaw("metaDescription LIKE ? ESCAPE '!'", [$term])
+                        ->orWhereRaw("content LIKE ? ESCAPE '!'", [$term]);
+                });
+            }
         })
         ->orderByDesc('createdAt')
         ->paginate(9)
@@ -383,28 +388,32 @@ Route::get('/kategori/{slug}', function (string $slug) {
 })->name('blog.category');
 
 Route::get('/tag/{slug}', function (string $slug) {
-    $matchingPosts = Post::query()
+    $normalizedSlug = str_replace('-', ' ', $slug);
+    $perPage = 9;
+
+    $baseQuery = Post::query()
         ->with(['category', 'author'])
         ->where('published', true)
         ->whereNotNull('tags')
+        ->whereRaw('FIND_IN_SET(?, REPLACE(tags, ", ", ","))', [$normalizedSlug]);
+
+    $total = (clone $baseQuery)->count();
+    $page = max(1, (int) request('page', 1));
+    $matchingPosts = $baseQuery
         ->orderByDesc('createdAt')
-        ->get()
-        ->filter(function (Post $post) use ($slug): bool {
-            return collect(explode(',', (string) $post->tags))
-                ->contains(fn (string $tag): bool => Str::slug(trim($tag)) === $slug);
-        })
-        ->values();
+        ->skip(($page - 1) * $perPage)
+        ->take($perPage)
+        ->get();
 
     $matchedTag = $matchingPosts
         ->flatMap(fn (Post $post) => explode(',', (string) $post->tags))
         ->map(fn (string $tag) => trim($tag))
         ->first(fn (string $tag): bool => Str::slug($tag) === $slug);
     $tagName = $matchedTag ?: Str::headline($slug);
-    $page = LengthAwarePaginator::resolveCurrentPage();
-    $perPage = 9;
+
     $posts = new LengthAwarePaginator(
-        $matchingPosts->forPage($page, $perPage)->values(),
-        $matchingPosts->count(),
+        $matchingPosts,
+        $total,
         $perPage,
         $page,
         ['path' => request()->url(), 'query' => request()->query()],
