@@ -47,7 +47,7 @@
       </p>
     </header>
 
-    <div class="home-products-editorial__grid" role="list" aria-label="Produk lanyard pilihan">
+    <div class="home-products-editorial__grid" aria-label="Produk lanyard pilihan">
       @foreach ($products as $index => $product)
         @php
           $image = \App\Support\AssetUrl::relative($product->featuredImage ?? null)

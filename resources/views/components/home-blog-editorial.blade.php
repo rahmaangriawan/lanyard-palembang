@@ -28,7 +28,7 @@ $articles = \App\Support\HomePageCache::remember('home_posts', function () {
     @if ($articles->isEmpty())
       <p class="home-blog-editorial__empty" role="status">Artikel terbaru sedang disiapkan.</p>
     @else
-      <div class="home-blog-editorial__grid" role="list">
+      <div class="home-blog-editorial__grid" aria-label="Artikel terbaru Lanyard Palembang">
         @foreach ($articles as $article)
           @php
             $rawFeatured = trim((string) ($article->featuredImage ?? ''));
@@ -68,7 +68,7 @@ $articles = \App\Support\HomePageCache::remember('home_posts', function () {
 
             $srcset = \App\Support\ResponsiveImage::srcset($featuredImage);
           @endphp
-          <article class="home-blog-editorial__card" role="listitem">
+          <article class="home-blog-editorial__card">
             <a href="{{ route('blog.show', ['slug' => $article->slug]) }}" class="home-blog-editorial__image-link" aria-label="Baca artikel: {{ $displayTitle }}">
               <div class="home-blog-editorial__image-wrap">
                 <img
