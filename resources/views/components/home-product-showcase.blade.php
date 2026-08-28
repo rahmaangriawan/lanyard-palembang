@@ -54,7 +54,7 @@
             ?: $fallbackImages[$index % count($fallbackImages)];
           $description = $excerpt($product->shortDescription ?? $product->description ?? '');
         @endphp
-        <article class="home-products-editorial__card" role="listitem">
+        <article class="home-products-editorial__card">
           <a
             href="{{ route('products.show', $product->slug) }}"
             class="home-products-editorial__link"

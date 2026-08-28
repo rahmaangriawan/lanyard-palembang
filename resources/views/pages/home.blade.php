@@ -6,14 +6,6 @@
     });
     $homeTitle = $homeSeoSettings['seo_meta_title'] ?? 'Print Lanyard Palembang Murah Free Ongkir';
     $homeDesc = $homeSeoSettings['seo_meta_description'] ?? 'Dapatkan lanyard custom berkualitas untuk kantor atau event Anda hanya di Lanyard Palembang.';
-@endphp
-@section('title', $homeTitle)
-@section('meta_description', $homeDesc)
-@section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/')
-@section('seo_og_image', '/uploads/lanyard-palembang-logo.webp')
-
-@push('head')
-@php
     $homeCssPath = public_path('build/public/home.min.css');
     $homeCssVersion = file_exists($homeCssPath) ? filemtime($homeCssPath) : 1;
     $homeJsPath = public_path('build/public/home.min.js');
@@ -23,12 +15,15 @@
     $ctaEditorialPath = public_path('css/home-cta-editorial.css');
     $ctaEditorialVersion = file_exists($ctaEditorialPath) ? filemtime($ctaEditorialPath) : 1;
 @endphp
+@section('title', $homeTitle)
+@section('meta_description', $homeDesc)
+@section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/')
+@section('seo_og_image', '/uploads/lanyard-palembang-logo.webp')
+
+@push('head')
 <link rel="stylesheet" href="/build/public/home.min.css?v={{ $homeCssVersion }}">
 <link rel="stylesheet" href="/css/home-blog-editorial.css?v={{ $blogEditorialVersion }}">
 <link rel="stylesheet" href="/css/home-cta-editorial.css?v={{ $ctaEditorialVersion }}">
-
-@push('schema')
-@include('components.schema.home')
 @endpush
 
 @section('content')
