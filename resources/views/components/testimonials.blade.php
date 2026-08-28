@@ -36,7 +36,7 @@
   ];
 @endphp
 
-<section class="home-testimonials" id="testimoni" aria-label="Testimoni pelanggan Lanyard Medan">
+<section class="home-testimonials" id="testimoni" aria-label="Testimoni pelanggan Lanyard Palembang">
   <div class="home-shell home-shell--wide">
     <header class="home-testimonials__intro">
       <p class="home-testimonials__eyebrow">TESTIMONI PELANGGAN</p>

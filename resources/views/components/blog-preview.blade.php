@@ -24,7 +24,7 @@
       }
     }
 
-    return '/uploads/hero-lanyard-medan.webp';
+    return '/uploads/hero-lanyard-palembang-gold-640w.webp';
   };
 
   $formatDate = function ($value): string {

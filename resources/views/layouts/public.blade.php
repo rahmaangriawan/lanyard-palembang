@@ -8,21 +8,21 @@
       $__seoTitle = null;
       $__seoDesc = null;
       $__seoCanonical = null;
-      if (View::hasSection('title')) { $__seoTitle = trim($__env->yieldContent('title')); }
-      if (View::hasSection('meta_description')) { $__seoDesc = trim($__env->yieldContent('meta_description')); }
-      if (View::hasSection('seo_title')) { $__seoTitle = trim($__env->yieldContent('seo_title')); }
-      if (View::hasSection('seo_desc')) { $__seoDesc = trim($__env->yieldContent('seo_desc')); }
-      if (View::hasSection('seo_canonical')) { $__seoCanonical = trim($__env->yieldContent('seo_canonical')); }
+      if (View::hasSection('title')) { $__seoTitle = html_entity_decode(trim($__env->yieldContent('title')), ENT_QUOTES | ENT_HTML5, 'UTF-8'); }
+      if (View::hasSection('meta_description')) { $__seoDesc = html_entity_decode(trim($__env->yieldContent('meta_description')), ENT_QUOTES | ENT_HTML5, 'UTF-8'); }
+      if (View::hasSection('seo_title')) { $__seoTitle = html_entity_decode(trim($__env->yieldContent('seo_title')), ENT_QUOTES | ENT_HTML5, 'UTF-8'); }
+      if (View::hasSection('seo_desc')) { $__seoDesc = html_entity_decode(trim($__env->yieldContent('seo_desc')), ENT_QUOTES | ENT_HTML5, 'UTF-8'); }
+      if (View::hasSection('seo_canonical')) { $__seoCanonical = html_entity_decode(trim($__env->yieldContent('seo_canonical')), ENT_QUOTES | ENT_HTML5, 'UTF-8'); }
       $__seoNoIndex = false;
       if (View::hasSection('seo_noindex')) { $__seoNoIndex = true; }
       $__seoNoCanonical = false;
       if (View::hasSection('seo_no_canonical')) { $__seoNoCanonical = true; }
       $__seoType = 'website';
-      if (View::hasSection('seo_type')) { $__seoType = trim($__env->yieldContent('seo_type')); if ($__seoType === '') $__seoType = 'website'; }
+      if (View::hasSection('seo_type')) { $__seoType = html_entity_decode(trim($__env->yieldContent('seo_type')), ENT_QUOTES | ENT_HTML5, 'UTF-8'); if ($__seoType === '') $__seoType = 'website'; }
       $__seoOgImage = null;
-      if (View::hasSection('seo_og_image')) { $__seoOgImage = trim($__env->yieldContent('seo_og_image')); }
-      $__seoPublishedTime = View::hasSection('seo_published_time') ? trim($__env->yieldContent('seo_published_time')) : null;
-      $__seoModifiedTime = View::hasSection('seo_modified_time') ? trim($__env->yieldContent('seo_modified_time')) : null;
+      if (View::hasSection('seo_og_image')) { $__seoOgImage = html_entity_decode(trim($__env->yieldContent('seo_og_image')), ENT_QUOTES | ENT_HTML5, 'UTF-8'); }
+      $__seoPublishedTime = View::hasSection('seo_published_time') ? html_entity_decode(trim($__env->yieldContent('seo_published_time')), ENT_QUOTES | ENT_HTML5, 'UTF-8') : null;
+      $__seoModifiedTime = View::hasSection('seo_modified_time') ? html_entity_decode(trim($__env->yieldContent('seo_modified_time')), ENT_QUOTES | ENT_HTML5, 'UTF-8') : null;
     @endphp
     @include('components.seo', [
       'title' => $__seoTitle ?: null,
@@ -40,7 +40,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/webp" sizes="1024x1024" href="/uploads/lanyard-medan-favicon.webp">
+    <link rel="icon" type="image/webp" sizes="1024x1024" href="/uploads/lanyard-palembang-favicon.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     {{-- Web App Manifest --}}
@@ -51,9 +51,9 @@
     <link rel="preload" href="/font-assets/geist-700" as="font" type="font/woff2" crossorigin>
 
     @if(request()->is('/'))
-    <link rel="preload" href="/uploads/hero-lanyard-medan.webp" as="image" type="image/webp" fetchpriority="high"
-      imagesrcset="/uploads/hero-lanyard-medan-320w.webp 320w, /uploads/hero-lanyard-medan-640w.webp 640w, /uploads/hero-lanyard-medan-960w.webp 960w, /uploads/hero-lanyard-medan-1280w.webp 1280w, /uploads/hero-lanyard-medan.webp 1448w"
-      imagesizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 680px">
+    <link rel="preload" href="/uploads/hero-lanyard-palembang-gold.webp" as="image" type="image/webp" fetchpriority="high"
+      imagesrcset="/uploads/hero-lanyard-palembang-gold-640w.webp 640w, /uploads/hero-lanyard-palembang-gold-960w.webp 960w, /uploads/hero-lanyard-palembang-gold-1280w.webp 1280w, /uploads/hero-lanyard-palembang-gold.webp 1717w"
+      imagesizes="100vw">
     @endif
     @if(request()->routeIs('ordering'))
     <link rel="preload" href="/uploads/hero-cara-pemesanan-lanyard.webp" as="image" type="image/webp" fetchpriority="high">
@@ -160,6 +160,7 @@
     <x-floating-whatsapp />
 
     @yield('scripts')
+    @stack('scripts')
     <script src="/build/public/site.min.js?v={{ $publicSiteJsV }}" defer></script>
     {{-- Scroll Reveal Engine — Mode A --}}
 </body>

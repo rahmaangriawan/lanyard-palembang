@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
 @php
-  $description = 'Kumpulan artikel dan panduan dengan tag #'.strtolower($tagName).' di Lanyard Medan untuk membantu Anda memahami seluk-beluk lanyard custom.';
-  $ogImage = $posts->first()?->featuredImage ?: '/uploads/lanyard-medan-logo.webp';
+  $description = 'Kumpulan artikel dan panduan dengan tag #'.strtolower($tagName).' di Lanyard Palembang untuk membantu Anda memahami seluk-beluk lanyard custom.';
+  $ogImage = $posts->first()?->featuredImage ?: '/uploads/lanyard-palembang-logo.webp';
   $archiveCssPath = public_path('css/blog-archive.css');
   $archiveCssVersion = file_exists($archiveCssPath) ? filemtime($archiveCssPath) : 1;
   $tagSlug = request()->route('slug');
 @endphp
 
-@section('title', 'Tag: #'.$tagName.' | Blog Lanyard Medan')
+@section('title', 'Tag: #'.$tagName.' | Blog Lanyard Palembang')
 @section('meta_description', $description)
 @section('seo_canonical', route('blog.tag', ['slug' => $tagSlug]))
 @section('seo_type', 'website')
@@ -22,7 +22,7 @@
 @endpush
 @push('schema')
   <x-schema.blog-archive
-    :name="'Tag #'.$tagName.' | Blog Lanyard Medan'"
+    :name="'Tag #'.$tagName.' | Blog Lanyard Palembang'"
     :description="$description"
     :canonical-path="'/tag/'.$tagSlug"
     :breadcrumb-name="'#'.$tagName"

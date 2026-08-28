@@ -54,7 +54,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'prod_url' => env('APP_PROD_URL', 'https://lanyardmedan.com'),
+    'prod_url' => env('APP_PROD_URL', 'https://lanyardpalembang.com'),
 
     'frontend_url' => env('ASTRO_FRONTEND_URL', 'http://localhost:4321'),
 

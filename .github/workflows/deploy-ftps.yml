@@ -1,4 +1,4 @@
-name: Deploy Lanyard Medan via FTPS
+name: Deploy Lanyard Palembang via FTPS
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       remote_root:
-        description: "Path relatif dari FTP home. Pakai lanyardmedan.com jika FTP home=/home/lanyardb; kosongkan jika akun sudah chroot ke folder aplikasi."
+        description: "Path relatif dari FTP home. Pakai lanyardpalembang.com jika FTP home=/home/lanyardb; kosongkan jika akun sudah chroot ke folder aplikasi."
         required: false
         default: ""
         type: string
@@ -23,7 +23,7 @@ on:
         type: boolean
 
 concurrency:
-  group: lanyard-medan-ftps-production-${{ github.ref }}
+  group: lanyard-palembang-ftps-production-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -78,8 +78,8 @@ jobs:
         run: |
           set -euo pipefail
 
-          release_dir="$RUNNER_TEMP/lanyard-medan-release"
-          runtime_asset_dir="$RUNNER_TEMP/lanyard-medan-runtime-assets"
+          release_dir="$RUNNER_TEMP/lanyard-palembang-release"
+          runtime_asset_dir="$RUNNER_TEMP/lanyard-palembang-runtime-assets"
           rm -rf "$release_dir" "$runtime_asset_dir"
           mkdir -p "$release_dir" "$runtime_asset_dir"
 

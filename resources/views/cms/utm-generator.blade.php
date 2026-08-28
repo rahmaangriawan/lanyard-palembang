@@ -16,7 +16,7 @@
       <div class="card__header">
         <div>
           <h2 class="card__title" id="utm-generator-title">Parameter kampanye</h2>
-          <p class="card__subtitle">Gunakan URL relatif seperti <code>/produk</code> atau domain resmi Lanyard Medan.</p>
+          <p class="card__subtitle">Gunakan URL relatif seperti <code>/produk</code> atau domain resmi Lanyard Palembang.</p>
         </div>
       </div>
       <div class="card__body">

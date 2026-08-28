@@ -1,83 +1,84 @@
 @extends('layouts.public')
 
-@section('title', 'Area Layanan Cetak Lanyard Custom Medan & Nasional | Lanyard Medan')
-@section('meta_description', 'Lanyard Medan melayani pesanan tali lanyard custom untuk Kota Medan, Binjai, Deli Serdang, Pematang Siantar, serta pengiriman aman ke seluruh provinsi di Indonesia.')
+@section('title', 'Area Layanan Cetak Lanyard Custom Palembang & Nasional | Lanyard Palembang')
+@section('meta_description', 'Lanyard Palembang melayani pesanan tali lanyard custom untuk Kota Palembang, Banyuasin, Ogan Ilir, Prabumulih, Muara Enim, hingga pengiriman aman ke seluruh provinsi di Indonesia.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/area')
-@section('seo_og_image', '/uploads/hero-area-lanyard-medan.webp')
+@section('seo_og_image', '/uploads/hero-area-lanyard-palembang.webp')
 
 @push('head')
   <link rel="stylesheet" href="/css/area-page.css?v={{ file_exists(public_path('css/area-page.css')) ? filemtime(public_path('css/area-page.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/home-cta-editorial.css?v={{ file_exists(public_path('css/home-cta-editorial.css')) ? filemtime(public_path('css/home-cta-editorial.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Medan, saya mau tanya layanan dan pengiriman lanyard custom untuk wilayah saya.');
+  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Palembang, saya mau tanya layanan dan pengiriman lanyard custom untuk wilayah saya.');
 
   $pillars = [
     [
       'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
-      'title' => 'Workshop Berbasis di Medan',
-      'description' => 'Produksi langsung di Kota Medan, memudahkan koordinasi cetak cepat tanpa ketergantungan antrean vendor luar pulau.',
+      'title' => 'Workshop Berbasis di Palembang',
+      'description' => 'Produksi langsung di Kota Palembang, memudahkan koordinasi cetak cepat tanpa ketergantungan antrean vendor luar pulau.',
     ],
     [
       'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
-      'title' => 'Pengiriman Cepat se-Sumut',
-      'description' => 'Tersedia opsi pengiriman kurir lokal instan/Same Day untuk Medan dan kargo darat 1 hari untuk kabupaten sekitar.',
+      'title' => 'Pengiriman Kilat se-Sumsel',
+      'description' => 'Tersedia opsi pengiriman kurir instan Same Day dalam kota dan kargo darat 1 hari untuk kabupaten tetangga di Sumatera Selatan.',
     ],
     [
       'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>',
       'title' => 'Jangkauan Ekspedisi Nasional',
-      'description' => 'Bekerja sama dengan JNE, SiCepat, J&T, dan operator kargo volume besar untuk pengiriman aman ke seluruh Nusantara.',
+      'description' => 'Bermitra resmi dengan JNE, J&T, SiCepat, dan operator kargo volume besar untuk pengiriman aman ke seluruh provinsi di Indonesia.',
     ],
     [
       'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
       'title' => 'Garansi & Tracking Terpantau',
-      'description' => 'Setiap paket dilindungi garansi cetak ulang dan dilengkapi nomor resi aktif yang dikirim langsung via WhatsApp.',
+      'description' => 'Setiap paket dilindungi garansi cetak ulang 100% dan dilengkapi nomor resi aktif yang dikirim langsung via WhatsApp.',
     ],
   ];
 
-  $sumutAreas = [
+  $sumselAreas = [
     [
       'num' => '01',
-      'name' => 'Kota Medan (Pusat Layanan)',
+      'name' => 'Kota Palembang (Pusat Layanan)',
       'badge' => 'SAME DAY / INSTAN',
-      'desc' => 'Pusat produksi dan operasional utama. Melayani instansi pemerintah, BUMN, perkantoran swasta, universitas, dan kepanitiaan event di seluruh kecamatan Kota Medan.',
+      'desc' => 'Pusat produksi dan operasional utama. Melayani instansi pemerintah, BUMN, perkantoran swasta, universitas, dan kepanitiaan event di seluruh kecamatan Kota Palembang.',
       'points' => ['Gratis ongkir reguler dalam kota', 'Tersedia kurir Same Day / Instan', 'Waktu produksi kilat 1–2 hari kerja'],
     ],
     [
       'num' => '02',
-      'name' => 'Kab. Deli Serdang & Percut Sei Tuan',
-      'badge' => 'PENGIRIMAN HARIAN',
-      'desc' => 'Pengiriman rutin harian untuk area perkantoran bandara Kualanamu, kampus, sekolah, dan instansi pemerintahan Deli Serdang.',
-      'points' => ['Kurir lokal ekspres & reguler', 'Tarif terjangkau dan packing aman', 'Layanan sampel mockup gratis'],
+      'name' => 'Kab. Banyuasin & Pangkalan Balai',
+      'badge' => 'KARGO DARAT HARIAN',
+      'desc' => 'Distribusi rutin via armada kargo lokal untuk perusahaan perkebunan, pertambangan, dan kantor pemerintahan di wilayah Banyuasin.',
+      'points' => ['Estimasi sampai 1 hari kerja', 'Tarif subsidi terjangkau', 'Packing kardus lapis bubble wrap anti benturan'],
     ],
     [
       'num' => '03',
-      'name' => 'Kota Binjai',
-      'badge' => 'KIRIM 1 HARI',
-      'desc' => 'Distribusi cepat via armada darat lokal untuk kebutuhan seragam lanyard pegawai dinas, organisasi kepemudaan, dan instansi pendidikan.',
-      'points' => ['Estimasi sampai 1 hari kerja', 'Pilihan bahan tissue & nylon komplit', 'Fasilitas konsultasi online mudah'],
+      'name' => 'Kab. Ogan Ilir & Indralaya (UNSRI)',
+      'badge' => 'KORPORAT & KAMPUS',
+      'desc' => 'Spesialis tali lanyard untuk perkantoran, dosen, mahasiswa, dan kepanitiaan event Universitas Sriwijaya serta kawasan Indralaya.',
+      'points' => ['Kurir reguler harian', 'Paket bundling + ID card PVC tersedia', 'Layanan desain mockup 3D gratis'],
     ],
     [
       'num' => '04',
-      'name' => 'Lubuk Pakam & Kawasan Industri',
-      'badge' => 'KORPORAT & PABRIK',
-      'desc' => 'Spesialis pengadaan tali tanda pengenal karyawan pabrik, kartu akses pegawai industri, dan instansi komersial.',
-      'points' => ['Paket bundling lanyard + ID card PVC', 'Diskon khusus order partai besar', 'Lengkap dengan safety breakaway buckle'],
+      'name' => 'Kota Prabumulih & Zona Industri Energi',
+      'badge' => 'KURIR EKSPRES',
+      'desc' => 'Pengiriman aman untuk perusahaan migas, perkantoran Pertamina, dan kegiatan operasional di area Prabumulih serta Sumatera Selatan bagian tengah.',
+      'points' => ['Kurir langsung via tol Trans Sumatera', 'Layanan konsultasi desain instan', 'Diskon khusus order perusahaan'],
     ],
     [
       'num' => '05',
-      'name' => 'Pematang Siantar & Tebing Tinggi',
+      'name' => 'Kab. Muara Enim & Lahat',
       'badge' => 'KARGO DARAT',
-      'desc' => 'Rute ekspres darat harian untuk sekolah, rumah sakit, perbankan, dan kepanitiaan seminar di Siantar dan Tebing Tinggi.',
-      'points' => ['Estimasi 1–2 hari kerja', 'Pengemasan kardus tahan benturan', 'Resi aktif terpantau real-time'],
+      'desc' => 'Rute pengiriman reguler untuk perusahaan tambang batu bara, perkantoran, dan rumah sakit rujukan di Muara Enim hingga Lahat.',
+      'points' => ['Pengiriman via ekspedisi kargo bus', 'Packing kardus tahan getaran', 'Resi real-time terhubung WhatsApp'],
     ],
     [
       'num' => '06',
-      'name' => 'Seluruh Kabupaten di Sumatera Utara',
-      'badge' => 'SUMUT LENGKAP',
-      'desc' => 'Menjangkau Asahan, Labuhanbatu, Toba, Tapanuli, Karo, Dairi, Langkat, Simalungun, hingga Nias dengan jalur logistik resmi.',
-      'points' => ['Pilihan ekspedisi reguler & kargo bus', 'Kemasan anti-air dan segel kuat', 'Jaminan garansi 100% ganti baru'],
+      'name' => 'Seluruh Kabupaten se-Sumatera Selatan',
+      'badge' => 'LIPUTAN LENGKAP',
+      'desc' => 'Mencakup Muba, OKU, OKU Timur, OKU Selatan, OKI, PALI, Lubuklinggau, Pagar Alam, Musi Rawas, dan Empat Lawang dengan jalur logistik resmi.',
+      'points' => ['Pilihan ekspedisi reguler & kargo', 'Kemasan anti-air dan segel kuat', 'Jaminan garansi 100% ganti baru'],
     ],
   ];
 
@@ -86,7 +87,7 @@
       'zone' => 'ZONA 1',
       'title' => 'Pulau Sumatera',
       'estimate' => '2–4 Hari Kerja',
-      'coverage' => 'Aceh, Riau, Kepulauan Riau, Sumatera Barat, Jambi, Sumatera Selatan, Bengkulu, & Lampung.',
+      'coverage' => 'Aceh, Riau, Kepulauan Riau, Sumatera Barat, Jambi, Bengkulu, & Lampung via kargo darat dan udara.',
     ],
     [
       'zone' => 'ZONA 2',
@@ -110,7 +111,7 @@
 @endphp
 
 <div class="area-page">
-  {{-- Hero Section --}}
+  {{-- 1. HERO SECTION --}}
   <section class="area-hero" id="area-hero" aria-labelledby="area-title">
     <div class="home-shell home-shell--wide area-hero__container">
       <div class="area-hero__content">
@@ -122,26 +123,26 @@
         </div>
 
         <h1 id="area-title" class="area-hero__title">
-          Pusat Cetak Tali Lanyard Medan dengan Jangkauan <span class="area-hero__title-accent">Nasional.</span>
+          Pusat Cetak Tali Lanyard Palembang dengan Jangkauan <span class="area-hero__title-accent">Nasional.</span>
         </h1>
 
         <p class="area-hero__desc">
-          Berbasis di Kota Medan, kami melayani pemesanan tali lanyard printing custom untuk instansi perkantoran, universitas, sekolah, dan event di seluruh Sumatera Utara hingga seluruh provinsi di Indonesia.
+          Berbasis langsung di Kota Palembang, kami melayani pengadaan tali lanyard printing custom untuk instansi perkantoran, BUMN, universitas, dinas pemerintahan, dan kepanitiaan event di seluruh Sumatera Selatan hingga provinsi lain di Indonesia.
         </p>
 
         <div class="area-hero__actions">
-          <a class="area-btn area-btn--primary ptl-button-motion" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" data-button-motion>
+          <a class="area-btn area-btn--primary" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer">
             <span class="area-btn__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
               </svg>
             </span>
-            <span data-button-label>Cek Layanan Area Anda via WA</span>
+            <span>Cek Layanan Area Anda via WA</span>
             <span class="area-btn__arrow" aria-hidden="true">→</span>
           </a>
 
-          <a class="area-btn area-btn--secondary ptl-button-motion" href="{{ route('products.index') }}" data-button-motion>
-            <span data-button-label>Eksplor Pilihan Produk</span>
+          <a class="area-btn area-btn--secondary" href="{{ route('products.index') }}">
+            <span>Eksplor Pilihan Produk</span>
             <span class="area-btn__arrow" aria-hidden="true">→</span>
           </a>
         </div>
@@ -149,25 +150,22 @@
 
       <div class="area-hero__visual">
         <div class="area-hero__image-card">
-          <picture>
-            <source srcset="/uploads/hero-area-lanyard-medan-1280w.webp 1280w, /uploads/hero-area-lanyard-medan-960w.webp 960w, /uploads/hero-area-lanyard-medan-640w.webp 640w" sizes="(max-width: 767px) 100vw, 560px" type="image/webp">
-            <img
-              src="/uploads/hero-area-lanyard-medan.webp"
-              alt="Cakupan area layanan cetak lanyard custom Lanyard Medan"
-              width="1448"
-              height="1086"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            >
-          </picture>
+          <img
+            src="/uploads/hero-area-lanyard-palembang.webp?v={{ file_exists(public_path('uploads/hero-area-lanyard-palembang.webp')) ? filemtime(public_path('uploads/hero-area-lanyard-palembang.webp')) : 1 }}"
+            alt="Cakupan area layanan cetak lanyard custom Lanyard Palembang"
+            width="1536"
+            height="1024"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          >
         </div>
       </div>
     </div>
   </section>
 
-  {{-- 4 Pilar Distribusi --}}
-  <section class="area-pillars" id="keunggulan-distribusi" aria-label="Keunggulan distribusi Lanyard Medan">
+  {{-- 2. 4 PILLAR KEUNGGULAN DISTRIBUSI --}}
+  <section class="area-pillars" id="keunggulan-distribusi" aria-label="Keunggulan distribusi Lanyard Palembang">
     <div class="home-shell home-shell--wide">
       <div class="area-pillars__grid">
         @foreach($pillars as $pillar)
@@ -183,32 +181,31 @@
     </div>
   </section>
 
-  {{-- Prioritas Wilayah Sumatera Utara (6 Card Grid) --}}
-  <section class="area-local" id="area-sumut" aria-labelledby="local-title">
+  {{-- 3. PRIORITAS WILAYAH SUMATERA SELATAN (6 Card Grid) --}}
+  <section class="area-local" id="area-sumsel" aria-labelledby="local-title">
     <div class="home-shell home-shell--wide">
       <header class="area-section-intro">
-        <p class="area-section-eyebrow">PRIORITAS WILAYAH SUMATERA UTARA</p>
-        <h2 id="local-title" class="area-section-title">Layanan Cepat untuk Medan &amp; Sekitarnya</h2>
-        <p class="area-section-lead">Didukung lokasi workshop di Medan yang strategis untuk memastikan pengiriman pesanan dalam kota dan sekitarnya berjalan super cepat.</p>
+        <p class="area-section-eyebrow">PRIORITAS SUMATERA SELATAN</p>
+        <h2 id="local-title" class="area-section-title">Layanan Cepat untuk Palembang &amp; Kabupaten se-Sumsel</h2>
+        <p class="area-section-lead">Didukung workshop di Palembang, kami memastikan pengiriman pesanan dalam kota dan ke seluruh kabupaten di Sumatera Selatan berjalan super cepat.</p>
       </header>
 
       <div class="area-local__grid">
-        @foreach($sumutAreas as $area)
+        @foreach($sumselAreas as $area)
           <article class="area-local-card">
             <div class="area-local-card__header">
               <span class="area-local-card__num">{{ $area['num'] }}</span>
               <span class="area-local-card__badge">{{ $area['badge'] }}</span>
             </div>
-
-            <h3 class="area-local-card__title">{{ $area['name'] }}</h3>
+            <h3 class="area-local-card__name">{{ $area['name'] }}</h3>
             <p class="area-local-card__desc">{{ $area['desc'] }}</p>
 
             <ul class="area-local-card__points">
               @foreach($area['points'] as $point)
                 <li>
-                  <span class="area-local-card__check" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                  </span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
                   <span>{{ $point }}</span>
                 </li>
               @endforeach
@@ -219,129 +216,57 @@
     </div>
   </section>
 
-  {{-- Distribusi Nasional Antar Pulau (4 Zona) --}}
-  <section class="area-zones" id="area-nasional" aria-labelledby="zones-title">
+  {{-- 4. 4 ZONA NASIONAL --}}
+  <section class="area-zones" id="area-zona-nasional" aria-labelledby="zones-title">
     <div class="home-shell home-shell--wide">
       <header class="area-section-intro">
-        <p class="area-section-eyebrow">DISTRIBUSI NASIONAL</p>
-        <h2 id="zones-title" class="area-section-title">Siap Kirim ke Seluruh Pelosok Indonesia</h2>
-        <p class="area-section-lead">Kemitraan ekspedisi darat, udara, dan laut untuk menjangkau kantor cabang, kampus, dan kepanitiaan event Anda di berbagai pulau.</p>
+        <p class="area-section-eyebrow">JANGKAUAN NASIONAL</p>
+        <h2 id="zones-title" class="area-section-title">4 Zona Ekspedisi ke Seluruh Indonesia</h2>
+        <p class="area-section-lead">Estimasi waktu tiba dihitung sejak paket diserahkan ke agen logistik resmi. Kami merekomendasikan opsi ekspedisi paling efisien untuk kebutuhan mendesak Anda.</p>
       </header>
 
       <div class="area-zones__grid">
         @foreach($nationalZones as $zone)
-          <div class="area-zone-card">
+          <article class="area-zone-card">
             <div class="area-zone-card__header">
-              <span class="area-zone-card__badge">{{ $zone['zone'] }}</span>
+              <span class="area-zone-card__tag">{{ $zone['zone'] }}</span>
               <span class="area-zone-card__estimate">{{ $zone['estimate'] }}</span>
             </div>
             <h3 class="area-zone-card__title">{{ $zone['title'] }}</h3>
             <p class="area-zone-card__coverage">{{ $zone['coverage'] }}</p>
-          </div>
+          </article>
         @endforeach
       </div>
     </div>
   </section>
 
-  {{-- Dynamic City Pages Index (Jika ada di database) --}}
+  {{-- 5. DIREKTORI HALAMAN KOTA (CityPage DB-driven) --}}
   @if($cityPages->isNotEmpty())
-    <section class="area-cities" aria-labelledby="cities-title">
+    <section class="area-cities" id="area-direktori-kota" aria-labelledby="cities-title">
       <div class="home-shell home-shell--wide">
         <header class="area-section-intro">
-          <p class="area-section-eyebrow">HALAMAN KOTA SPESIFIK</p>
-          <h2 id="cities-title" class="area-section-title">Informasi Layanan Per Kota</h2>
-          <p class="area-section-lead">Pilih kota untuk melihat informasi layanan dan penawaran spesifik di daerah Anda.</p>
+          <p class="area-section-eyebrow">DIREKTORI HALAMAN</p>
+          <h2 id="cities-title" class="area-section-title">Cek Halaman Detail Wilayah Spesifik</h2>
+          <p class="area-section-lead">Pelajari cakupan layanan, estimasi ongkir, dan rekomendasi produk untuk tiap kota yang sudah memiliki halaman khusus.</p>
         </header>
 
-        <div class="area-cities__grid">
-          @foreach($cityPages as $cityPage)
-            <a href="{{ route('area.show', $cityPage->slug) }}" class="area-city-link">
-              <span>{{ $cityPage->title }}</span>
-              <span class="area-city-link__arrow" aria-hidden="true">→</span>
+        <nav class="area-cities__grid" aria-label="Pilih halaman kota">
+          @foreach($cityPages as $city)
+            <a href="{{ route('area.show', $city->slug) }}" class="area-city-link">
+              <span>{{ $city->title }}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
             </a>
           @endforeach
-        </div>
+        </nav>
       </div>
     </section>
   @endif
 
-  {{-- Closing CTA Card --}}
-  <section class="home-cta" id="cta-section" aria-labelledby="home-cta-title">
-    <div class="home-shell home-shell--wide">
-      <div class="home-cta__card">
-        <div class="home-cta__content">
-          <div class="home-cta__eyebrow-wrap">
-            <span class="home-cta__sparkle-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
-            </span>
-            <span class="home-cta__eyebrow">KONSULTASI MUDAH &amp; RESPONSIF</span>
-          </div>
-
-          <h2 id="home-cta-title" class="home-cta__title">
-            Mau Pesan Lanyard Custom untuk <span class="home-cta__title-accent">Wilayah Anda?</span>
-          </h2>
-
-          <p class="home-cta__desc">
-            Sampaikan kota lokasi dan batas waktu kebutuhan acara Anda. Tim Lanyard Medan siap memberikan rekomendasi spesifikasi terbaik, sampel mockup digital gratis, dan estimasi ongkir paling hemat.
-          </p>
-
-          <div class="home-cta__buttons">
-            <a class="home-cta__btn home-cta__btn--primary ptl-button-motion" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" data-button-motion>
-              <span class="home-cta__btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                </svg>
-              </span>
-              <span data-button-label>Konsultasi via WhatsApp</span>
-              <span class="home-cta__btn-arrow" aria-hidden="true">→</span>
-            </a>
-
-            <a class="home-cta__btn home-cta__btn--secondary ptl-button-motion" href="{{ route('products.index') }}" data-button-motion>
-              <span data-button-label>Lihat Katalog Produk</span>
-              <span class="home-cta__btn-arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
-
-          <div class="home-cta__benefits">
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Desain Gratis</span>
-            </div>
-            <span class="home-cta__benefit-divider" aria-hidden="true"></span>
-
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Produksi Cepat 1–3 Hari</span>
-            </div>
-            <span class="home-cta__benefit-divider" aria-hidden="true"></span>
-
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Bahan Premium</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="home-cta__visual">
-          <img
-            class="home-cta__img"
-            src="/uploads/home-cta-banner.webp"
-            alt="Layanan cetak tali lanyard custom berkualitas tinggi Lanyard Medan"
-            width="800"
-            height="600"
-            loading="lazy"
-            decoding="async"
-          >
-        </div>
-      </div>
-    </div>
-  </section>
+  {{-- 6. CLOSING CTA SECTION --}}
+  @include('components.home-cta-editorial')
 </div>
 
 @include('components.footer')

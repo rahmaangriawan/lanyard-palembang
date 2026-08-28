@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if ($siteUrl === '' || str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
   $canonicalUrl = $siteUrl . '/template-desain';
 
@@ -10,12 +10,12 @@
     '@type' => 'WebPage',
     '@id' => $canonicalUrl . '/#webpage',
     'name' => 'Template Desain Lanyard Custom | Inspirasi Gaya & Konsultasi Desain Gratis',
-    'description' => 'Inspirasi arah gaya desain tali lanyard custom (Corporate, Event, Sekolah, Komunitas, Full Color, Minimalis) dan konsultasi mockup gratis dari Lanyard Medan.',
+    'description' => 'Inspirasi arah gaya desain tali lanyard custom (Corporate, Event, Sekolah, Komunitas, Full Color, Minimalis) dan konsultasi mockup gratis dari Lanyard Palembang.',
     'url' => $canonicalUrl,
     'inLanguage' => 'id-ID',
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Medan',
+      'name' => 'Lanyard Palembang',
       'url' => $siteUrl,
     ],
   ];

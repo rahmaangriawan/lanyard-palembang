@@ -1,9 +1,9 @@
 @extends('layouts.public')
 
-@section('title', 'Layanan Cetak Tali Lanyard Custom & ID Card Medan | Lanyard Medan')
-@section('meta_description', 'Solusi cetak tali lanyard custom dan ID card terpercaya di Kota Medan: teknik sublimasi HD full color anti luntur, bahan tissue lembut, garansi kualitas, dan pengerjaan kilat 1–3 hari.')
+@section('title', 'Layanan Cetak Tali Lanyard Custom & ID Card Palembang | Lanyard Palembang')
+@section('meta_description', 'Solusi cetak tali lanyard custom dan ID card terpercaya di Kota Palembang: teknik sublimasi HD full color anti luntur, bahan tissue lembut, garansi kualitas, dan pengerjaan kilat 1–3 hari.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/layanan')
-@section('seo_og_image', '/uploads/hero-layanan-lanyard-medan.webp')
+@section('seo_og_image', '/uploads/hero-layanan-lanyard-palembang.webp')
 
 @push('head')
   <link rel="stylesheet" href="/css/services-index.css?v={{ file_exists(public_path('css/services-index.css')) ? filemtime(public_path('css/services-index.css')) : 1 }}">
@@ -11,7 +11,7 @@
 
 @section('content')
 @php
-  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Medan, saya mau konsultasi layanan cetak lanyard custom & ID card.');
+  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Palembang, saya mau konsultasi layanan cetak lanyard custom & ID card.');
 
   $pillars = [
     [
@@ -51,10 +51,10 @@
     ],
     [
       'badge' => 'EKONOMIS & SOLID',
-      'title' => 'Lanyard Sablon & Polyflex Presisi',
-      'description' => 'Solusi tepat untuk kebutuhan tali lanyard dengan desain logo monokrom atau 1–2 warna solid dalam jumlah pemesanan skala besar.',
+      'title' => 'Lanyard Polyester Sublimasi Standar',
+      'description' => 'Solusi tepat untuk kebutuhan tali lanyard dengan bahan polyester kuat dan cetak sublimasi tajam untuk jumlah pemesanan skala besar.',
       'points' => [
-        'Hasil sablon timbul, tajam, dan rekat kuat',
+        'Hasil cetak sublimasi awet dan tidak mudah pudar',
         'Bahan poliester nilon kuat berdaya tahan tinggi',
         'Biaya produksi sangat hemat untuk partai ribuan pcs',
         'Cocok untuk seragam pabrik, sekolah, & organisasi',
@@ -80,10 +80,10 @@
       'points' => [
         'Penanganan prioritas oleh tim produksi khusus',
         'Proses approval desain kilat di hari yang sama',
-        'Opsi pengiriman Same Day / kurir instan area Medan',
+        'Opsi pengiriman Same Day / kurir instan area Palembang',
         'Menyelamatkan kebutuhan acara mendadak tanpa kompromi kualitas',
       ],
-      'link' => 'https://wa.me/6282210200700?text=' . rawurlencode('Halo Lanyard Medan, saya ada kebutuhan pesanan lanyard express mendesak.'),
+      'link' => 'https://wa.me/6282210200700?text=' . rawurlencode('Halo Lanyard Palembang, saya ada kebutuhan pesanan lanyard express mendesak.'),
     ],
   ];
 
@@ -141,11 +141,11 @@
           <span class="services-hero__sparkle" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
           </span>
-          <span class="services-hero__eyebrow">LAYANAN CETAK LANYARD CUSTOM MEDAN</span>
+          <span class="services-hero__eyebrow">LAYANAN CETAK LANYARD CUSTOM PALEMBANG</span>
         </div>
 
         <h1 id="services-title" class="services-hero__title">
-          Solusi Cetak Tali Lanyard &amp; ID Card Berkualitas di <span class="services-hero__title-accent">Kota Medan.</span>
+          Solusi Cetak Tali Lanyard &amp; ID Card Berkualitas di <span class="services-hero__title-accent">Kota Palembang.</span>
         </h1>
 
         <p class="services-hero__desc">
@@ -173,10 +173,10 @@
       <div class="services-hero__visual">
         <div class="services-hero__image-card">
           <picture>
-            <source srcset="/uploads/hero-layanan-lanyard-medan-1280w.webp 1280w, /uploads/hero-layanan-lanyard-medan-960w.webp 960w, /uploads/hero-layanan-lanyard-medan-640w.webp 640w" sizes="(max-width: 767px) 100vw, 560px" type="image/webp">
+            <source srcset="/uploads/hero-layanan-lanyard-palembang-1280w.webp 1280w, /uploads/hero-layanan-lanyard-palembang-960w.webp 960w, /uploads/hero-layanan-lanyard-palembang-640w.webp 640w" sizes="(max-width: 767px) 100vw, 560px" type="image/webp">
             <img
-              src="/uploads/hero-layanan-lanyard-medan.webp"
-              alt="Layanan cetak tali lanyard custom dan ID card berkualitas Lanyard Medan"
+              src="/uploads/hero-layanan-lanyard-palembang.webp"
+              alt="Layanan cetak tali lanyard custom dan ID card berkualitas Lanyard Palembang"
               width="1448"
               height="1086"
               loading="eager"
@@ -190,7 +190,7 @@
   </section>
 
   {{-- 4 Pilar Keunggulan Produksi --}}
-  <section class="services-pillars" id="keunggulan-layanan" aria-label="Keunggulan layanan produksi Lanyard Medan">
+  <section class="services-pillars" id="keunggulan-layanan" aria-label="Keunggulan layanan produksi Lanyard Palembang">
     <div class="home-shell home-shell--wide">
       <div class="services-pillars__grid">
         @foreach($pillars as $pillar)
@@ -212,7 +212,7 @@
       <header class="services-section-intro">
         <p class="services-section-eyebrow">KATALOG LAYANAN</p>
         <h2 id="catalog-title" class="services-section-title">Pilihan Layanan Cetak Sesuai Kebutuhan Brand</h2>
-        <p class="services-section-lead">Pilih paket pembuatan tali lanyard sublimasi, sablon presisi, hingga paket bundling kartu identitas siap pakai.</p>
+        <p class="services-section-lead">Pilih paket pembuatan tali lanyard sublimasi full color, polyester standar, hingga paket bundling kartu identitas siap pakai.</p>
       </header>
 
       <div class="services-catalog__grid">
@@ -395,7 +395,7 @@
           <img
             class="home-cta__img"
             src="/uploads/home-cta-banner.webp"
-            alt="Layanan cetak tali lanyard custom berkualitas tinggi Lanyard Medan"
+            alt="Layanan cetak tali lanyard custom berkualitas tinggi Lanyard Palembang"
             width="800"
             height="600"
             loading="lazy"

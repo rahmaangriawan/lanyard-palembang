@@ -1,5 +1,63 @@
 /* Public interactions shared by Blade pages. Keep this file deferred. */
 
+(function initUniqueTestimonials() {
+  function init() {
+    document.querySelectorAll('[data-unique-testimonial]').forEach(function (section) {
+      if (section.dataset.uniqueTestimonialReady === 'true') return;
+      section.dataset.uniqueTestimonialReady = 'true';
+
+      var testimonials;
+      try {
+        testimonials = JSON.parse(section.getAttribute('data-unique-testimonial') || '[]');
+      } catch (error) {
+        return;
+      }
+      if (!Array.isArray(testimonials) || testimonials.length === 0) return;
+
+      var quote = section.querySelector('[data-unique-testimonial-quote]');
+      var role = section.querySelector('[data-unique-testimonial-role]');
+      var buttons = Array.from(section.querySelectorAll('[data-unique-testimonial-index]'));
+      var activeIndex = 0;
+      var isAnimating = false;
+
+      function setActive(index) {
+        if (index === activeIndex || isAnimating || !testimonials[index]) return;
+        isAnimating = true;
+        if (quote) quote.classList.add('unique-testimonial__quote--hiding');
+        if (role) role.classList.add('unique-testimonial__role--hiding');
+
+        window.setTimeout(function () {
+          activeIndex = index;
+          if (quote) quote.textContent = testimonials[index].quote || '';
+          if (role) role.textContent = testimonials[index].role || '';
+          buttons.forEach(function (button, buttonIndex) {
+            var active = buttonIndex === activeIndex;
+            button.setAttribute('aria-pressed', active ? 'true' : 'false');
+            button.classList.toggle('unique-testimonial__avatar-btn--active', active);
+          });
+          if (quote) quote.classList.remove('unique-testimonial__quote--hiding');
+          if (role) role.classList.remove('unique-testimonial__role--hiding');
+          isAnimating = false;
+        }, 200);
+      }
+
+      buttons.forEach(function (button) {
+        var index = Number(button.dataset.uniqueTestimonialIndex);
+        button.addEventListener('click', function () { setActive(index); });
+        button.addEventListener('mouseenter', function () {
+          if (index !== activeIndex) button.classList.add('unique-testimonial__avatar-btn--active');
+        });
+        button.addEventListener('mouseleave', function () {
+          if (index !== activeIndex) button.classList.remove('unique-testimonial__avatar-btn--active');
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
 (function() {
     var header = document.getElementById('site-header');
     var sentinel = document.getElementById('site-header-sentinel');

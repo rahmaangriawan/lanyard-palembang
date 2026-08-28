@@ -14,7 +14,7 @@
   $excerpt = $post->metaDescription ?: Str::limit($plainContent, 145);
   $wordCount = $plainContent === '' ? 0 : count(preg_split('/\s+/', $plainContent));
   $readingTime = max(1, (int) ceil($wordCount / 200));
-  $authorName = $post->author?->name ?: 'Tim Lanyard Medan';
+  $authorName = $post->author?->name ?: 'Tim Lanyard Palembang';
   $authorSlug = $post->author?->slug;
   $postUrl = route('blog.show', ['slug' => $post->slug]);
 @endphp
@@ -53,7 +53,7 @@
       <span>{{ $readingTime }} mnt baca</span>
     </div>
     <h3><a href="{{ $postUrl }}">{{ $post->title }}</a></h3>
-    <p>{{ $excerpt ?: 'Baca panduan dan wawasan terbaru seputar lanyard custom dari Lanyard Medan.' }}</p>
+    <p>{{ $excerpt ?: 'Baca panduan dan wawasan terbaru seputar lanyard custom dari Lanyard Palembang.' }}</p>
     <div class="blog-archive-card__footer">
       @if($authorSlug)
         <a class="blog-archive-card__author" href="{{ route('blog.author', ['slug' => $authorSlug]) }}">{{ $authorName }}</a>

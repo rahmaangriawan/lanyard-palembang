@@ -25,7 +25,7 @@
       ],
     ],
     [
-      'name' => 'Lanyard Sablon Full Color',
+      'name' => 'Lanyard Sublimasi Full Color',
       'description' => 'Cocok untuk desain kompleks dan bergradasi.',
       'featured' => false,
       'prices' => [
@@ -63,7 +63,7 @@
       @foreach ($pricingItems as $item)
         @php
           $itemWhatsappUrl = 'https://wa.me/6282210200700?text=' . rawurlencode(
-            'Halo Lanyard Medan, saya mau konsultasi harga ' . $item['name'] . '.'
+            'Halo Lanyard Palembang, saya mau konsultasi harga ' . $item['name'] . '.'
           );
         @endphp
 

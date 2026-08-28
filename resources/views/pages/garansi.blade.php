@@ -1,17 +1,18 @@
 @extends('layouts.public')
 
-@section('title', 'Garansi Kualitas Cetak & Kepuasan 100% | Lanyard Medan')
-@section('meta_description', 'Informasi jaminan garansi produksi Lanyard Medan: cetak ulang 100% gratis jika cacat produksi, kepastian akurasi jumlah, aksesoris kokoh, dan klaim praktis via WhatsApp.')
+@section('title', 'Garansi Kualitas Cetak & Kepuasan 100% | Lanyard Palembang')
+@section('meta_description', 'Informasi jaminan garansi produksi Lanyard Palembang: cetak ulang 100% gratis jika cacat produksi, kepastian akurasi jumlah, aksesoris kokoh, dan klaim praktis via WhatsApp.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/garansi')
-@section('seo_og_image', '/uploads/hero-garansi-lanyard-medan.webp')
+@section('seo_og_image', '/uploads/hero-garansi-lanyard-palembang.webp')
 
 @push('head')
   <link rel="stylesheet" href="/css/warranty-page.css?v={{ file_exists(public_path('css/warranty-page.css')) ? filemtime(public_path('css/warranty-page.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/home-cta-editorial.css?v={{ file_exists(public_path('css/home-cta-editorial.css')) ? filemtime(public_path('css/home-cta-editorial.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $claimWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Medan, saya ingin konsultasi atau mengajukan klaim garansi untuk pesanan lanyard.');
+  $claimWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Palembang, saya ingin konsultasi atau mengajukan klaim garansi untuk pesanan lanyard.');
 
   $commitments = [
     [
@@ -48,7 +49,7 @@
     'Perbedaan saturasi warna 5–10% akibat konversi profil warna digital RGB ke mesin cetak CMYK.',
     'Toleransi pergeseran potong kain 1–2 mm dalam batas standar industri percetakan tekstil.',
     'Kesalahan ketik teks/logo yang sudah disetujui pemesan saat tahap approval mockup digital.',
-    'Kerusakan fisik paket akibat benturan kurir ekspedisi (dibantu via klaim asuransi ekspedisi).',
+    'Kerusakan fisik paket akibat kelalaian kurir ekspedisi (dibantu klaim asuransi pihak ekspedisi).',
     'Klaim kendala yang dilaporkan melewati batas maksimal 3x24 jam sejak paket diterima.',
   ];
 
@@ -62,9 +63,8 @@
     [
       'num' => '02',
       'title' => 'Kirim Bukti via WhatsApp CS',
-      'description' => 'Hubungi nomor WhatsApp resmi Lanyard Medan dalam batas waktu 3x24 jam setelah paket dinyatakan tiba oleh ekspedisi.',
-      'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-      </svg>',
+      'description' => 'Hubungi nomor WhatsApp resmi Lanyard Palembang dalam batas waktu 3x24 jam setelah paket dinyatakan tiba oleh ekspedisi.',
+      'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
     ],
     [
       'num' => '03',
@@ -84,7 +84,7 @@
 @endphp
 
 <div class="warranty-page">
-  {{-- Hero Section --}}
+  {{-- 1. HERO SECTION --}}
   <section class="warranty-hero" id="warranty-hero" aria-labelledby="warranty-title">
     <div class="home-shell home-shell--wide warranty-hero__container">
       <div class="warranty-hero__content">
@@ -96,7 +96,7 @@
         </div>
 
         <h1 id="warranty-title" class="warranty-hero__title">
-          Garansi Kualitas Cetak &amp; Kepuasan Produksi di <span class="warranty-hero__title-accent">Lanyard Medan.</span>
+          Garansi Kualitas Cetak &amp; Kepuasan Produksi di <span class="warranty-hero__title-accent">Lanyard Palembang.</span>
         </h1>
 
         <p class="warranty-hero__desc">
@@ -104,18 +104,18 @@
         </p>
 
         <div class="warranty-hero__actions">
-          <a class="warranty-btn warranty-btn--primary ptl-button-motion" href="{{ $claimWhatsappUrl }}" target="_blank" rel="noopener noreferrer" data-button-motion>
+          <a class="warranty-btn warranty-btn--primary" href="{{ $claimWhatsappUrl }}" target="_blank" rel="noopener noreferrer">
             <span class="warranty-btn__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
               </svg>
             </span>
-            <span data-button-label>Klaim Garansi via WhatsApp</span>
+            <span>Klaim Garansi via WhatsApp</span>
             <span class="warranty-btn__arrow" aria-hidden="true">→</span>
           </a>
 
-          <a class="warranty-btn warranty-btn--secondary ptl-button-motion" href="{{ route('terms') }}" data-button-motion>
-            <span data-button-label>Pelajari Syarat &amp; Ketentuan</span>
+          <a class="warranty-btn warranty-btn--secondary" href="{{ route('terms') }}">
+            <span>Pelajari Syarat &amp; Ketentuan</span>
             <span class="warranty-btn__arrow" aria-hidden="true">→</span>
           </a>
         </div>
@@ -123,25 +123,22 @@
 
       <div class="warranty-hero__visual">
         <div class="warranty-hero__image-card">
-          <picture>
-            <source srcset="/uploads/hero-garansi-lanyard-medan-1280w.webp 1280w, /uploads/hero-garansi-lanyard-medan-960w.webp 960w, /uploads/hero-garansi-lanyard-medan-640w.webp 640w" sizes="(max-width: 767px) 100vw, 560px" type="image/webp">
-            <img
-              src="/uploads/hero-garansi-lanyard-medan.webp"
-              alt="Jaminan garansi kualitas cetak tali lanyard custom Lanyard Medan"
-              width="1448"
-              height="1086"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            >
-          </picture>
+          <img
+            src="/uploads/hero-garansi-lanyard-palembang.webp?v={{ file_exists(public_path('uploads/hero-garansi-lanyard-palembang.webp')) ? filemtime(public_path('uploads/hero-garansi-lanyard-palembang.webp')) : 1 }}"
+            alt="Jaminan garansi kualitas cetak tali lanyard custom Lanyard Palembang"
+            width="1536"
+            height="1024"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          >
         </div>
       </div>
     </div>
   </section>
 
-  {{-- 4 Pilar Komitmen Garansi --}}
-  <section class="warranty-commitments" id="komitmen-garansi" aria-label="Komitmen garansi kualitas Lanyard Medan">
+  {{-- 2. 4 PILAR KOMITMEN GARANSI --}}
+  <section class="warranty-commitments" id="komitmen-garansi" aria-label="Komitmen garansi kualitas Lanyard Palembang">
     <div class="home-shell home-shell--wide">
       <div class="warranty-commitments__grid">
         @foreach($commitments as $item)
@@ -157,7 +154,7 @@
     </div>
   </section>
 
-  {{-- Matriks Cakupan Garansi (2 Card Komparasi Seimbang) --}}
+  {{-- 3. CAKUPAN GARANSI --}}
   <section class="warranty-coverage" id="cakupan-garansi" aria-labelledby="coverage-title">
     <div class="home-shell home-shell--wide">
       <header class="warranty-section-intro">
@@ -168,22 +165,21 @@
 
       <div class="warranty-coverage__grid">
         {{-- Card 1: Dijamin (Covered) --}}
-        <article class="warranty-coverage-card warranty-coverage-card--covered">
+        <article class="warranty-coverage-card">
           <div class="warranty-coverage-card__header">
             <div class="warranty-coverage-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div>
-              <span class="warranty-coverage-card__badge warranty-coverage-card__badge--covered">DILINDUNGI PENUH</span>
+              <span class="warranty-coverage-card__badge">DILINDUNGI PENUH</span>
               <h3 class="warranty-coverage-card__title">Cacat Produksi yang Dijamin</h3>
             </div>
           </div>
-
           <ul class="warranty-coverage-card__list">
             @foreach($coveredItems as $item)
               <li>
                 <span class="warranty-coverage-card__check" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </span>
                 <span>{{ $item }}</span>
               </li>
@@ -191,22 +187,23 @@
           </ul>
         </article>
 
-        {{-- Card 2: Batasan & Toleransi (Excluded/Limits) --}}
-        <article class="warranty-coverage-card warranty-coverage-card--excluded">
+        {{-- Card 2: Batasan & Toleransi (Excluded) --}}
+        <article class="warranty-coverage-card">
           <div class="warranty-coverage-card__header">
-            <div class="warranty-coverage-card__icon warranty-coverage-card__icon--excluded" aria-hidden="true">
+            <div class="warranty-coverage-card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </div>
             <div>
-              <span class="warranty-coverage-card__badge warranty-coverage-card__badge--excluded">KETENTUAN &amp; TOLERANSI</span>
-              <h3 class="warranty-coverage-card__title">Kondisi di Luar Cakupan</h3>
+              <span class="warranty-coverage-card__badge">KETENTUAN &amp; TOLERANSI</span>
+              <h3 class="warranty-coverage-card__title">Batasan Standar Industri</h3>
             </div>
           </div>
-
-          <ul class="warranty-coverage-card__list warranty-coverage-card__list--excluded">
+          <ul class="warranty-coverage-card__list">
             @foreach($excludedItems as $item)
               <li>
-                <span class="warranty-coverage-card__bullet" aria-hidden="true">•</span>
+                <span class="warranty-coverage-card__check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/></svg>
+                </span>
                 <span>{{ $item }}</span>
               </li>
             @endforeach
@@ -216,19 +213,19 @@
     </div>
   </section>
 
-  {{-- Alur Klaim Garansi 4 Langkah Mudah --}}
-  <section class="warranty-steps" id="alur-klaim" aria-labelledby="steps-title">
+  {{-- 4. ALUR KLAIM GARANSI --}}
+  <section class="warranty-claim" id="alur-klaim" aria-labelledby="claim-title">
     <div class="home-shell home-shell--wide">
       <header class="warranty-section-intro">
         <p class="warranty-section-eyebrow">PROSEDUR MUDAH</p>
-        <h2 id="steps-title" class="warranty-section-title">4 Langkah Pengajuan Klaim Tanpa Ribet</h2>
-        <p class="warranty-section-lead">Cukup kirimkan dokumentasi unboxing via WhatsApp, tim kami segera memproses unit pengganti untuk Anda.</p>
+        <h2 id="claim-title" class="warranty-section-title">4 Langkah Pengajuan Klaim Garansi</h2>
+        <p class="warranty-section-lead">Proses klaim dibuat ringkas tanpa formulir rumit. Cukup hubungi customer service kami dengan bukti visual yang jelas.</p>
       </header>
 
-      <div class="warranty-steps__grid" role="list">
+      <div class="warranty-claim__grid">
         @foreach($claimSteps as $step)
-          <article class="warranty-step-card" role="listitem">
-            <div class="warranty-step-card__meta">
+          <article class="warranty-step-card">
+            <div class="warranty-step-card__header">
               <span class="warranty-step-card__num">{{ $step['num'] }}</span>
               <div class="warranty-step-card__icon" aria-hidden="true">
                 {!! $step['icon'] !!}
@@ -240,25 +237,26 @@
         @endforeach
       </div>
 
-      <div class="warranty-steps__notice">
-        <span class="warranty-steps__notice-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </span>
-        <p><strong>Batas Waktu Klaim:</strong> Pengajuan klaim garansi dapat diproses maksimal <strong>3x24 jam</strong> sejak paket dinyatakan sampai oleh sistem ekspedisi demi kemudahan investigasi kualitas.</p>
+      {{-- Notice Card --}}
+      <div class="warranty-claim__notice">
+        <div class="warranty-claim__notice-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="warranty-claim__notice-text">
+          <strong>Batas Waktu Pengajuan Klaim: 3x24 Jam</strong>
+          <p>Mohon segera periksa seluruh kondisi tali lanyard begitu paket tiba di alamat Anda dan hubungi kami jika terdapat ketidaksesuaian produksi.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  {{-- FAQ Garansi --}}
-  <section class="warranty-faq" id="faq-garansi" aria-labelledby="faq-title">
+  {{-- 5. FAQ SECTION --}}
+  <section class="warranty-faq" id="faq-garansi" aria-labelledby="warranty-faq-title">
     <div class="home-shell home-shell--wide warranty-faq__container">
       <header class="warranty-faq__intro">
-        <p class="warranty-faq__eyebrow">FAQ GARANSI</p>
-        <h2 id="faq-title" class="warranty-faq__title">Hal yang Sering Ditanyakan Seputar Garansi</h2>
-        <p class="warranty-faq__lead">Rangkuman informasi prosedur klaim, penggantian unit, dan syarat video unboxing.</p>
+        <p class="warranty-faq__eyebrow">TANYA JAWAB GARANSI</p>
+        <h2 id="warranty-faq-title" class="warranty-faq__title">Pertanyaan Seputar Layanan Garansi</h2>
+        <p class="warranty-faq__lead">Informasi praktis seputar cakupan cacat produksi, durasi penyelesaian cetak ulang, dan prosedur pengajuan komplain.</p>
       </header>
 
       <div class="warranty-faq__list">
@@ -279,83 +277,8 @@
     </div>
   </section>
 
-  {{-- Closing CTA Card --}}
-  <section class="home-cta" id="cta-section" aria-labelledby="home-cta-title">
-    <div class="home-shell home-shell--wide">
-      <div class="home-cta__card">
-        <div class="home-cta__content">
-          <div class="home-cta__eyebrow-wrap">
-            <span class="home-cta__sparkle-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
-            </span>
-            <span class="home-cta__eyebrow">PRODUKSI AMAN &amp; BERGARANSI</span>
-          </div>
-
-          <h2 id="home-cta-title" class="home-cta__title">
-            Pesan Lanyard Custom dengan Rasa <span class="home-cta__title-accent">Tenang &amp; Pasti.</span>
-          </h2>
-
-          <p class="home-cta__desc">
-            Dapatkan jaminan kualitas cetak terbaik dan proteksi garansi 100% dari Lanyard Medan. Hubungi kami sekarang untuk penawaran harga dan konsultasi gratis.
-          </p>
-
-          <div class="home-cta__buttons">
-            <a class="home-cta__btn home-cta__btn--primary ptl-button-motion" href="{{ $claimWhatsappUrl }}" target="_blank" rel="noopener noreferrer" data-button-motion>
-              <span class="home-cta__btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                </svg>
-              </span>
-              <span data-button-label>Konsultasi via WhatsApp</span>
-              <span class="home-cta__btn-arrow" aria-hidden="true">→</span>
-            </a>
-
-            <a class="home-cta__btn home-cta__btn--secondary ptl-button-motion" href="{{ route('products.index') }}" data-button-motion>
-              <span data-button-label>Lihat Katalog Produk</span>
-              <span class="home-cta__btn-arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
-
-          <div class="home-cta__benefits">
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Desain Gratis</span>
-            </div>
-            <span class="home-cta__benefit-divider" aria-hidden="true"></span>
-
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Produksi Cepat 1–3 Hari</span>
-            </div>
-            <span class="home-cta__benefit-divider" aria-hidden="true"></span>
-
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Bahan Premium</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="home-cta__visual">
-          <img
-            class="home-cta__img"
-            src="/uploads/home-cta-banner.webp"
-            alt="Garansi kualitas cetak tali lanyard custom Lanyard Medan"
-            width="800"
-            height="600"
-            loading="lazy"
-            decoding="async"
-          >
-        </div>
-      </div>
-    </div>
-  </section>
+  {{-- 6. CLOSING CTA SECTION --}}
+  @include('components.home-cta-editorial')
 </div>
 
 @include('components.footer')

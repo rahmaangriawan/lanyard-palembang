@@ -1,9 +1,9 @@
 @extends('layouts.public')
 
-@section('title', 'Daftar Harga Lanyard Custom Medan - Transparan')
-@section('meta_description', 'Estimasi harga lanyard tissue, polyester, sablon full color & aksesoris di Medan. Transparan per kuantitas, makin banyak makin murah. Minta quotation resmi.')
+@section('title', 'Daftar Harga Lanyard Custom Palembang - Transparan')
+@section('meta_description', 'Estimasi harga lanyard tissue, polyester, sublimasi full color & aksesoris di Palembang. Transparan per kuantitas, makin banyak makin murah. Minta quotation resmi.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/daftar-harga')
-@section('seo_og_image', '/uploads/hero-lanyard-medan.webp')
+@section('seo_og_image', '/uploads/hero-lanyard-palembang-gold.webp')
 
 @push('schema')
   @include('components.schema.daftar-harga')
@@ -39,8 +39,8 @@
       ],
     ],
     [
-      'name' => 'Lanyard Sablon Full Color',
-      'desc' => 'Cetak sablon full color untuk desain kompleks dengan gradasi.',
+      'name' => 'Lanyard Sublimasi Full Color',
+      'desc' => 'Cetak sublimasi digital bolak-balik untuk desain kompleks dengan gradasi tajam.',
       'image' => '/uploads/hero-lanyard-slider-01.webp',
       'options' => [
         ['qty' => '1 – 99 pcs', 'price' => 'Rp 14.000 /pcs'],

@@ -56,8 +56,8 @@
 
       <figure class="home-custom-needs__visual">
         <img
-          src="/uploads/custom-options-lanyard-medan.webp"
-          alt="Lanyard custom Medan dengan cetak warna gold, ID card, buckle, dan kait premium"
+          src="/uploads/custom-options-lanyard-palembang.webp"
+          alt="Lanyard custom Palembang dengan cetak warna gold, ID card, buckle, dan kait premium"
           width="1448"
           height="1086"
           loading="lazy"

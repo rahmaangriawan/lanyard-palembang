@@ -1,10 +1,10 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
   $canonicalUrl = $siteUrl . '/area';
-  $areaNames = ['Medan', 'Deli Serdang', 'Binjai', 'Percut Sei Tuan', 'Lubuk Pakam'];
+  $areaNames = ['Palembang', 'Banyuasin', 'Ogan Ilir', 'Indralaya', 'Prabumulih'];
 
   $serviceSchema = [
     '@context' => 'https://schema.org',
@@ -17,7 +17,7 @@
       '@type' => 'City',
       'name' => $area,
     ])->all(),
-    'description' => 'Lanyard Medan melayani produksi dan pengiriman lanyard custom ke seluruh Indonesia dengan cakupan utama Kota Medan, Sumatera Utara.',
+    'description' => 'Lanyard Palembang melayani produksi dan pengiriman lanyard custom ke seluruh Indonesia dengan cakupan utama Kota Palembang, Sumatera Selatan.',
     'url' => $canonicalUrl,
   ];
 

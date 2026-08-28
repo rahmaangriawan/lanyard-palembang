@@ -1,17 +1,17 @@
 <footer class="site-footer" id="site-footer" aria-labelledby="site-footer-title">
-  <h2 class="sr-only" id="site-footer-title">Informasi Footer Lanyard Medan</h2>
+  <h2 class="sr-only" id="site-footer-title">Informasi Footer Lanyard Palembang</h2>
 
   <div class="site-footer__container">
     {{-- Bagian Utama: 3 Area (Brand, Navigasi, Kontak) --}}
     <div class="site-footer__main">
       {{-- Area 1: Brand --}}
       <div class="site-footer__brand">
-        <a class="site-footer__logo" href="{{ route('home') }}" aria-label="Lanyard Medan, kembali ke beranda">
+        <a class="site-footer__logo" href="{{ route('home') }}" aria-label="Lanyard Palembang, kembali ke beranda">
           <img
-            src="/uploads/lanyard-medan-logo-160w.webp"
-            srcset="/uploads/lanyard-medan-logo-160w.webp 160w, /uploads/lanyard-medan-logo-256w.webp 256w, /uploads/lanyard-medan-logo.webp 500w"
+            src="/uploads/lanyard-palembang-logo-160w.webp"
+            srcset="/uploads/lanyard-palembang-logo-160w.webp 160w, /uploads/lanyard-palembang-logo-256w.webp 256w, /uploads/lanyard-palembang-logo.webp 500w"
             sizes="160px"
-            alt="Lanyard Medan"
+            alt="Lanyard Palembang"
             width="160"
             height="40"
             loading="lazy"
@@ -65,14 +65,14 @@
             </a>
           </li>
           <li>
-            <a href="mailto:info@lanyardmedan.com" class="site-footer__contact-link">
+            <a href="mailto:info@lanyardpalembang.com" class="site-footer__contact-link">
               <span class="site-footer__contact-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                   <polyline points="22,6 12,13 2,6"/>
                 </svg>
               </span>
-              <span>info@lanyardmedan.com</span>
+              <span>info@lanyardpalembang.com</span>
             </a>
           </li>
           <li>
@@ -83,7 +83,7 @@
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
               </span>
-              <span>Medan, Sumatera Utara</span>
+              <span>Palembang, Sumatera Selatan</span>
             </div>
           </li>
         </ul>
@@ -92,7 +92,7 @@
 
     {{-- Bottom Footer: Divider, Copyright & Legal Links --}}
     <div class="site-footer__bottom">
-      <p class="site-footer__copyright">&copy; {{ date('Y') }} Lanyard Medan. Seluruh hak dilindungi.</p>
+      <p class="site-footer__copyright">&copy; {{ date('Y') }} Lanyard Palembang. Seluruh hak dilindungi.</p>
       <div class="site-footer__legal">
         <a href="{{ route('privacy') }}">Kebijakan Privasi</a>
         <span class="site-footer__legal-sep" aria-hidden="true">&bull;</span>

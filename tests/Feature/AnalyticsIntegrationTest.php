@@ -59,7 +59,7 @@ class AnalyticsIntegrationTest extends TestCase
         $this->assertStringContainsString("Route::post('/utm-generator'", $routes);
         $this->assertStringContainsString("Route::middleware('admin')", $routes);
         $this->assertStringContainsString("'UTM Generator'", $menu);
-        $this->assertStringContainsString("'lanyardmedan.com'", $controller);
+        $this->assertStringContainsString("'lanyardpalembang.com'", $controller);
         $this->assertStringContainsString('http_build_query($query, \'\', \'&\', PHP_QUERY_RFC3986)', $controller);
         $this->assertStringContainsString('generatedUrl', $controller);
         $this->assertStringNotContainsString('UTM::create', $controller);

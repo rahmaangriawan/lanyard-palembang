@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if ($siteUrl === '' || str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
   $canonicalUrl = $siteUrl . '/daftar-harga';
 
@@ -9,13 +9,13 @@
     '@context' => 'https://schema.org',
     '@type' => 'WebPage',
     '@id' => $canonicalUrl . '/#webpage',
-    'name' => 'Daftar Harga Lanyard Custom | Lanyard Medan',
-    'description' => 'Estimasi harga cetak tali lanyard tissue, polyester, sablon, dan aksesoris di Medan. Transparan dan kompetitif.',
+    'name' => 'Daftar Harga Lanyard Custom | Lanyard Palembang',
+    'description' => 'Estimasi harga cetak tali lanyard tissue, polyester, sublimasi full color, dan aksesoris di Palembang. Transparan dan kompetitif.',
     'url' => $canonicalUrl,
     'inLanguage' => 'id-ID',
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Medan',
+      'name' => 'Lanyard Palembang',
       'url' => $siteUrl,
     ],
   ];

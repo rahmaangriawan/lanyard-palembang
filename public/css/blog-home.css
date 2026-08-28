@@ -1,8 +1,32 @@
 /* ==========================================================================
-   BLOG HOME PAGE SCOPED STYLES — Lanyard Medan
-   Palette: Crimson (#9E0C17) on White & Dark Slate (#0f172a)
+   BLOG HOME PAGE SCOPED STYLES — Lanyard Palembang
+   Theme: Modern Warm Editorial & Antique Gold
    ========================================================================== */
+
+:root {
+  --blog-ink: #151515;
+  --blog-ink-soft: #1A1510;
+  --blog-muted: #5C4F3E;
+  --blog-subtle: #8A837A;
+  
+  --blog-gold: #C3944B;
+  --blog-gold-dark: #A07A2B;
+  --blog-gold-strong: #8C6D1D;
+  --blog-gold-light: #F5D98A;
+  --blog-gold-hover: #E4C469;
+  --blog-gold-soft: #FAF3E0;
+  --blog-gold-border: #E5D2A8;
+
+  --blog-bg: #ffffff;
+  --blog-surface: #FAF7F2;
+  --blog-surface-warm: #F7F3E8;
+  --blog-border: #EDE4D1;
+  --blog-border-subtle: #F0E4D5;
+  --blog-line: #F2ECE1;
+}
 
 .blog-home-page {
   background: var(--blog-bg);
+  color: var(--blog-ink);
+  font-family: inherit;
 }

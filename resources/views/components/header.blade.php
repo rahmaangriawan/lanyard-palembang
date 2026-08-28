@@ -8,7 +8,7 @@
     ['label' => 'FAQ', 'href' => route('faq'), 'patterns' => ['faq*']],
   ];
 
-  $quotationUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Medan, saya mau konsultasi lanyard custom.');
+  $quotationUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Palembang, saya mau konsultasi lanyard custom.');
 @endphp
 
 <div class="site-header__sentinel" id="site-header-sentinel" aria-hidden="true"></div>
@@ -16,12 +16,12 @@
 <header class="site-header" id="site-header">
   <div class="site-header__surface">
     <nav class="site-header__nav" aria-label="Navigasi utama">
-      <a href="{{ route('home') }}" class="site-header__logo" aria-label="Lanyard Medan, kembali ke beranda">
+      <a href="{{ route('home') }}" class="site-header__logo" aria-label="Lanyard Palembang, kembali ke beranda">
         <img
-          src="/uploads/lanyard-medan-logo-160w.webp"
-          srcset="/uploads/lanyard-medan-logo-160w.webp 160w, /uploads/lanyard-medan-logo-256w.webp 256w, /uploads/lanyard-medan-logo.webp 500w"
+          src="/uploads/lanyard-palembang-logo-160w.webp"
+          srcset="/uploads/lanyard-palembang-logo-160w.webp 160w, /uploads/lanyard-palembang-logo-256w.webp 256w, /uploads/lanyard-palembang-logo.webp 500w"
           sizes="138px"
-          alt="Lanyard Medan"
+          alt="Lanyard Palembang"
           width="500"
           height="122"
           loading="eager"

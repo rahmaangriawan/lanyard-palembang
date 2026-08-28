@@ -1,16 +1,16 @@
 @php
   $siteUrl = rtrim((string) (config('app.prod_url') ?: config('app.url') ?: url('/')), '/');
   if ($siteUrl === '' || str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
   $canonicalUrl = $siteUrl . '/tentang-kami';
-  $logoUrl = $siteUrl . '/uploads/lanyard-medan-favicon.webp';
+  $logoUrl = $siteUrl . '/uploads/lanyard-palembang-favicon.webp';
 
   $org = [
     '@context' => 'https://schema.org',
     '@type' => 'Organization',
     '@id' => $siteUrl . '/#organization',
-    'name' => 'Lanyard Medan',
+    'name' => 'Lanyard Palembang',
     'url' => $siteUrl,
     'logo' => [
       '@type' => 'ImageObject',
@@ -29,13 +29,13 @@
     '@context' => 'https://schema.org',
     '@type' => 'AboutPage',
     '@id' => $canonicalUrl . '/#webpage',
-    'name' => 'Tentang Lanyard Medan',
-    'description' => 'Profil dan proses kerja Lanyard Medan, produsen tali lanyard custom untuk kantor, event, sekolah, dan komunitas di Medan dan seluruh Indonesia.',
+    'name' => 'Tentang Lanyard Palembang | Workshop Tali Lanyard Custom',
+    'description' => 'Mengenal workshop Lanyard Palembang: atelier percetakan tali lanyard custom untuk perusahaan, BUMN, universitas, dan event di seluruh Indonesia dengan presisi cetak 1–3 hari.',
     'url' => $canonicalUrl,
     'inLanguage' => 'id-ID',
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Medan',
+      'name' => 'Lanyard Palembang',
       'url' => $siteUrl,
     ],
     'about' => ['@id' => $siteUrl . '/#organization'],

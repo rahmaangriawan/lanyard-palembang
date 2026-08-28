@@ -23,8 +23,8 @@ final class PublicApi
 
         foreach ($assetSettings as $key => $value) {
             $fallback = str_contains($key, 'favicon')
-                ? '/uploads/lanyard-medan-favicon.webp'
-                : '/uploads/lanyard-medan-logo.webp';
+                ? '/uploads/lanyard-palembang-favicon.webp'
+                : '/uploads/lanyard-palembang-logo.webp';
             $settings[$key] = AssetUrl::relative($value, $fallback) ?? $fallback;
         }
 
@@ -79,11 +79,11 @@ final class PublicApi
                     'pusattalilanyard',
                 ],
                 [
-                    'www.lanyardmedan.com',
-                    'lanyardmedan.com',
-                    'LanyardMedan',
-                    'Lanyard Medan',
-                    'lanyardmedan',
+                    'www.lanyardpalembang.com',
+                    'lanyardpalembang.com',
+                    'LanyardPalembang',
+                    'Lanyard Palembang',
+                    'lanyardpalembang',
                 ],
                 $value,
             )

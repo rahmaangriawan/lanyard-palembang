@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.prod_url', config('app.url', url('/'))), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
 
   $canonicalUrl = $siteUrl . $path;
@@ -15,7 +15,7 @@
     'inLanguage' => 'id-ID',
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Medan',
+      'name' => 'Lanyard Palembang',
       'url' => $siteUrl,
     ],
   ];

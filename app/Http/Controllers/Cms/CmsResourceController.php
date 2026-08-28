@@ -81,11 +81,19 @@ class CmsResourceController extends Controller
         if ($search !== '' && ! empty($config['search'])) {
             $escapedSearch = str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $search);
 
-            $query->where(function ($query) use ($config, $escapedSearch) {
-                foreach ($config['search'] as $column) {
-                    $query->orWhereRaw("{$column} LIKE ? ESCAPE '!'", ["%{$escapedSearch}%"]);
-                }
-            });
+            // Defense-in-depth: only allow alphanumeric/underscore column names.
+            $allowedColumns = array_filter(
+                $config['search'],
+                fn (string $column) => preg_match('/^[A-Za-z_][A-Za-z0-9_.]*$/', $column) === 1,
+            );
+
+            if ($allowedColumns !== []) {
+                $query->where(function ($query) use ($allowedColumns, $escapedSearch) {
+                    foreach ($allowedColumns as $column) {
+                        $query->orWhereRaw("{$column} LIKE ? ESCAPE '!'", ["%{$escapedSearch}%"]);
+                    }
+                });
+            }
         }
 
         if ($request->filled('type') && in_array('type', $config['filters'] ?? [], true)) {
@@ -1212,7 +1220,7 @@ class CmsResourceController extends Controller
                 'label' => 'Umum',
                 'description' => 'Identitas utama website dan teks dasar brand.',
                 'fields' => [
-                    ['key' => 'site_title', 'label' => 'Site Title', 'type' => 'text', 'placeholder' => 'Lanyard Medan'],
+                    ['key' => 'site_title', 'label' => 'Site Title', 'type' => 'text', 'placeholder' => 'Lanyard Palembang'],
                     ['key' => 'site_description', 'label' => 'Site Description', 'type' => 'textarea', 'placeholder' => 'Cetak lanyard custom untuk kebutuhan brand dan event.'],
                     ['key' => 'footer_text', 'label' => 'Footer Text', 'type' => 'textarea'],
                 ],
@@ -1221,11 +1229,11 @@ class CmsResourceController extends Controller
                 'label' => 'Brand Media',
                 'description' => 'Logo, favicon, dan gambar preview untuk kebutuhan brand/SEO.',
                 'fields' => [
-                    ['key' => 'site_logo', 'label' => 'Logo Utama', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-logo.webp'],
-                    ['key' => 'site_logo_header', 'label' => 'Logo Header', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-logo.webp'],
-                    ['key' => 'site_logo_mobile', 'label' => 'Logo Mobile', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-logo.webp'],
-                    ['key' => 'site_favicon', 'label' => 'Favicon', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-favicon.webp'],
-                    ['key' => 'og_image', 'label' => 'Open Graph Image', 'type' => 'image', 'fallback' => '/uploads/lanyard-medan-logo.webp'],
+                    ['key' => 'site_logo', 'label' => 'Logo Utama', 'type' => 'image', 'fallback' => '/uploads/lanyard-palembang-logo.webp'],
+                    ['key' => 'site_logo_header', 'label' => 'Logo Header', 'type' => 'image', 'fallback' => '/uploads/lanyard-palembang-logo.webp'],
+                    ['key' => 'site_logo_mobile', 'label' => 'Logo Mobile', 'type' => 'image', 'fallback' => '/uploads/lanyard-palembang-logo.webp'],
+                    ['key' => 'site_favicon', 'label' => 'Favicon', 'type' => 'image', 'fallback' => '/uploads/lanyard-palembang-favicon.webp'],
+                    ['key' => 'og_image', 'label' => 'Open Graph Image', 'type' => 'image', 'fallback' => '/uploads/lanyard-palembang-logo.webp'],
                 ],
             ],
             'kontak' => [
@@ -1234,7 +1242,7 @@ class CmsResourceController extends Controller
                 'fields' => [
                     ['key' => 'contact_phone', 'label' => 'Telepon', 'type' => 'text', 'placeholder' => '+62 822-1020-0700'],
                     ['key' => 'contact_whatsapp', 'label' => 'WhatsApp', 'type' => 'text', 'placeholder' => '6282210200700'],
-                    ['key' => 'contact_email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'info@lanyardmedan.com'],
+                    ['key' => 'contact_email', 'label' => 'Email', 'type' => 'email', 'placeholder' => 'info@lanyardpalembang.com'],
                     ['key' => 'contact_address', 'label' => 'Alamat', 'type' => 'textarea', 'placeholder' => 'Depok, Indonesia'],
                 ],
             ],

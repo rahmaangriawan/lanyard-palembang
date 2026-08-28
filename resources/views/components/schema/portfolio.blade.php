@@ -2,7 +2,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if ($siteUrl === '' || str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
   $canonicalUrl = $siteUrl . '/portofolio';
 
@@ -10,13 +10,13 @@
     '@context' => 'https://schema.org',
     '@type' => 'CollectionPage',
     '@id' => $canonicalUrl . '/#collection',
-    'name' => 'Portofolio Lanyard Custom | Hasil Produksi Lanyard Medan',
+    'name' => 'Portofolio Lanyard Custom | Hasil Produksi Lanyard Palembang',
     'description' => 'Kumpulan hasil produksi tali lanyard custom untuk perusahaan, BUMN, instansi pemerintah, universitas, event, dan komunitas di Indonesia.',
     'url' => $canonicalUrl,
     'inLanguage' => 'id-ID',
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Medan',
+      'name' => 'Lanyard Palembang',
       'url' => $siteUrl,
     ],
   ];

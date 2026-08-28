@@ -15,7 +15,7 @@ class AreaPageTest extends TestCase
 
         config([
             'app.url' => 'http://localhost',
-            'app.prod_url' => 'https://lanyardmedan.com',
+            'app.prod_url' => 'https://lanyardpalembang.com',
             'cache.public_store' => 'array',
         ]);
     }
@@ -29,8 +29,8 @@ class AreaPageTest extends TestCase
             ->assertSee('area-page-shell', false)
             ->assertSee('/css/area-page.css', false)
             ->assertDontSee('/css/support-pages.css', false)
-            ->assertSee('/uploads/hero-area-lanyard-medan.webp', false)
-            ->assertSee('/uploads/hero-area-lanyard-medan-320w.webp 320w', false)
+            ->assertSee('/uploads/hero-area-lanyard-palembang.webp', false)
+            ->assertSee('/uploads/hero-area-lanyard-palembang-320w.webp 320w', false)
             ->assertSee('fetchpriority="high"', false)
             ->assertSee('Lanyard Custom untuk Seluruh Kota Surabaya')
             ->assertSee('Konsultasi Area Anda')
@@ -49,7 +49,7 @@ class AreaPageTest extends TestCase
         $this->assertSame(31, substr_count($html, 'area-page__zone-content li'));
         $this->assertSame(4, substr_count($html, 'area-page__proof-item'));
         $this->assertSame(4, substr_count($html, 'area-page__process-list li'));
-        $this->assertStringContainsString('https://lanyardmedan.com/area', $html);
+        $this->assertStringContainsString('https://lanyardpalembang.com/area', $html);
         $this->assertStringContainsString('"name":"Kota Surabaya"', $html);
     }
 }

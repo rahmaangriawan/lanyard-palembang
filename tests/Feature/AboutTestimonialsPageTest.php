@@ -16,7 +16,7 @@ class AboutTestimonialsPageTest extends TestCase
 
         config([
             'app.url' => 'http://localhost',
-            'app.prod_url' => 'https://lanyardmedan.com',
+            'app.prod_url' => 'https://lanyardpalembang.com',
             'cache.public_store' => 'array',
         ]);
     }
@@ -33,11 +33,11 @@ class AboutTestimonialsPageTest extends TestCase
             ->assertSee('about-page-shell', false)
             ->assertSee('/css/about-testimonials-page.css', false)
             ->assertDontSee('/css/support-pages.css', false)
-            ->assertSee('TENTANG LANYARD MEDAN')
+            ->assertSee('TENTANG LANYARD PALEMBANG')
             ->assertSee('Kami Menjaga Detail dari Brief hingga Dikirim')
             ->assertSee('Memproduksi dari Surabaya')
             ->assertSee('Cara Pemesanan')
-            ->assertSee('https://lanyardmedan.com/tentang-kami', false);
+            ->assertSee('https://lanyardpalembang.com/tentang-kami', false);
 
         $this->assertSame(0, $xpath->query('//*[contains(concat(" ", normalize-space(@class), " "), " about-page ")]//img')->length);
         $this->assertSame(6, $xpath->query('//section[contains(concat(" ", normalize-space(@class), " "), " about-page__hero ") or contains(concat(" ", normalize-space(@class), " "), " about-page__proof ") or contains(concat(" ", normalize-space(@class), " "), " about-page__story ") or contains(concat(" ", normalize-space(@class), " "), " about-page__principles ") or contains(concat(" ", normalize-space(@class), " "), " about-page__process ") or contains(concat(" ", normalize-space(@class), " "), " about-page__cta ")]')->length);
@@ -86,7 +86,7 @@ class AboutTestimonialsPageTest extends TestCase
             ->assertDontSee('Draft Internal')
             ->assertDontSee('should-not-render.webp')
             ->assertDontSee('/css/support-pages.css', false)
-            ->assertSee('https://lanyardmedan.com/testimoni', false);
+            ->assertSee('https://lanyardpalembang.com/testimoni', false);
 
         $this->assertSame(0, $xpath->query('//*[contains(concat(" ", normalize-space(@class), " "), " testimonials-page ")]//img')->length);
         $this->assertSame(1, substr_count($html, 'testimonials-page__feature-panel'));

@@ -2,7 +2,7 @@
 
 ## Scope and limitation
 
-Audit dilakukan read-only terhadap production `https://lanyardmedan.com`.
+Audit dilakukan read-only terhadap production `https://lanyardpalembang.com`.
 Lighthouse binary/browser engine tidak tersedia pada sesi ini, sehingga metrik
 Core Web Vitals seperti LCP, CLS, dan INP belum dapat diukur langsung. Angka di
 bawah adalah response timing dan inspeksi markup/header production, bukan skor
@@ -20,7 +20,7 @@ dan dapat dipengaruhi cache edge, koneksi, serta kondisi origin.
 | `/layanan` | 0.44s/0.45s, 0.33s/0.34s, 5.39s/12.96s / 34 KB | outlier origin perlu diselidiki |
 | `/pengiriman` | 0.37s/0.37s, 0.29s/0.30s, 1.30s/1.30s / 33 KB | cache/origin variance |
 | `/blog` | 0.39s/0.39s, 0.25s/0.27s, 0.35s/0.36s / 28 KB | relatif stabil |
-| `/blog/polyester-vs-nylon-lanyard-medan` | 0.59s/0.60s, 0.67s/0.73s, 0.36s/0.36s / 36 KB | relatif baik setelah cache hangat |
+| `/blog/polyester-vs-nylon-lanyard-palembang` | 0.59s/0.60s, 0.67s/0.73s, 0.36s/0.36s / 36 KB | relatif baik setelah cache hangat |
 
 Semua route yang diuji mengembalikan HTTP 200 saat verifikasi akhir.
 
@@ -60,10 +60,3 @@ Semua route yang diuji mengembalikan HTTP 200 saat verifikasi akhir.
   desktop/mobile masing-masing.
 - Tidak ada perubahan pada route, markup CTA, teks, link, interaksi, atau
   layout. Perubahan hanya mengurangi overdelivery asset.
-
-## Deployment note
-
-Baseline FTPS penuh belum dipublikasikan karena remote belum memiliki manifest
-dan upload satu-file-per-koneksi mendeteksi 11.330 file. Deploy incremental
-perubahan audit tetap sudah tersimpan dan hash remote cocok; baseline penuh perlu
-dilakukan dengan metode release yang lebih efisien atau akses SSH/cPanel extract.

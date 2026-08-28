@@ -32,7 +32,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
-Route::get('/health', fn () => ['ok' => true, 'app' => 'lanyardmedan-laravel']);
+Route::get('/health', fn () => ['ok' => true, 'app' => 'lanyardpalembang-laravel']);
 
 Route::middleware('throttle:public-api')->group(function () {
     Route::get('/turnstile-config', function () {

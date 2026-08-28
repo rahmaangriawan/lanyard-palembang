@@ -38,9 +38,9 @@ final class OpenGraphImage
 
         $white = imagecolorallocate($canvas, 255, 255, 255);
         $muted = imagecolorallocate($canvas, 218, 225, 232);
-        imagettftext($canvas, 25, 0, 76, 96, $green, $font, 'LANYARD MEDAN');
+        imagettftext($canvas, 25, 0, 76, 96, $green, $font, 'LANYARD PALEMBANG');
 
-        $title = trim((string) $post->title) ?: 'Artikel Lanyard Medan';
+        $title = trim((string) $post->title) ?: 'Artikel Lanyard Palembang';
         $lines = self::wrap($title, $font, 53, 980, 3);
         $y = 210;
         foreach ($lines as $line) {
@@ -49,7 +49,7 @@ final class OpenGraphImage
         }
 
         $category = trim((string) ($post->category?->name ?? 'Inspirasi Lanyard'));
-        imagettftext($canvas, 24, 0, 76, 555, $muted, $regular, $category.'  •  lanyardmedan.com');
+        imagettftext($canvas, 24, 0, 76, 555, $muted, $regular, $category.'  •  lanyardpalembang.com');
 
         ob_start();
         imagepng($canvas, null, 8);

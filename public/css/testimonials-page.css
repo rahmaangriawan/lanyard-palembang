@@ -1,20 +1,54 @@
 /* ==========================================================================
-   Testimonials Page — 3-Column Vertical Infinite Marquee (#9E0C17 on White)
+   Testimonials Page — Lanyard Palembang
+   Theme: Modern Warm Editorial & Pure CSS Testimonial Marquee
    ========================================================================== */
+
+:root {
+  --testi-ink: #151515;
+  --testi-ink-soft: #1A1510;
+  --testi-muted: #5C4F3E;
+  --testi-subtle: #8A837A;
+  
+  --testi-gold: #C3944B;
+  --testi-gold-dark: #A07A2B;
+  --testi-gold-strong: #8C6D1D;
+  --testi-gold-light: #F5D98A;
+  --testi-gold-hover: #E4C469;
+  --testi-gold-soft: #FAF3E0;
+  --testi-gold-border: #E5D2A8;
+
+  --testi-bg: #ffffff;
+  --testi-surface: #FAF7F2;
+  --testi-surface-warm: #F7F3E8;
+  --testi-border: #EDE4D1;
+  --testi-border-subtle: #F0E4D5;
+  --testi-line: #F2ECE1;
+
+  --marquee-duration: 38s;
+}
+
+.testimonials-wall-page,
+.testimonials-wall-page *,
+.testimonials-wall-page *::before,
+.testimonials-wall-page *::after {
+  box-sizing: border-box;
+}
 
 .testimonials-wall-page {
   position: relative;
-  background: #ffffff;
-  padding: 0 0 64px;
-  overflow: hidden;
+  background: var(--testi-bg);
+  color: var(--testi-ink);
+  overflow-x: hidden;
+  font-family: inherit;
 }
 
 /* --------------------------------------------------------------------------
-   Hero Section
+   1. Hero Section
    -------------------------------------------------------------------------- */
 .testimonials-hero {
-  padding: clamp(48px, 6vw, 76px) 0 clamp(32px, 4vw, 48px);
+  padding: clamp(56px, 7vw, 88px) 0 clamp(40px, 5vw, 56px);
   background: #ffffff;
+  border-bottom: 1px solid var(--testi-line);
 }
 
 .testimonials-hero__header {
@@ -30,11 +64,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   padding: 6px 14px 6px 10px;
   border-radius: 9999px;
-  background: #fff5f5;
-  border: 1px solid #fee2e2;
+  background: var(--testi-gold-soft);
+  border: 1px solid var(--testi-gold-border);
 }
 
 .testimonials-hero__sparkle {
@@ -43,296 +77,257 @@
   justify-content: center;
   width: 16px;
   height: 16px;
-  color: #9E0C17;
+  color: var(--testi-gold-dark);
 }
 
 .testimonials-hero__sparkle svg {
-  width: 15px;
-  height: 15px;
+  width: 100%;
+  height: 100%;
 }
 
 .testimonials-hero__eyebrow {
-  color: #9E0C17;
-  font-size: 11.5px;
+  color: var(--testi-gold-dark);
+  font-size: 12px;
   font-weight: 850;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   line-height: 1.2;
   text-transform: uppercase;
 }
 
 .testimonials-hero__title {
   margin: 0 0 16px;
-  color: #0f172a;
+  color: var(--testi-ink);
   font-size: clamp(2.2rem, 3.8vw, 3.4rem);
   font-weight: 850;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   line-height: 1.15;
 }
 
 .testimonials-hero__title-accent {
-  color: #9E0C17;
+  color: var(--testi-gold);
+  background: linear-gradient(135deg, var(--testi-gold-dark) 0%, var(--testi-gold) 60%, var(--testi-gold-strong) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .testimonials-hero__desc {
-  margin: 0 0 24px;
-  color: #475569;
+  margin: 0 0 26px;
+  color: var(--testi-muted);
   font-size: 16px;
-  line-height: 1.65;
-  max-width: 680px;
+  line-height: 1.68;
+  max-width: 700px;
 }
 
 .testimonials-hero__rating-badge {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 20px;
+  padding: 8px 22px;
   border-radius: 9999px;
-  background: #fafafa;
-  border: 1px solid #e2e8f0;
-  color: #334155;
+  background: var(--testi-surface);
+  border: 1px solid var(--testi-border);
+  color: var(--testi-muted);
   font-size: 14px;
 }
 
 .testimonials-hero__stars {
-  color: #f59e0b;
-  font-size: 16px;
+  color: var(--testi-gold);
+  font-size: 17px;
   letter-spacing: 2px;
   line-height: 1;
 }
 
 .testimonials-hero__rating-badge strong {
-  color: #0f172a;
-  font-weight: 800;
+  color: var(--testi-ink);
+  font-weight: 850;
 }
 
 /* --------------------------------------------------------------------------
-   Container & Fade Mask (Top and Bottom subtle gradient)
+   2. Testimonial Marquee Section (Pure CSS)
    -------------------------------------------------------------------------- */
-.testimonials-wall {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  overflow: hidden;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
-}
-
-/* --------------------------------------------------------------------------
-   Viewport & Column Setup
-   -------------------------------------------------------------------------- */
-.testimonials-col {
+.testimonial-marquee-section {
+  padding: clamp(48px, 6vw, 76px) 0;
+  background: var(--testi-surface-warm);
   position: relative;
   overflow: hidden;
-  height: 720px;
 }
 
-.testimonials-col__track {
+/* Marquee Container with Horizontal Scrolling & Edge Fades */
+.testimonial-marquee-container {
+  position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Soft Left & Right Edge Fades */
+.testimonial-marquee-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  width: clamp(40px, 8vw, 120px);
+  pointer-events: none;
+}
+
+.testimonial-marquee-fade--left {
+  left: 0;
+  background: linear-gradient(to right, #F7F3E8 0%, rgba(247, 243, 232, 0) 100%);
+}
+
+.testimonial-marquee-fade--right {
+  right: 0;
+  background: linear-gradient(to left, #F7F3E8 0%, rgba(247, 243, 232, 0) 100%);
+}
+
+/* Marquee Track */
+.testimonial-marquee {
+  position: relative;
+  display: flex;
+  overflow: hidden;
   width: 100%;
-  height: max-content;
-  animation-name: testimonials-scroll;
-  animation-duration: 18s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+}
+
+.testimonial-marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  flex-shrink: 0;
+  animation: testimonial-marquee var(--marquee-duration) linear infinite;
   will-change: transform;
 }
 
-/* Durasi animasi berbeda per kolom */
-.testimonials-col--1 .testimonials-col__track {
-  animation-duration: 18s;
-}
-
-.testimonials-col--2 .testimonials-col__track {
-  animation-duration: 22s;
-}
-
-.testimonials-col--3 .testimonials-col__track {
-  animation-duration: 20s;
+.testimonial-marquee-track--reverse {
+  animation-name: testimonial-marquee-reverse;
 }
 
 /* Pause on hover */
-.testimonials-col:hover .testimonials-col__track {
+.testimonial-marquee-container:hover .testimonial-marquee-track {
   animation-play-state: paused;
 }
 
-@keyframes testimonials-scroll {
+@keyframes testimonial-marquee {
   from {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(0, -50%, 0);
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes testimonial-marquee-reverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
   }
 }
 
 /* --------------------------------------------------------------------------
-   Individual Testimonial Card
+   3. Review Card
    -------------------------------------------------------------------------- */
-.testi-card {
+.testimonial-marquee-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid #eaecf0;
-  border-radius: 20px;
+  width: 320px;
+  min-height: 154px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 1px solid var(--testi-border);
   background: #ffffff;
-  padding: 26px;
-  box-shadow: 0 4px 20px rgb(15 23 42 / 0.04);
+  padding: 20px 22px;
+  box-shadow: 0 4px 16px rgba(26, 21, 16, 0.03);
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
   user-select: text;
 }
 
-.testi-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 30px rgb(158 12 23 / 0.06);
+.testimonial-marquee-card:hover {
+  border-color: var(--testi-gold);
+  box-shadow: 0 8px 24px rgba(26, 21, 16, 0.08);
 }
 
-.testi-card__stars {
-  margin-bottom: 12px;
-  color: #f59e0b;
-  font-size: 15px;
-  letter-spacing: 3px;
-  line-height: 1;
-}
-
-.testi-card__quote {
-  margin: 0;
-  flex: 1;
-  font-weight: 400;
-  line-height: 1.65;
-}
-
-.testi-card__quote p {
-  margin: 0;
-  color: #0f172a;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.65;
-  letter-spacing: -0.01em;
-}
-
-.testi-card__footer {
+.testimonial-marquee-card__header {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.testi-card__avatar {
-  width: 44px;
-  height: 44px;
+.testimonial-marquee-card__avatar {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  border: 2px solid #fff5f5;
-  background: #f8fafc;
+  border: 1.5px solid var(--testi-gold-border);
+  background: var(--testi-surface);
 }
 
-.testi-card__info {
+.testimonial-marquee-card__user {
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 
-.testi-card__name {
-  color: #0f172a;
-  font-size: 14.5px;
-  font-weight: 800;
+.testimonial-marquee-card__name {
+  margin: 0;
+  color: var(--testi-ink);
+  font-size: 14px;
+  font-weight: 850;
   line-height: 1.25;
 }
 
-.testi-card__role {
+.testimonial-marquee-card__role {
   margin-top: 2px;
-  color: #64748b;
-  font-size: 12.5px;
+  color: var(--testi-muted);
+  font-size: 12px;
   line-height: 1.3;
 }
 
-/* --------------------------------------------------------------------------
-   Responsive Breakpoints
-   -------------------------------------------------------------------------- */
-@media (max-width: 1024px) {
-  .testimonials-hero {
-    padding: 40px 0 32px;
-  }
-  .testimonials-wall {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
-  .testimonials-col {
-    height: 660px;
-  }
-  .testimonials-col--3 {
-    display: none !important;
-  }
-  .testimonials-col__track {
-    gap: 18px;
-  }
-  .testi-card {
-    padding: 22px;
-    border-radius: 18px;
-  }
+.testimonial-marquee-card__body {
+  margin: 0;
+  color: var(--testi-ink-soft);
+  font-size: 13.5px;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-@media (max-width: 767px) {
+/* --------------------------------------------------------------------------
+   4. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
   .testimonials-hero {
-    padding: 32px 0 24px;
+    padding: 36px 0 32px;
   }
   .testimonials-hero__title {
-    font-size: 26px;
+    font-size: clamp(1.85rem, 7vw, 2.4rem);
   }
   .testimonials-hero__desc {
-    font-size: 14px;
-    margin-bottom: 18px;
-  }
-  .testimonials-hero__rating-badge {
-    font-size: 12.5px;
-    padding: 6px 16px;
-    width: 100%;
-    justify-content: center;
-  }
-  .testimonials-wall-page {
-    padding: 0 0 44px;
-  }
-  .testimonials-wall {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin-inline: auto;
-  }
-  .testimonials-col {
-    height: 600px;
-  }
-  .testimonials-col--2,
-  .testimonials-col--3 {
-    display: none !important;
-  }
-  .testimonials-col__track {
-    gap: 14px;
-  }
-  .testi-card {
-    padding: 20px;
-    border-radius: 16px;
-  }
-  .testi-card__quote p {
     font-size: 14.5px;
+  }
+  .testimonial-marquee-section {
+    padding: 44px 0 56px;
+  }
+  .testimonial-marquee-card {
+    width: 270px;
+    padding: 16px 18px;
+    min-height: 140px;
+  }
+  .testimonial-marquee-card__body {
+    font-size: 13px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .testimonials-col__track {
+  .testimonial-marquee-track {
     animation: none !important;
     transform: none !important;
-  }
-  .testimonials-wall {
-    height: auto;
-    overflow-y: auto;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-  .testimonials-col {
-    height: auto;
-    overflow: visible;
   }
 }

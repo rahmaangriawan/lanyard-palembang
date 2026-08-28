@@ -58,13 +58,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>@yield('title', 'Dashboard') · Lanyard Medan</title>
+    <title>@yield('title', 'Dashboard') · Lanyard Palembang</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <script>
       (function () {
-        var color = localStorage.getItem("lanyardmedan-dashboard-primary");
+        var color = localStorage.getItem("lanyardpalembang-dashboard-primary");
         if (color) document.documentElement.style.setProperty("--meridian-accent", color);
       })();
     </script>
@@ -248,8 +248,8 @@
       <aside class="sidebar sidebar--lg sidebar--app" data-stisla-sidebar>
         <header class="sidebar__header">
           <a class="sidebar__brand" href="{{ route('dashboard') }}">
-            <img class="dashboard-brand-logo dashboard-brand-logo--full" src="/uploads/lanyard-medan-logo.webp" alt="Lanyard Medan" />
-            <img class="dashboard-brand-logo dashboard-brand-logo--icon" src="/uploads/lanyard-medan-favicon.webp" alt="Lanyard Medan" />
+            <img class="dashboard-brand-logo dashboard-brand-logo--full" src="/uploads/lanyard-palembang-logo.webp" alt="Lanyard Palembang" />
+            <img class="dashboard-brand-logo dashboard-brand-logo--icon" src="/uploads/lanyard-palembang-favicon.webp" alt="Lanyard Palembang" />
           </a>
         </header>
 

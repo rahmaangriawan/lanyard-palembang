@@ -1,13 +1,13 @@
 /* ==========================================================================
-   BLOG SINGLE ARTICLE — Lanyard Medan
-   Palette: Crimson (#9E0C17) on White & Dark Slate (#0f172a)
+   BLOG SINGLE ARTICLE — Lanyard Palembang
+   Palette: Crimson (#C3944B) on White & Dark Slate (#0f172a)
    ========================================================================== */
 
 :root {
-  --single-crimson: #9E0C17;
-  --single-crimson-hover: #800a12;
-  --single-crimson-soft: #fff5f5;
-  --single-crimson-border: #fee2e2;
+  --single-crimson: #C3944B;
+  --single-crimson-hover: #A07A2B;
+  --single-crimson-soft: #FAF3E0;
+  --single-crimson-border: #E5D2A8;
   --single-ink: #0f172a;
   --single-slate: #334155;
   --single-muted: #475569;

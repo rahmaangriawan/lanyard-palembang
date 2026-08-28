@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if (str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
 
   $canonicalUrl = $siteUrl . '/kebijakan';
@@ -9,14 +9,14 @@
     '@context' => 'https://schema.org',
     '@type' => 'WebPage',
     '@id' => $canonicalUrl . '/#webpage',
-    'name' => 'Kebijakan Privasi Lanyard Medan',
-    'description' => 'Informasi pengumpulan, penggunaan, penyimpanan, dan perlindungan data pribadi serta file desain pelanggan Lanyard Medan.',
+    'name' => 'Kebijakan Privasi Lanyard Palembang',
+    'description' => 'Informasi pengumpulan, penggunaan, penyimpanan, dan perlindungan data pribadi serta file desain pelanggan Lanyard Palembang.',
     'url' => $canonicalUrl,
     'inLanguage' => 'id-ID',
     'dateModified' => '2026-08-13',
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Medan',
+      'name' => 'Lanyard Palembang',
       'url' => $siteUrl,
     ],
   ];

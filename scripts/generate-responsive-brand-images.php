@@ -19,8 +19,8 @@ $images = [
         'widths' => [192, 320, 480, 640],
     ],
     [
-        'source' => $publicPath.'/uploads/lanyard-medan-logo.webp',
-        'prefix' => 'lanyard-medan-logo',
+        'source' => $publicPath.'/uploads/lanyard-palembang-logo.webp',
+        'prefix' => 'lanyard-palembang-logo',
         'widths' => [160, 256],
     ],
 ];

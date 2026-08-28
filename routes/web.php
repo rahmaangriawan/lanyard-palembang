@@ -148,6 +148,9 @@ Route::get('/sitemap.xml', function () use ($sitemapBaseUrl) {
         ['loc' => $base.'/product-sitemap.xml', 'lastmod' => $lastModified(Product::query()->where('published', true)->max('updatedAt'))],
         ['loc' => $base.'/post-sitemap.xml', 'lastmod' => $lastModified(Post::query()->where('published', true)->max('updatedAt'))],
         ['loc' => $base.'/city-sitemap.xml', 'lastmod' => $lastModified(CityPage::query()->where('published', true)->max('updatedAt'))],
+        ['loc' => $base.'/category-sitemap.xml'],
+        ['loc' => $base.'/tag-sitemap.xml'],
+        ['loc' => $base.'/author-sitemap.xml'],
     ];
 
     return response()
@@ -185,13 +188,21 @@ Route::get('/product-sitemap.xml', function () use ($sitemapBaseUrl, $sitemapRes
         return Product::query()
             ->where('published', true)
             ->orderByDesc('updatedAt')
-            ->get(['slug', 'updatedAt'])
-            ->map(fn (Product $product): array => [
-                'loc' => $base.'/produk/'.$product->slug,
-                'lastmod' => $product->updatedAt,
-                'changefreq' => 'weekly',
-                'priority' => '0.7',
-            ])
+            ->get(['slug', 'updatedAt', 'featuredImage'])
+            ->map(function (Product $product) use ($base): array {
+                $image = \App\Support\AssetUrl::relative($product->featuredImage);
+                if ($image !== '' && ! str_starts_with($image, 'http')) {
+                    $image = $base.'/'.ltrim($image, '/');
+                }
+
+                return [
+                    'loc' => $base.'/produk/'.$product->slug,
+                    'lastmod' => $product->updatedAt,
+                    'changefreq' => 'weekly',
+                    'priority' => '0.7',
+                    'image' => $image !== '' ? $image : null,
+                ];
+            })
             ->all();
     });
 
@@ -204,18 +215,92 @@ Route::get('/post-sitemap.xml', function () use ($sitemapBaseUrl, $sitemapRespon
         return Post::query()
             ->where('published', true)
             ->orderByDesc('updatedAt')
-            ->get(['slug', 'updatedAt'])
-            ->map(fn (Post $post): array => [
-                'loc' => $base.'/blog/'.$post->slug,
-                'lastmod' => $post->updatedAt,
-                'changefreq' => 'weekly',
-                'priority' => '0.8',
-            ])
+            ->get(['slug', 'updatedAt', 'featuredImage'])
+            ->map(function (Post $post) use ($base): array {
+                $image = \App\Support\AssetUrl::relative($post->featuredImage);
+                if ($image !== '' && ! str_starts_with($image, 'http')) {
+                    $image = $base.'/'.ltrim($image, '/');
+                }
+
+                return [
+                    'loc' => $base.'/blog/'.$post->slug,
+                    'lastmod' => $post->updatedAt,
+                    'changefreq' => 'weekly',
+                    'priority' => '0.8',
+                    'image' => $image !== '' ? $image : null,
+                ];
+            })
             ->all();
     });
 
     return $sitemapResponse($urls);
 })->withoutMiddleware($statelessPublicMiddleware)->name('sitemap.posts');
+
+Route::get('/category-sitemap.xml', function () use ($sitemapBaseUrl, $sitemapResponse) {
+    $base = $sitemapBaseUrl();
+    $urls = Category::query()
+        ->where('type', 'BLOG')
+        ->orderBy('name')
+        ->get(['slug', 'name'])
+        ->map(fn (Category $category): array => [
+            'loc' => $base.'/kategori/'.$category->slug,
+            'changefreq' => 'weekly',
+            'priority' => '0.6',
+        ])
+        ->all();
+
+    return $sitemapResponse($urls);
+})->withoutMiddleware($statelessPublicMiddleware)->name('sitemap.categories');
+
+Route::get('/tag-sitemap.xml', function () use ($sitemapBaseUrl, $sitemapResponse, $cachedSitemapUrls) {
+    $base = $sitemapBaseUrl();
+    $urls = $cachedSitemapUrls('public_sitemap_tags', function () use ($base): array {
+        return Post::query()
+            ->where('published', true)
+            ->whereNotNull('tags')
+            ->where('tags', '!=', '')
+            ->pluck('tags')
+            ->flatMap(fn (string $tags): array => array_map(
+                fn (string $tag): string => trim($tag),
+                explode(',', $tags),
+            ))
+            ->filter()
+            ->unique()
+            ->sort()
+            ->values()
+            ->map(fn (string $tag): array => [
+                'loc' => $base.'/tag/'.Str::slug($tag),
+                'changefreq' => 'weekly',
+                'priority' => '0.5',
+            ])
+            ->all();
+    });
+
+    return $sitemapResponse($urls);
+})->withoutMiddleware($statelessPublicMiddleware)->name('sitemap.tags');
+
+Route::get('/author-sitemap.xml', function () use ($sitemapBaseUrl, $sitemapResponse, $cachedSitemapUrls) {
+    $base = $sitemapBaseUrl();
+    $urls = $cachedSitemapUrls('public_sitemap_authors', function () use ($base): array {
+        return User::query()
+            ->whereIn('role', [User::ROLE_ADMIN, User::ROLE_WRITER])
+            ->whereHas('posts', fn ($query) => $query->where('published', true))
+            ->orderBy('name')
+            ->get(['id', 'slug', 'name'])
+            ->map(function (User $author) use ($base): array {
+                $slug = $author->slug ?: Str::slug($author->name);
+
+                return [
+                    'loc' => $base.'/blog/penulis/'.$slug,
+                    'changefreq' => 'weekly',
+                    'priority' => '0.5',
+                ];
+            })
+            ->all();
+    });
+
+    return $sitemapResponse($urls);
+})->withoutMiddleware($statelessPublicMiddleware)->name('sitemap.authors');
 
 Route::get('/og/blog/{slug}.png', function (string $slug) {
     $post = Post::query()->with('category')->where('published', true)->where('slug', $slug)->firstOrFail();

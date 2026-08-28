@@ -1,7 +1,7 @@
 @php
   $siteUrl = rtrim((string) config('app.url', url('/')), '/');
   if ($siteUrl === '' || str_contains($siteUrl, 'localhost') || str_contains($siteUrl, '127.0.0.1')) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
   $canonicalUrl = $siteUrl . '/testimoni';
 
@@ -9,13 +9,13 @@
     '@context' => 'https://schema.org',
     '@type' => 'WebPage',
     '@id' => $canonicalUrl . '/#webpage',
-    'name' => 'Testimoni Pelanggan Lanyard Medan | Pengalaman & Kepuasan',
-    'description' => 'Cerita dan pengalaman langsung pelanggan mengenai hasil cetak lanyard custom, kecepatan produksi, dan kualitas pelayanan Lanyard Medan.',
+    'name' => 'Testimoni Pelanggan Lanyard Palembang | Pengalaman & Kepuasan',
+    'description' => 'Cerita dan pengalaman langsung pelanggan mengenai hasil cetak lanyard custom, kecepatan produksi, dan kualitas pelayanan Lanyard Palembang.',
     'url' => $canonicalUrl,
     'inLanguage' => 'id-ID',
     'isPartOf' => [
       '@type' => 'WebSite',
-      'name' => 'Lanyard Medan',
+      'name' => 'Lanyard Palembang',
       'url' => $siteUrl,
     ],
   ];

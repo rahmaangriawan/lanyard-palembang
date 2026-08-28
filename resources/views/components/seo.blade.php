@@ -20,15 +20,15 @@
   }
   // Force production domain if config is localhost / 127 / empty to avoid indexing dev
   if (strpos($siteUrl, 'localhost') !== false || strpos($siteUrl, '127.0.0.1') !== false) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
   if (!preg_match('/^https?:\/\//', $siteUrl)) {
-    $siteUrl = 'https://lanyardmedan.com';
+    $siteUrl = 'https://lanyardpalembang.com';
   }
   $siteUrl = rtrim($siteUrl, '/');
 
-  $defaultTitle = 'Print Lanyard Medan Murah Free Ongkir';
-  $defaultDesc = 'Dapatkan lanyard custom berkualitas untuk kantor atau event Anda hanya di Lanyard Medan Medan.';
+  $defaultTitle = 'Print Lanyard Palembang Murah Free Ongkir';
+  $defaultDesc = 'Dapatkan lanyard custom berkualitas untuk kantor atau event Anda hanya di Lanyard Palembang.';
 
   $incomingTitle = isset($title) && $title !== '' ? $title : null;
   $incomingDesc = isset($description) && $description !== '' ? $description : null;
@@ -64,7 +64,7 @@
 
   $ogImagePath = \App\Support\AssetUrl::relative(
     $incomingOgImage,
-    '/uploads/lanyard-medan-logo.webp'
+    '/uploads/lanyard-palembang-logo.webp'
   );
   if (strpos($ogImagePath, 'http') === 0) {
     $finalImage = $ogImagePath;
@@ -113,11 +113,11 @@
 <link rel="canonical" href="{{ $finalCanonical }}">
 @endif
 <meta name="robots" content="{{ $robotsContent }}">
-<meta name="author" content="Lanyard Medan">
+<meta name="author" content="Lanyard Palembang">
 <meta name="theme-color" content="#0f172a">
 
 {{-- Open Graph --}}
-<meta property="og:site_name" content="Lanyard Medan">
+<meta property="og:site_name" content="Lanyard Palembang">
 <meta property="og:locale" content="id_ID">
 <meta property="og:title" content="{{ $finalTitleDisplay }}">
 <meta property="og:description" content="{{ $trimmedDesc }}">

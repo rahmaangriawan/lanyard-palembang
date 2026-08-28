@@ -1,38 +1,38 @@
 <?php
 
 return [
-    'medan' => [
-        'title' => 'Kota Medan',
+    'palembang' => [
+        'title' => 'Kota Palembang',
         'zones' => [
             [
-                'name' => 'Medan Kota',
+                'name' => 'Pusat Kota',
                 'description' => 'Kawasan pusat kota untuk kebutuhan kantor, instansi, dan acara profesional.',
                 'icon' => 'location_city',
-                'districts' => ['Kesawan', 'Bukit Barisan', 'Pulo Brayan', 'Teladan'],
+                'districts' => ['Bukit Kecil', 'Kemuning', 'Ilir Barat I', 'Ilir Barat II'],
             ],
             [
-                'name' => 'Medan Barat',
-                'description' => 'Melayani kebutuhan komunitas, sekolah, kantor, dan kegiatan di kawasan barat.',
-                'icon' => 'location_on',
-                'districts' => ['Glugur Kota', 'Kesawan Barat', 'Silalas', 'Srigunting'],
-            ],
-            [
-                'name' => 'Medan Timur',
+                'name' => 'Ilir Timur',
                 'description' => 'Cakupan untuk kampus, perusahaan, komunitas, dan event di sisi timur kota.',
                 'icon' => 'inventory_2',
-                'districts' => ['Gaharu', 'Mabar', 'Pulo Brayan Darat', 'Sidorejo'],
+                'districts' => ['Ilir Timur I', 'Ilir Timur II', 'Ilir Timur III', 'Sako'],
             ],
             [
-                'name' => 'Medan Selatan',
-                'description' => 'Konsultasi dan pengiriman untuk kebutuhan lanyard di kawasan selatan.',
+                'name' => 'Sukarami & Alang-Alang Lebar',
+                'description' => 'Melayani kebutuhan perumahan, sekolah, dan korporat di kawasan bandara SMB II.',
+                'icon' => 'flight',
+                'districts' => ['Sukarami', 'Alang-Alang Lebar', 'Kalidoni', 'Sematang Borang'],
+            ],
+            [
+                'name' => 'Seberang Ulu',
+                'description' => 'Melayani pesanan kantor, sekolah, event, dan komunitas di sisi selatan Sungai Musi.',
                 'icon' => 'verified',
-                'districts' => ['Pasar Merah Barat', 'Sei Rengas I', 'Tegal Sari I', 'Tegal Sari II'],
+                'districts' => ['Seberang Ulu I', 'Seberang Ulu II', 'Gandus', 'Tambaksari'],
             ],
             [
-                'name' => 'Medan Utara',
-                'description' => 'Melayani pesanan kantor, sekolah, event, dan komunitas di kawasan utara.',
+                'name' => 'Plaju & Kertapati',
+                'description' => 'Konsultasi dan pengiriman untuk kebutuhan lanyard kawasan industri dan pelabuhan.',
                 'icon' => 'local_shipping',
-                'districts' => ['Bungo', 'Paya Pasir', 'Sei Sikambing D', 'Tanjung Gusta'],
+                'districts' => ['Plaju', 'Kertapati'],
             ],
         ],
     ],

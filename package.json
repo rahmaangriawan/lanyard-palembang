@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@lucide/vue": "^1.23.0",
+        "alpinejs": "^3.16.2",
         "quill": "^2.0.3"
     }
 }

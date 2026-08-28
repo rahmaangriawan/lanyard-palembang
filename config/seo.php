@@ -3,20 +3,20 @@
 return [
     'faq' => [
         ['question' => 'Bisa cetak logo sendiri di lanyard?', 'answer' => 'Bisa. Anda dapat mengirimkan logo, warna brand, atau referensi desain kepada tim kami. Logo akan disesuaikan dengan ukuran lanyard agar hasil cetaknya tetap jelas dan proporsional.'],
-        ['question' => 'Berapa lama proses cetak lanyard custom?', 'answer' => 'Waktu produksi standar sekitar 3-5 hari kerja setelah desain disetujui. Estimasi dapat menyesuaikan jumlah pesanan, bahan, tingkat kerumitan desain, dan antrean produksi saat pemesanan.'],
-        ['question' => 'Apakah bisa request contoh desain dulu?', 'answer' => 'Bisa. Tim kami akan menyiapkan mockup digital berdasarkan logo, warna, dan kebutuhan Anda sebelum produksi dimulai. Produksi baru diproses setelah desain mendapatkan persetujuan.'],
-        ['question' => 'Aksesoris lanyard apa saja yang bisa dipilih?', 'answer' => 'Tersedia pilihan hook plastik, hook metal, stopper silikon, dan ID Card holder. Tim kami dapat membantu memilih kombinasi aksesori yang sesuai dengan penggunaan dan anggaran Anda.'],
+        ['question' => 'Berapa lama proses cetak lanyard custom?', 'answer' => 'Waktu produksi standar sekitar 1-3 hari kerja setelah desain disetujui. Estimasi dapat menyesuaikan jumlah pesanan, bahan, tingkat kerumitan desain, dan antrean produksi saat pemesanan.'],
+        ['question' => 'Apakah bisa request contoh desain dulu?', 'answer' => 'Bisa. Tim kami akan menyiapkan mockup digital 3D gratis berdasarkan logo, warna, dan kebutuhan Anda sebelum produksi dimulai. Produksi baru diproses setelah desain mendapatkan persetujuan.'],
+        ['question' => 'Aksesoris lanyard apa saja yang bisa dipilih?', 'answer' => 'Tersedia pilihan kait besi oval, kait lobster tebal, ring O, stopper putar lepas-cepat, safety breakaway buckle, dan holder ID card. Tim kami siap membantu memilih kombinasi aksesori yang tepat.'],
     ],
     'shipping_faq' => [
-        ['question' => 'Apakah semua pengiriman ke seluruh Indonesia gratis?', 'answer' => 'Gratis ongkir berlaku untuk layanan reguler sesuai ketentuan promo aktif. Layanan khusus, pengiriman prioritas, atau tujuan tertentu akan dikonfirmasi terlebih dahulu.'],
-        ['question' => 'Apakah tersedia layanan Same Day?', 'answer' => 'Opsi prioritas atau Same Day dapat tersedia berdasarkan kesiapan produksi, waktu persetujuan desain, lokasi tujuan, dan ketersediaan kurir. Tim akan mengonfirmasi kelayakannya sebelum pesanan diproses.'],
-        ['question' => 'Kapan nomor resi diberikan?', 'answer' => 'Nomor resi diberikan setelah paket diterima oleh ekspedisi dan data pengiriman tersedia pada sistem kurir.'],
-        ['question' => 'Bagaimana jika paket rusak atau hilang?', 'answer' => 'Tim Lanyard Medan akan membantu proses follow-up dan klaim asuransi apabila layanan pengiriman yang digunakan memiliki perlindungan asuransi.'],
+        ['question' => 'Apakah semua pengiriman ke seluruh Indonesia gratis?', 'answer' => 'Gratis ongkir reguler berlaku untuk area Kota Palembang dan subsidi khusus untuk pengiriman ke kota-kota lain di seluruh Indonesia sesuai promo aktif.'],
+        ['question' => 'Apakah tersedia layanan Same Day?', 'answer' => 'Bisa. Khusus wilayah Kota Palembang dan sekitarnya, pesanan yang selesai dicetak dapat langsung dikirimkan menggunakan armada kurir instan lokal (Grab/Gojek/Maxim) di hari yang sama.'],
+        ['question' => 'Kapan nomor resi diberikan?', 'answer' => 'Nomor resi resmi dan foto paket langsung dibagikan oleh customer service kami via WhatsApp sesaat setelah paket diproses pihak ekspedisi.'],
+        ['question' => 'Bagaimana jika paket rusak atau terlambat?', 'answer' => 'Tim Lanyard Palembang akan membantu pemantauan aktif dan eskalasi klaim asuransi langsung ke pihak manajemen ekspedisi.'],
     ],
     'warranty_faq' => [
-        ['question' => 'Apa yang termasuk dalam garansi produksi?', 'answer' => 'Garansi berlaku untuk cacat produksi major yang terbukti murni berasal dari proses produksi atau quality control, seperti hasil cetak pudar ekstrem, tali putus, atau stopper rusak.'],
-        ['question' => 'Berapa batas waktu pengajuan klaim?', 'answer' => 'Komplain dan pengajuan garansi harus dikirimkan maksimal 3x24 jam setelah status pelacakan kurir menunjukkan barang telah diterima.'],
-        ['question' => 'Bukti apa yang diperlukan untuk klaim?', 'answer' => 'Pemesan perlu menyertakan nomor pesanan serta bukti foto dan video unboxing yang jelas agar kondisi produk dapat divalidasi.'],
-        ['question' => 'Bagaimana jika paket rusak atau hilang saat dikirim?', 'answer' => 'Keterlambatan, kehilangan, atau kerusakan akibat kurir berada di luar cakupan garansi produksi. Tim Lanyard Medan tetap membantu proses follow-up dan klaim asuransi jika pengiriman menggunakan asuransi.'],
+        ['question' => 'Apa saja yang termasuk dalam garansi produksi 100%?', 'answer' => 'Garansi 100% cetak ulang gratis berlaku jika ditemukan cacat produksi seperti warna cetakan luntur, cetak buram/berbayang, jahitan terlepas, aksesoris patah sebelum dipakai, atau kuantitas kurang.'],
+        ['question' => 'Berapa batas waktu pengajuan klaim garansi?', 'answer' => 'Pengajuan klaim garansi dapat dilakukan maksimal dalam kurun waktu 3x24 jam terhitung sejak status resi ekspedisi menunjukkan barang telah diterima di alamat Anda.'],
+        ['question' => 'Bukti apa yang perlu disiapkan saat klaim?', 'answer' => 'Cukup kirimkan rekaman video unboxing singkat atau foto jelas yang memperlihatkan bagian reject kepada nomor WhatsApp customer service kami.'],
+        ['question' => 'Berapa lama proses cetak ulang barang garansi?', 'answer' => 'Unit pengganti langsung kami prioritaskan dan diproduksi ulang dalam 1–2 hari kerja tanpa dipungut biaya sepeser pun, termasuk ongkos kirim ulang ke alamat Anda.'],
     ],
 ];

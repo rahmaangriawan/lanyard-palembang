@@ -9,7 +9,7 @@
       $plain = html_entity_decode(strip_tags((string) $value), ENT_QUOTES | ENT_HTML5, 'UTF-8');
       $plain = str_replace(
           ['IndoLanyard', 'Pusat Tali Lanyard', 'PusatTaliLanyard', '—', '–'],
-          ['Lanyard Medan', 'Lanyard Medan', 'Lanyard Medan', '-', '-'],
+          ['Lanyard Palembang', 'Lanyard Palembang', 'Lanyard Palembang', '-', '-'],
           $plain
       );
 
@@ -49,7 +49,7 @@
   $price = $normalizeCopy($product->basePrice) ?: 'Minta Penawaran';
   $minimumOrder = $normalizeCopy($product->minOrder) ?: '50 pcs';
   $description = $normalizeCopy($product->description ?: $product->shortDescription);
-  $description = $description ?: 'Informasi bahan, ukuran, aksesori, dan kebutuhan produksi dapat dikonsultasikan langsung dengan tim Lanyard Medan.';
+  $description = $description ?: 'Informasi bahan, ukuran, aksesori, dan kebutuhan produksi dapat dikonsultasikan langsung dengan tim Lanyard Palembang.';
   $descriptionHtml = Str::markdown($description, [
       'html_input' => 'strip',
       'allow_unsafe_links' => false,
@@ -61,10 +61,10 @@
   $hasFeaturedImage = filled($product->featuredImage);
   $heroImage = AssetUrl::relative($product->featuredImage, '/uploads/aset-produk.webp');
   $heroSrcset = ResponsiveImage::srcset($heroImage);
-  $heroAlt = $hasFeaturedImage ? 'Foto '.$productName.' hasil produksi Lanyard Medan' : 'Contoh hasil tali lanyard custom Lanyard Medan';
+  $heroAlt = $hasFeaturedImage ? 'Foto '.$productName.' hasil produksi Lanyard Palembang' : 'Contoh hasil tali lanyard custom Lanyard Palembang';
 
   $waNumber = \App\Models\Setting::query()->where('key', 'wa_number')->value('value') ?: '6282210200700';
-  $productContext = "Halo Lanyard Medan, saya tertarik untuk memesan produk ini:\n\n"
+  $productContext = "Halo Lanyard Palembang, saya tertarik untuk memesan produk ini:\n\n"
       ."• Produk: {$productName}\n"
       .($sku ? "• SKU: {$sku}\n" : '')
       .($price ? "• Estimasi Harga: {$price}\n" : '')
@@ -72,7 +72,7 @@
       ."• Deadline Acara: \n\n"
       ."Mohon dibantu info penawaran harga terbaik dan layout mockup gratisnya. Terima kasih!";
   $waOrderLink = 'https://wa.me/'.$waNumber.'?text='.rawurlencode($productContext);
-  $title = filled($product->metaTitle) ? $normalizeCopy($product->metaTitle) : $productName.' | Lanyard Medan';
+  $title = filled($product->metaTitle) ? $normalizeCopy($product->metaTitle) : $productName.' | Lanyard Palembang';
   $metaDescription = filled($product->metaDescription)
       ? $normalizeCopy($product->metaDescription)
       : Str::limit($shortDescription, 155, '');
@@ -87,6 +87,7 @@
 @push('head')
   <link rel="preload" href="{{ $heroImage }}" as="image" fetchpriority="high">
   <link rel="stylesheet" href="/css/product-detail.css?v={{ file_exists(public_path('css/product-detail.css')) ? filemtime(public_path('css/product-detail.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/home-cta-editorial.css?v={{ file_exists(public_path('css/home-cta-editorial.css')) ? filemtime(public_path('css/home-cta-editorial.css')) : 1 }}">
 @endpush
 
 @push('schema')
@@ -183,11 +184,11 @@
             </div>
             <div class="product-detail__quick-item">
               <dt>Teknik Cetak</dt>
-              <dd>Digital Sublimasi / Sablon</dd>
+              <dd>Digital Sublimasi Full Color</dd>
             </div>
             <div class="product-detail__quick-item">
               <dt>Jangkauan Kirim</dt>
-              <dd>Medan &amp; Seluruh Indonesia</dd>
+              <dd>Palembang &amp; Seluruh Indonesia</dd>
             </div>
           </dl>
 
@@ -276,7 +277,7 @@
           <div class="product-detail__workflow-card">
             <div class="product-detail__workflow-header">
               <p>PROSES MUDAH &amp; CEPAT</p>
-              <h4>4 Tahap Pemesanan Lanyard</h4>
+              <h3>4 Tahap Pemesanan Lanyard</h3>
             </div>
             <ol class="product-detail__workflow-steps">
               <li class="product-detail__workflow-step">
@@ -326,7 +327,7 @@
               $relatedName = $normalizeCopy($relatedProduct->name ?: 'Lanyard Custom');
               $relatedImage = AssetUrl::relative($relatedProduct->featuredImage, '/uploads/aset-produk.webp');
               $relatedSrcset = ResponsiveImage::srcset($relatedImage);
-              $relatedAlt = filled($relatedProduct->featuredImage) ? 'Foto '.$relatedName : 'Contoh hasil lanyard custom Lanyard Medan';
+              $relatedAlt = filled($relatedProduct->featuredImage) ? 'Foto '.$relatedName : 'Contoh hasil lanyard custom Lanyard Palembang';
               $relatedPrice = $normalizeCopy($relatedProduct->basePrice) ?: 'Minta Penawaran';
               $relatedCategory = $normalizeCopy($relatedProduct->category?->name ?: 'Lanyard Custom');
               $relatedShortDesc = $normalizeCopy($relatedProduct->shortDescription ?: 'Tali lanyard custom berkualitas tinggi.');
@@ -365,7 +366,7 @@
   @endif
 
   {{-- 5. CLOSING CTA SECTION --}}
-  @include('components.cta')
+  @include('components.home-cta-editorial')
 </div>
 
 @include('components.footer')

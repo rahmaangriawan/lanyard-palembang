@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
-@section('title', 'Katalog Produk Tali Lanyard Custom & Aksesoris | Lanyard Medan')
-@section('meta_description', 'Eksplorasi varian tali lanyard custom sublimasi full color, polyester, sablon, ID card holder, dan aksesoris terlengkap di Medan. Produksi kilat 1–3 hari.')
+@section('title', 'Katalog Produk Tali Lanyard Custom & Aksesoris | Lanyard Palembang')
+@section('meta_description', 'Eksplorasi varian tali lanyard custom sublimasi full color, polyester, ID card holder, dan aksesoris terlengkap di Palembang. Produksi kilat 1–3 hari.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/produk')
 @section('seo_og_image', '/uploads/hero-produk-lanyard.webp')
 
@@ -12,6 +12,7 @@
 
 @push('head')
   <link rel="stylesheet" href="/css/product-index.css?v={{ file_exists(public_path('css/product-index.css')) ? filemtime(public_path('css/product-index.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/home-cta-editorial.css?v={{ file_exists(public_path('css/home-cta-editorial.css')) ? filemtime(public_path('css/home-cta-editorial.css')) : 1 }}">
 @endpush
 
 @section('content')
@@ -21,7 +22,7 @@
   $search = trim((string) request('q', ''));
   $categoryFilter = trim((string) request('kategori', ''));
   $page = max(1, (int) request('page', 1));
-  $perPage = 9;
+  $perPage = 8;
   $query = Product::query()->with('category')->where('published', true);
 
   if ($search !== '') {
@@ -49,7 +50,7 @@
   $products = $query->skip(($page - 1) * $perPage)->take($perPage)->get();
   $nextPage = ($page * $perPage) < $total ? $page + 1 : null;
 
-  if ($products->isEmpty() && $search === '' && $categoryFilter === '') {
+  if (app()->environment('local', 'staging') && $products->isEmpty() && $search === '' && $categoryFilter === '') {
     $products = collect([
       (object) [
         'name' => 'Lanyard Tissue Sublimasi Full Color',
@@ -61,22 +62,13 @@
         'category' => (object) ['name' => 'Lanyard Tissue']
       ],
       (object) [
-        'name' => 'Lanyard Polyester Standar Event',
+        'name' => 'Lanyard Polyester Sublimasi Standar',
         'slug' => 'lanyard-polyester',
         'sku' => 'LP-001',
         'shortDescription' => 'Pilihan tali lanyard ekonomis dengan serat polyester tebal dan kuat. Sangat pas untuk kebutuhan panitia seminar, konser, dan MOS sekolah.',
         'featuredImage' => '/uploads/hero-lanyard-slider-02.webp',
         'basePrice' => 'Mulai Rp 3.500 / pcs',
         'category' => (object) ['name' => 'Lanyard Polyester']
-      ],
-      (object) [
-        'name' => 'Lanyard Sablon High Density',
-        'slug' => 'lanyard-sablon',
-        'sku' => 'LS-001',
-        'shortDescription' => 'Cetak sablon manual berdaya rekat tinggi pada bahan polyester kilap. Hasil sablon timbul, rapi, dan cocok untuk logo 1–2 warna solid.',
-        'featuredImage' => '/uploads/hero-lanyard-medan.webp',
-        'basePrice' => 'Mulai Rp 4.500 / pcs',
-        'category' => (object) ['name' => 'Lanyard Sablon']
       ],
       (object) [
         'name' => 'ID Card Holder Kulit Sintetis Premium',
@@ -117,7 +109,6 @@
     ['slug' => '', 'name' => 'Semua Produk'],
     ['slug' => 'tissue', 'name' => 'Lanyard Tissue'],
     ['slug' => 'polyester', 'name' => 'Lanyard Polyester'],
-    ['slug' => 'sablon', 'name' => 'Lanyard Sablon'],
     ['slug' => 'id-card', 'name' => 'ID Card & Holder'],
     ['slug' => 'aksesoris', 'name' => 'Aksesoris'],
   ];
@@ -138,7 +129,7 @@
         </div>
 
         <h1 id="product-hero-title" class="product-hero__title">
-          Pilihan Tali Lanyard Custom &amp; Aksesoris <span class="product-hero__title-accent">Terlengkap di Medan.</span>
+          Pilihan Tali Lanyard Custom &amp; Aksesoris <span class="product-hero__title-accent">Terlengkap di Palembang.</span>
         </h1>
 
         <p class="product-hero__desc">
@@ -189,18 +180,15 @@
       {{-- Visual Hero Card --}}
       <div class="product-hero__visual">
         <div class="product-hero__image-card">
-          <picture>
-            <source srcset="/uploads/hero-produk-lanyard-medan-1280w.webp 1280w, /uploads/hero-produk-lanyard-medan-960w.webp 960w, /uploads/hero-produk-lanyard-medan-640w.webp 640w, /uploads/hero-produk-lanyard-medan-320w.webp 320w" sizes="(max-width: 767px) 100vw, 560px" type="image/webp">
-            <img
-              src="/uploads/hero-produk-lanyard.webp"
-              alt="Katalog produk tali lanyard custom dan id card holder Lanyard Medan"
-              width="1448"
-              height="1086"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            >
-          </picture>
+          <img
+            src="/uploads/hero-produk-lanyard.webp?v={{ file_exists(public_path('uploads/hero-produk-lanyard.webp')) ? filemtime(public_path('uploads/hero-produk-lanyard.webp')) : 1 }}"
+            alt="Katalog produk tali lanyard custom dan id card holder Lanyard Palembang"
+            width="1672"
+            height="941"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          >
         </div>
 
         <div class="product-hero__trust-badge">
@@ -215,27 +203,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  {{-- 2. CATEGORY TABS BAR --}}
-  <section class="product-tabs-section" aria-label="Filter kategori produk">
-    <div class="home-shell home-shell--wide">
-      <nav class="product-tabs-nav" aria-label="Pilih kategori produk">
-        @foreach($categories as $cat)
-          @php
-            $isActive = ($categoryFilter === $cat['slug']);
-            $tabUrl = route('products.index', array_filter(['q' => $search ?: null, 'kategori' => $cat['slug'] ?: null]));
-          @endphp
-          <a
-            href="{{ $tabUrl }}"
-            class="product-tab-pill {{ $isActive ? 'is-active' : '' }}"
-            @if($isActive) aria-current="page" @endif
-          >
-            <span>{{ $cat['name'] }}</span>
-          </a>
-        @endforeach
-      </nav>
     </div>
   </section>
 
@@ -290,7 +257,7 @@
           </a>
         </div>
       @else
-        <ul class="product-grid" aria-label="Daftar produk Lanyard Medan">
+        <ul class="product-grid" aria-label="Daftar produk Lanyard Palembang">
           @foreach($products as $product)
             @php
               $image = $asset($product->featuredImage ?? null);
@@ -305,7 +272,7 @@
                   <img
                     src="{{ $image }}"
                     @if($srcset) srcset="{{ $srcset }}" sizes="(max-width: 767px) 100vw, (max-width: 1100px) 50vw, 33vw" @endif
-                    alt="{{ $product->name }} - Hasil cetak Lanyard Medan"
+                    alt="{{ $product->name }} - Hasil cetak Lanyard Palembang"
                     width="640"
                     height="480"
                     loading="lazy"
@@ -360,7 +327,7 @@
   </section>
 
   {{-- 4. CLOSING CTA SECTION --}}
-  @include('components.cta')
+  @include('components.home-cta-editorial')
 </div>
 
 @include('components.footer')

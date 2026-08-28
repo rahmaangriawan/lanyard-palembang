@@ -1,39 +1,40 @@
 @extends('layouts.public')
 
-@section('title', 'Layanan Pengiriman Lanyard Custom Cepat & Bergaransi | Lanyard Medan')
-@section('meta_description', 'Layanan ekspedisi dan pengiriman lanyard custom dari Medan ke seluruh Indonesia: garansi packing anti-rusak, kemudahan cek nomor resi online, serta proteksi pengiriman terpercaya.')
+@section('title', 'Layanan Pengiriman Lanyard Custom Cepat & Bergaransi | Lanyard Palembang')
+@section('meta_description', 'Layanan ekspedisi dan pengiriman lanyard custom dari Palembang ke seluruh Indonesia: garansi packing anti-rusak, kemudahan cek nomor resi online, serta proteksi pengiriman terpercaya.')
 @section('seo_canonical', rtrim(config('app.url', url('/')), '/') . '/pengiriman')
-@section('seo_og_image', '/uploads/hero-pengiriman-lanyard-medan.webp')
+@section('seo_og_image', '/uploads/hero-pengiriman-lanyard-palembang.webp')
 
 @push('head')
   <link rel="stylesheet" href="/css/shipping-index.css?v={{ file_exists(public_path('css/shipping-index.css')) ? filemtime(public_path('css/shipping-index.css')) : 1 }}">
+  <link rel="stylesheet" href="/css/home-cta-editorial.css?v={{ file_exists(public_path('css/home-cta-editorial.css')) ? filemtime(public_path('css/home-cta-editorial.css')) : 1 }}">
 @endpush
 
 @section('content')
 @php
-  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Medan, saya mau cek estimasi ongkos kirim dan jadwal ekspedisi lanyard custom.');
+  $whatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Palembang, saya mau cek estimasi ongkos kirim dan jadwal ekspedisi lanyard custom.');
 
   $shippingServices = [
     [
-      'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+      'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
       'badge' => 'PENGIRIMAN LOKAL',
-      'title' => 'Wilayah Medan & Sekitarnya',
-      'description' => 'Solusi distribusi kilat untuk instansi perkantoran dan kepanitiaan event di Kota Medan, Binjai, Deli Serdang, hingga Karo.',
+      'title' => 'Kota Palembang & Sekitarnya',
+      'description' => 'Solusi distribusi kilat untuk instansi perkantoran, BUMN, dan kepanitiaan event di Kota Palembang, Ogan Ilir, Banyuasin, Musi Banyuasin, hingga Prabumulih.',
       'points' => [
         'Estimasi 1–2 hari kerja setelah cetak tuntas',
         'Subsidi & promo gratis ongkos kirim reguler',
-        'Tersedia opsi kirim instan Same Day via kurir lokal',
+        'Tersedia opsi pengiriman Same Day via kurir instan',
         'Sangat tepat untuk kebutuhan deadline event mendesak',
       ],
     ],
     [
       'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 7.95 7.95"/><path d="M14.05 6A5 5 0 0 1 18 9.95"/></svg>',
-      'badge' => 'EKSPEDISI ANTAR PULAU',
-      'title' => 'Pengiriman Nasional se-Indonesia',
-      'description' => 'Bermitra dengan operator kargo dan kurir nasional untuk menjamin paket sampai selamat di pulau Sumatera, Jawa, Kalimantan, Sulawesi, hingga Papua.',
+      'badge' => 'EKSPEDISI NASIONAL',
+      'title' => 'Pengiriman se-Indonesia',
+      'description' => 'Bermitra dengan operator kargo dan ekspedisi nasional terpercaya untuk menjamin pesanan sampai aman di pulau Sumatera, Jawa, Kalimantan, Sulawesi, hingga Papua.',
       'points' => [
-        'Estimasi 2–6 hari kerja via JNE, J&T, SiCepat, atau Cargo',
-        'Opsi kargo darat/udara ekonomis untuk order skala besar (1.000+ pcs)',
+        'Estimasi 2–5 hari kerja via JNE, J&T, SiCepat, atau Kargo',
+        'Opsi kargo darat/udara ekonomis untuk order skala besar (500+ pcs)',
         'Packing waterproof berlapis bubble wrap tebal anti-basah',
         'Tracking resi real-time yang langsung dikirimkan ke kontak WhatsApp',
       ],
@@ -44,7 +45,7 @@
     [
       'num' => '01',
       'title' => 'Validasi Data Penerima & Deadline',
-      'description' => 'Memastikan kelengkapan nama PIC penerima, nomor telepon aktif, patokan alamat presisi, dan tanggal waktu kegiatan agar tidak terlambat.',
+      'description' => 'Memastikan kelengkapan nama PIC penerima, nomor kontak aktif, patokan alamat presisi, dan target waktu acara agar tidak meleset.',
       'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
     ],
     [
@@ -55,8 +56,8 @@
     ],
     [
       'num' => '03',
-      'title' => 'Proteksi Packing Ekstra Tebal',
-      'description' => 'Lanyard diikat rapi per 50/100 pcs dalam plastik seal tertutup, dimasukkan ke kardus kuat, dan dilapisi plastik bubble wrap tahan hujan.',
+      'title' => 'Proteksi Packing Kedap Air',
+      'description' => 'Lanyard diikat rapi per 50 pcs dalam plastik seal tertutup, dimasukkan ke kardus kuat, dan dilapisi plastik bubble wrap tahan cuaca.',
       'icon' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
     ],
     [
@@ -69,32 +70,32 @@
 
   $shippingEstimates = [
     [
-      'area' => 'Kota Medan, Binjai, & Deli Serdang',
+      'area' => 'Kota Palembang & Sekitarnya (Ogan Ilir, Banyuasin, Prabumulih)',
       'estimate' => '1–2 Hari Kerja',
       'cost' => 'Gratis Ongkir Reguler / Tersedia Kurir Instan',
       'highlight' => true,
     ],
     [
-      'area' => 'Kabupaten Lain di Sumatera Utara',
+      'area' => 'Kabupaten Lain di Sumatera Selatan (Muba, OKU, Lahat, Muara Enim)',
       'estimate' => '2–3 Hari Kerja',
       'cost' => 'Tarif Domestik Terjangkau via Kurir Lokal',
       'highlight' => false,
     ],
     [
-      'area' => 'Provinsi Sumatera (Aceh, Riau, Sumbar, Sumsel, Lampung)',
+      'area' => 'Provinsi Sumatera (Lampung, Jambi, Bengkulu, Riau, Sumbar, Sumut, Aceh)',
       'estimate' => '2–4 Hari Kerja',
-      'cost' => 'Tersedia Promo Subsidi Ongkir / Kargo Bus & Darat',
+      'cost' => 'Tersedia Subsidi Ongkir / Opsi Kargo Darat',
       'highlight' => false,
     ],
     [
-      'area' => 'DKI Jakarta, Jawa Barat, Jateng, Jatim, & Bali',
-      'estimate' => '3–5 Hari Kerja',
+      'area' => 'DKI Jakarta, Jawa Barat, Banten, Jateng, Jatim, & Bali',
+      'estimate' => '2–4 Hari Kerja',
       'cost' => 'Pilihan Layanan Udara Cepat / Kargo Volume',
       'highlight' => false,
     ],
     [
-      'area' => 'Kalimantan, Sulawesi, Maluku, & Papua',
-      'estimate' => '4–7 Hari Kerja',
+      'area' => 'Kalimantan, Sulawesi, Nusa Tenggara, Maluku, & Papua',
+      'estimate' => '3–6 Hari Kerja',
       'cost' => 'Kargo Udara / Laut Resmi dengan Tracking GPS',
       'highlight' => false,
     ],
@@ -104,7 +105,7 @@
 @endphp
 
 <div class="shipping-page">
-  {{-- Hero Section --}}
+  {{-- 1. HERO SECTION --}}
   <section class="shipping-hero" id="shipping-hero" aria-labelledby="shipping-title">
     <div class="home-shell home-shell--wide shipping-hero__container">
       <div class="shipping-hero__content">
@@ -120,22 +121,22 @@
         </h1>
 
         <p class="shipping-hero__desc">
-          Dari Kota Medan langsung menuju pintu kantor Anda. Kami memastikan tiap paket pesanan tali ID card melewati kontrol kualitas ganda, dibungkus kedap air, dan terlindungi penuh hingga tujuan.
+          Dari Kota Palembang langsung menuju pintu kantor Anda. Kami memastikan tiap paket pesanan tali ID card melewati kontrol kualitas ganda, dibungkus kedap air, dan terlindungi penuh hingga tujuan.
         </p>
 
         <div class="shipping-hero__actions">
-          <a class="shipping-btn shipping-btn--primary ptl-button-motion" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" data-button-motion>
+          <a class="shipping-btn shipping-btn--primary" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer">
             <span class="shipping-btn__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
               </svg>
             </span>
-            <span data-button-label>Konsultasi Ongkir via WhatsApp</span>
+            <span>Konsultasi Ongkir via WhatsApp</span>
             <span class="shipping-btn__arrow" aria-hidden="true">→</span>
           </a>
 
-          <a class="shipping-btn shipping-btn--secondary ptl-button-motion" href="{{ route('area') }}" data-button-motion>
-            <span data-button-label>Jangkauan Wilayah Layanan</span>
+          <a class="shipping-btn shipping-btn--secondary" href="{{ route('area') }}">
+            <span>Jangkauan Wilayah Layanan</span>
             <span class="shipping-btn__arrow" aria-hidden="true">→</span>
           </a>
         </div>
@@ -144,10 +145,10 @@
       <div class="shipping-hero__visual">
         <div class="shipping-hero__image-card">
           <img
-            src="/uploads/hero-pengiriman-lanyard-medan.webp"
-            alt="Proses pengemasan dan ekspedisi tali lanyard custom Lanyard Medan"
-            width="1448"
-            height="1086"
+            src="/uploads/hero-pengiriman-lanyard-palembang.webp?v={{ file_exists(public_path('uploads/hero-pengiriman-lanyard-palembang.webp')) ? filemtime(public_path('uploads/hero-pengiriman-lanyard-palembang.webp')) : 1 }}"
+            alt="Proses pengemasan dan ekspedisi tali lanyard custom Lanyard Palembang"
+            width="1536"
+            height="1024"
             loading="eager"
             fetchpriority="high"
             decoding="async"
@@ -157,34 +158,33 @@
     </div>
   </section>
 
-  {{-- Pilihan Layanan Pengiriman (2 Card Grid Seimbang) --}}
+  {{-- 2. SERVICES SECTION --}}
   <section class="shipping-services" id="layanan-pengiriman" aria-labelledby="shipping-services-title">
     <div class="home-shell home-shell--wide">
-      <header class="shipping-section-intro">
-        <p class="shipping-section-eyebrow">PILIHAN LOGISTIK</p>
-        <h2 id="shipping-services-title" class="shipping-section-title">Opsi Pengiriman yang Fleksibel &amp; Ekonomis</h2>
-        <p class="shipping-section-lead">Disesuaikan dengan batas waktu acara dan kuantitas order Anda, mulai dari kurir instan dalam kota hingga armada kargo antar pulau.</p>
+      <header class="shipping-services__intro">
+        <p class="shipping-services__eyebrow">PILIHAN LOGISTIK</p>
+        <h2 id="shipping-services-title" class="shipping-services__title">Opsi Pengiriman yang Fleksibel &amp; Ekonomis</h2>
       </header>
 
       <div class="shipping-services__grid">
         @foreach($shippingServices as $service)
           <article class="shipping-service-card">
             <div class="shipping-service-card__header">
+              <span class="shipping-service-card__badge">{{ $service['badge'] }}</span>
               <div class="shipping-service-card__icon" aria-hidden="true">
                 {!! $service['icon'] !!}
               </div>
-              <span class="shipping-service-card__badge">{{ $service['badge'] }}</span>
             </div>
 
             <h3 class="shipping-service-card__title">{{ $service['title'] }}</h3>
             <p class="shipping-service-card__desc">{{ $service['description'] }}</p>
 
-            <ul class="shipping-service-card__points">
+            <ul class="shipping-service-card__list">
               @foreach($service['points'] as $point)
                 <li>
-                  <span class="shipping-service-card__check" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                  </span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
                   <span>{{ $point }}</span>
                 </li>
               @endforeach
@@ -195,19 +195,18 @@
     </div>
   </section>
 
-  {{-- Alur 4 Tahap Penanganan Paket --}}
+  {{-- 3. PACKAGING PROCESS SECTION --}}
   <section class="shipping-process" id="alur-pengiriman" aria-labelledby="shipping-process-title">
     <div class="home-shell home-shell--wide">
-      <header class="shipping-section-intro">
-        <p class="shipping-section-eyebrow">STANDARDISASI PACKING</p>
-        <h2 id="shipping-process-title" class="shipping-section-title">Prosedur Pengemasan 4 Lapis Perlindungan</h2>
-        <p class="shipping-section-lead">Menjaga lanyard tetap rapi, bersih, tidak kusut, dan terhindar dari air hujan selama dalam perjalanan ekspedisi.</p>
+      <header class="shipping-process__intro">
+        <p class="shipping-process__eyebrow">STANDARISASI PACKING</p>
+        <h2 id="shipping-process-title" class="shipping-process__title">Prosedur Pengemasan 4 Lapis Perlindungan</h2>
       </header>
 
-      <div class="shipping-process__grid" role="list">
+      <div class="shipping-process__grid">
         @foreach($shippingSteps as $step)
-          <article class="shipping-step-card" role="listitem">
-            <div class="shipping-step-card__meta">
+          <article class="shipping-step-card">
+            <div class="shipping-step-card__header">
               <span class="shipping-step-card__num">{{ $step['num'] }}</span>
               <div class="shipping-step-card__icon" aria-hidden="true">
                 {!! $step['icon'] !!}
@@ -221,75 +220,59 @@
     </div>
   </section>
 
-  {{-- Tabel Estimasi Waktu & Biaya Pengiriman --}}
+  {{-- 4. ESTIMATES TABLE SECTION --}}
   <section class="shipping-estimates" id="estimasi-pengiriman" aria-labelledby="shipping-estimates-title">
     <div class="home-shell home-shell--wide shipping-estimates__layout">
-      {{-- Sisi Kiri: Sticky Intro Card --}}
-      <div class="shipping-estimates__intro-card">
-        <span class="shipping-estimates__tag">PANDUAN TARIF &amp; DURASI</span>
-        <h2 id="shipping-estimates-title">Perkiraan Waktu Tiba ke Lokasi Anda</h2>
-        <p>Durasi pengiriman dihitung sejak paket diserahterimakan ke pihak ekspedisi rekanan. Estimasi dapat berbeda tergantung paket reguler atau opsi kargo kilat yang disepakati.</p>
+      <aside class="shipping-estimates__intro-card">
+        <p class="shipping-estimates__eyebrow">ESTIMASI WAKTU TIBA</p>
+        <h2 id="shipping-estimates-title" class="shipping-estimates__title">Perkiraan Waktu Tiba ke Lokasi Anda</h2>
+        <p class="shipping-estimates__lead">
+          Jadwal estimasi pengiriman dihitung sejak paket diserahkan ke agen logistik. Kami siap merekomendasikan opsi ekspedisi tercepat untuk kebutuhan mendesak.
+        </p>
 
-        <a class="shipping-btn shipping-btn--primary ptl-button-motion" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" data-button-motion>
-          <span class="shipping-btn__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </span>
-          <span data-button-label>Cek Tarif ke Alamat Saya</span>
+        <a class="shipping-btn shipping-btn--primary" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer">
+          <span>Cek Ongkir Tujuan Anda</span>
           <span class="shipping-btn__arrow" aria-hidden="true">→</span>
         </a>
-      </div>
+      </aside>
 
-      {{-- Sisi Kanan: Tabel Modern --}}
       <div class="shipping-estimates__table-card">
-        <table class="shipping-table">
-          <caption class="sr-only">Tabel estimasi waktu dan biaya pengiriman lanyard Lanyard Medan</caption>
-          <thead>
-            <tr>
-              <th scope="col">Wilayah Tujuan</th>
-              <th scope="col">Estimasi Perjalanan</th>
-              <th scope="col">Opsi Ongkir</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($shippingEstimates as $estimate)
-              <tr class="{{ $estimate['highlight'] ? 'is-highlight' : '' }}">
-                <th scope="row" data-label="Wilayah">
-                  <div class="shipping-table__area">
-                    <span>{{ $estimate['area'] }}</span>
-                    @if($estimate['highlight'])
-                      <span class="shipping-table__promo-pill">PROMO MEDAN</span>
-                    @endif
-                  </div>
-                </th>
-                <td data-label="Estimasi">{{ $estimate['estimate'] }}</td>
-                <td data-label="Biaya" class="shipping-table__cost">{{ $estimate['cost'] }}</td>
+        <div class="shipping-table-wrap">
+          <table class="shipping-table">
+            <thead>
+              <tr>
+                <th scope="col">Wilayah Tujuan</th>
+                <th scope="col">Estimasi Perjalanan</th>
+                <th scope="col">Opsi Ongkir</th>
               </tr>
-            @endforeach
-          </tbody>
-        </table>
-
-        <div class="shipping-estimates__footer-note">
-          <span class="shipping-estimates__note-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="1" y="3" width="15" height="13" rx="1"/>
-              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
-              <circle cx="5.5" cy="18.5" r="2.5"/>
-              <circle cx="18.5" cy="18.5" r="2.5"/>
-            </svg>
-          </span>
-          <p>Untuk pesanan berjumlah besar (di atas 1.000 pcs), kami menyediakan rute kargo khusus kereta/darat dan kapal laut dengan biaya ongkir yang jauh lebih hemat.</p>
+            </thead>
+            <tbody>
+              @foreach($shippingEstimates as $row)
+                <tr class="{{ $row['highlight'] ? 'is-highlight' : '' }}">
+                  <td>
+                    <div class="shipping-table__area">{{ $row['area'] }}</div>
+                    @if($row['highlight'])
+                      <span class="shipping-table__promo-badge">PROMO PALEMBANG</span>
+                    @endif
+                  </td>
+                  <td>{{ $row['estimate'] }}</td>
+                  <td>{{ $row['cost'] }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
-  {{-- FAQ Pengiriman --}}
+  {{-- 5. FAQ SECTION --}}
   <section class="shipping-faq" id="faq-pengiriman" aria-labelledby="shipping-faq-title">
     <div class="home-shell home-shell--wide shipping-faq__container">
       <header class="shipping-faq__intro">
         <p class="shipping-faq__eyebrow">FAQ EKSPEDISI</p>
         <h2 id="shipping-faq-title" class="shipping-faq__title">Pertanyaan Seputar Pengiriman &amp; Ekspedisi</h2>
-        <p class="shipping-faq__lead">Informasi praktis mengenai pembagian nomor resi, asuransi paket hilang, dan jadwal pengiriman harian.</p>
+        <p class="shipping-faq__lead">Informasi praktis mengenai pengiriman hari yang sama, pelacakan nomor resi, dan asuransi proteksi paket.</p>
       </header>
 
       <div class="shipping-faq__list">
@@ -310,83 +293,8 @@
     </div>
   </section>
 
-  {{-- Closing CTA Card --}}
-  <section class="home-cta" id="cta-section" aria-labelledby="home-cta-title">
-    <div class="home-shell home-shell--wide">
-      <div class="home-cta__card">
-        <div class="home-cta__content">
-          <div class="home-cta__eyebrow-wrap">
-            <span class="home-cta__sparkle-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
-            </span>
-            <span class="home-cta__eyebrow">DISTRIBUSI CEPAT &amp; AMAN</span>
-          </div>
-
-          <h2 id="home-cta-title" class="home-cta__title">
-            Mau Cek Ongkir Terbaik untuk <span class="home-cta__title-accent">Pesanan Anda?</span>
-          </h2>
-
-          <p class="home-cta__desc">
-            Sampaikan kota/kabupaten tujuan dan jumlah pesanan yang Anda butuhkan. Tim kami siap menghitungkan estimasi ongkir paling hemat serta merekomendasikan ekspedisi tercepat.
-          </p>
-
-          <div class="home-cta__buttons">
-            <a class="home-cta__btn home-cta__btn--primary ptl-button-motion" href="{{ $whatsappUrl }}" target="_blank" rel="noopener noreferrer" data-button-motion>
-              <span class="home-cta__btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                </svg>
-              </span>
-              <span data-button-label>Tanya Ongkir via WhatsApp</span>
-              <span class="home-cta__btn-arrow" aria-hidden="true">→</span>
-            </a>
-
-            <a class="home-cta__btn home-cta__btn--secondary ptl-button-motion" href="{{ route('products.index') }}" data-button-motion>
-              <span data-button-label>Lihat Katalog Produk</span>
-              <span class="home-cta__btn-arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
-
-          <div class="home-cta__benefits">
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Desain Gratis</span>
-            </div>
-            <span class="home-cta__benefit-divider" aria-hidden="true"></span>
-
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Produksi Cepat 1–3 Hari</span>
-            </div>
-            <span class="home-cta__benefit-divider" aria-hidden="true"></span>
-
-            <div class="home-cta__benefit-item">
-              <span class="home-cta__check-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              </span>
-              <span>Bahan Premium</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="home-cta__visual">
-          <img
-            class="home-cta__img"
-            src="/uploads/home-cta-banner.webp"
-            alt="Pengiriman tali lanyard custom berkualitas tinggi Lanyard Medan"
-            width="800"
-            height="600"
-            loading="lazy"
-            decoding="async"
-          >
-        </div>
-      </div>
-    </div>
-  </section>
+  {{-- 6. CLOSING CTA SECTION --}}
+  @include('components.home-cta-editorial')
 </div>
 
 @include('components.footer')

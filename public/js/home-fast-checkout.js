@@ -21,19 +21,23 @@
     const quantity = safeQuantity();
     quantityInput.value = quantity;
     const note = String(values.get('note') || '').trim();
+    
     const message = [
-      'Halo Lanyard Medan, saya ingin pesan lanyard custom.',
-      `Nama: ${String(values.get('name') || '').trim()}`,
-      `Kebutuhan: ${values.get('need')}`,
-      `Jumlah: ${quantity.toLocaleString('id-ID')} pcs`,
-      `Ukuran: ${values.get('size')}`,
-      `Target selesai: ${values.get('deadline')}`,
-      ...(note ? [`Catatan: ${note}`] : []),
-      'Mohon dibantu konsultasi dan quotationnya.',
+      'Halo Lanyard Palembang, saya ingin memesan tali lanyard custom (Fast Checkout):',
+      `• Nama/PIC: ${String(values.get('name') || '').trim()}`,
+      `• Kategori: ${values.get('need')}`,
+      `• Jumlah: ${quantity.toLocaleString('id-ID')} pcs`,
+      `• Lebar Tali: ${values.get('size')}`,
+      `• Target Selesai: ${values.get('deadline')}`,
+      ...(note ? [`• Catatan Khusus: ${note}`] : []),
+      '',
+      'Mohon dibantu konfirmasi penawaran harga resmi dan layout mockup 3D gratisnya. Terima kasih!'
     ].join('\n');
 
     const url = `https://wa.me/6282210200700?text=${encodeURIComponent(message)}`;
-    status.textContent = 'Membuka WhatsApp dengan detail pesanan Anda.';
+    if (status) {
+      status.textContent = 'Membuka WhatsApp dengan rincian pesanan Anda...';
+    }
     window.open(url, '_blank', 'noopener,noreferrer');
   });
 

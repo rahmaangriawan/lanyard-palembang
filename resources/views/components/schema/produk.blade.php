@@ -6,8 +6,8 @@
   $collectionSchema = [
     '@context' => 'https://schema.org',
     '@type' => 'CollectionPage',
-    'name' => 'Katalog Produk Tali Lanyard Custom & Aksesoris | Lanyard Medan',
-    'description' => 'Katalog lengkap tali lanyard cetak sublimasi digital, polyester, sablon, ID card holder, dan aksesoris logam berkualitas di Medan.',
+    'name' => 'Katalog Produk Tali Lanyard Custom & Aksesoris | Lanyard Palembang',
+    'description' => 'Katalog lengkap tali lanyard cetak sublimasi digital, polyester, ID card holder, dan aksesoris logam berkualitas di Palembang.',
     'url' => $siteUrl . '/produk',
     'inLanguage' => 'id-ID',
     'isPartOf' => ['@id' => $siteUrl . '/#website'],
@@ -52,7 +52,7 @@
   $offerCatalog = [
     '@context' => 'https://schema.org',
     '@type' => 'OfferCatalog',
-    'name' => 'Katalog Lanyard Custom & Aksesoris Lanyard Medan',
+    'name' => 'Katalog Lanyard Custom & Aksesoris Lanyard Palembang',
     'url' => $siteUrl . '/produk',
   ];
 @endphp

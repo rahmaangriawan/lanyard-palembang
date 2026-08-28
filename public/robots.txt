@@ -6,4 +6,4 @@ Disallow: /login/
 Disallow: /storage/
 Disallow: /*?q=
 
-Sitemap: https://lanyardmedan.com/sitemap.xml
+Sitemap: https://lanyardpalembang.com/sitemap.xml

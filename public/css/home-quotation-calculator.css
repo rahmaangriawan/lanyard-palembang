@@ -1,17 +1,49 @@
 /* ==========================================================================
-   Quotation Calculator — Modern, Clean & Professional Redesign (#9E0C17)
+   Quotation Calculator — Lanyard Palembang
+   Theme: Modern Warm Editorial & Antique Gold
    ========================================================================== */
+
+:root {
+  --calc-ink: #151515;
+  --calc-ink-soft: #1A1510;
+  --calc-muted: #5C4F3E;
+  --calc-subtle: #8A837A;
+  
+  --calc-gold: #C3944B;
+  --calc-gold-dark: #A07A2B;
+  --calc-gold-strong: #8C6D1D;
+  --calc-gold-light: #F5D98A;
+  --calc-gold-hover: #E4C469;
+  --calc-gold-soft: #FAF3E0;
+  --calc-gold-border: #E5D2A8;
+
+  --calc-bg: #ffffff;
+  --calc-surface: #FAF7F2;
+  --calc-surface-warm: #F7F3E8;
+  --calc-border: #EDE4D1;
+  --calc-border-subtle: #F0E4D5;
+  --calc-line: #F2ECE1;
+}
+
+.home-quotation-calculator,
+.home-quotation-calculator *,
+.home-quotation-calculator *::before,
+.home-quotation-calculator *::after {
+  box-sizing: border-box;
+}
 
 .home-quotation-calculator {
   position: relative;
-  padding: 80px 0;
+  padding: clamp(64px, 7vw, 96px) 0;
   background: #ffffff;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--calc-line);
+  color: var(--calc-ink);
+  font-family: inherit;
 }
 
 .home-quotation-calculator__layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  grid-template-columns: minmax(0, 0.58fr) minmax(0, 0.42fr);
   align-items: center;
   gap: clamp(36px, 5vw, 64px);
 }
@@ -24,9 +56,16 @@
 }
 
 .home-quotation-calculator__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin: 0 0 14px;
-  color: #9E0C17;
-  font-size: 13.5px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 9999px;
+  background: var(--calc-gold-soft);
+  border: 1px solid var(--calc-gold-border);
+  color: var(--calc-gold-dark);
+  font-size: 12px;
   font-weight: 850;
   letter-spacing: 0.1em;
   line-height: 1.2;
@@ -35,10 +74,10 @@
 
 .home-quotation-calculator__title {
   margin: 0 0 16px;
-  color: #0f172a;
+  color: var(--calc-ink);
   font-size: clamp(2.2rem, 3.5vw, 3.1rem);
   font-weight: 850;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   line-height: 1.15;
 }
 
@@ -47,25 +86,53 @@
 }
 
 .home-quotation-calculator__title-accent {
-  color: #9E0C17;
+  color: var(--calc-gold);
+  background: linear-gradient(135deg, var(--calc-gold-dark) 0%, var(--calc-gold) 60%, var(--calc-gold-strong) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .home-quotation-calculator__desc {
-  margin: 0;
-  color: #475569;
+  margin: 0 0 24px;
+  color: var(--calc-muted);
   font-size: 16px;
-  line-height: 1.65;
+  line-height: 1.68;
+}
+
+.home-quotation-calculator__highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-quotation-calculator__highlights li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--calc-ink);
+}
+
+.home-quotation-calculator__highlights li svg {
+  width: 16px;
+  height: 16px;
+  color: var(--calc-gold-dark);
+  flex-shrink: 0;
 }
 
 /* --------------------------------------------------------------------------
-   Right Column: Modern White Card (#ffffff + #e2e8f0 border + shadow)
+   Right Column: Modern White Card
    -------------------------------------------------------------------------- */
 .home-quotation-calculator__form {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--calc-border);
   border-radius: 24px;
   padding: clamp(24px, 3.5vw, 36px);
-  background: #ffffff;
-  box-shadow: 0 12px 36px rgb(15 23 42 / 0.05);
+  background: var(--calc-surface);
+  box-shadow: 0 12px 36px rgba(26, 21, 16, 0.05);
 }
 
 .home-quotation-calculator__section {
@@ -78,15 +145,13 @@
 .home-quotation-calculator__label {
   display: block;
   margin: 0 0 12px;
-  color: #0f172a;
-  font-size: 15px;
-  font-weight: 750;
+  color: var(--calc-ink);
+  font-size: 14.5px;
+  font-weight: 800;
   line-height: 1.35;
 }
 
-/* --------------------------------------------------------------------------
-   Section 1: Ukuran Lanyard (3-col Cards)
-   -------------------------------------------------------------------------- */
+/* Section 1: Ukuran Lanyard (3-col Cards) */
 .home-quotation-calculator__packages {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -99,13 +164,13 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 6px;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 14px;
+  border: 1.5px solid var(--calc-border);
+  border-radius: 16px;
   padding: 16px 14px;
   background: #ffffff;
-  color: #0f172a;
+  color: var(--calc-ink);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 180ms ease;
 }
 
 .home-quotation-calculator__package input {
@@ -115,10 +180,10 @@
 }
 
 .home-quotation-calculator__package-name {
-  font-size: 14.5px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 800;
   line-height: 1.3;
-  color: #334155;
+  color: var(--calc-ink);
 }
 
 .home-quotation-calculator__package-price {
@@ -126,41 +191,31 @@
 }
 
 .home-quotation-calculator__package-price strong {
-  color: #0f172a;
-  font-size: 16.5px;
-  font-weight: 800;
+  color: var(--calc-gold-strong);
+  font-size: 16px;
+  font-weight: 850;
   line-height: 1.2;
 }
 
 .home-quotation-calculator__package-price small {
   margin-left: 2px;
-  color: #64748b;
-  font-size: 13px;
+  color: var(--calc-subtle);
+  font-size: 12px;
   font-weight: 500;
 }
 
 .home-quotation-calculator__package:hover {
-  border-color: #cbd5e1;
-  background: #fafafa;
+  border-color: var(--calc-gold);
+  background: #ffffff;
 }
 
 .home-quotation-calculator__package.is-selected {
-  border-color: #9E0C17;
-  background: #fffafa;
-  box-shadow: none;
+  border-color: var(--calc-gold);
+  background: var(--calc-gold-soft);
+  box-shadow: 0 4px 14px rgba(245, 217, 138, 0.35);
 }
 
-.home-quotation-calculator__package.is-selected .home-quotation-calculator__package-name {
-  color: #0f172a;
-}
-
-.home-quotation-calculator__package.is-selected .home-quotation-calculator__package-price strong {
-  color: #9E0C17;
-}
-
-/* --------------------------------------------------------------------------
-   Section 2: Jumlah & Bahan (2-col Grid)
-   -------------------------------------------------------------------------- */
+/* Section 2: Jumlah & Bahan (2-col Grid) */
 .home-quotation-calculator__fields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -179,14 +234,15 @@
   width: 100%;
   min-height: 48px;
   overflow: hidden;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid var(--calc-border);
   border-radius: 12px;
   background: #ffffff;
-  transition: border-color 0.15s ease;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .home-quotation-calculator__quantity:focus-within {
-  border-color: #9E0C17;
+  border-color: var(--calc-gold);
+  box-shadow: 0 0 0 3px rgba(195, 148, 75, 0.18);
 }
 
 .home-quotation-calculator__quantity button {
@@ -195,26 +251,27 @@
   justify-content: center;
   border: 0;
   background: #ffffff;
-  color: #9E0C17;
+  color: var(--calc-gold-strong);
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
 .home-quotation-calculator__quantity button:hover {
-  background: #fef2f2;
+  background: var(--calc-gold-soft);
+  color: var(--calc-ink);
 }
 
 .home-quotation-calculator__quantity input {
   min-width: 0;
   border: 0;
-  border-inline: 1px solid #e2e8f0;
+  border-inline: 1px solid var(--calc-border);
   background: transparent;
-  color: #0f172a;
+  color: var(--calc-ink);
   font: inherit;
   font-size: 16px;
-  font-weight: 750;
+  font-weight: 800;
   text-align: center;
   outline: none;
 }
@@ -229,39 +286,40 @@
   width: 100%;
   min-height: 48px;
   padding: 0 42px 0 16px;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid var(--calc-border);
   border-radius: 12px;
   background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238A837A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 16px 16px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  color: #0f172a;
+  color: var(--calc-ink);
   font: inherit;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14.5px;
+  font-weight: 700;
   outline: none;
   cursor: pointer;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .home-quotation-calculator__select-wrap select:focus {
-  border-color: #9E0C17;
+  border-color: var(--calc-gold);
+  box-shadow: 0 0 0 3px rgba(195, 148, 75, 0.18);
 }
 
 .home-quotation-calculator__field small {
   display: block;
   margin-top: 8px;
-  color: #64748b;
-  font-size: 13px;
+  color: var(--calc-muted);
+  font-size: 12.5px;
   line-height: 1.4;
 }
 
 /* --------------------------------------------------------------------------
-   Summary Price Box: Red Focal Point (#9E0C17)
+   Summary Price Box: Dark/Gold Focal Point
    -------------------------------------------------------------------------- */
 .home-quotation-calculator__result {
   display: flex;
@@ -269,11 +327,12 @@
   justify-content: space-between;
   gap: 20px;
   margin-top: 26px;
-  border-radius: 18px;
-  padding: 22px 26px;
-  background: #9E0C17;
+  border-radius: 20px;
+  padding: 24px 28px;
+  background: var(--calc-ink);
   color: #ffffff;
-  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 28px rgba(26, 21, 16, 0.12);
 }
 
 .home-quotation-calculator__total-info {
@@ -282,10 +341,10 @@
 
 .home-quotation-calculator__total-label {
   display: block;
-  color: rgb(255 255 255 / 0.82);
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  color: var(--calc-gold-light);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -302,8 +361,8 @@
 .home-quotation-calculator__total-breakdown {
   display: block;
   margin-top: 4px;
-  color: rgb(255 255 255 / 0.78);
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13.5px;
   font-weight: 500;
 }
 
@@ -313,36 +372,34 @@
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  border-radius: 12px;
-  padding: 0 22px;
-  background: #ffffff;
-  color: #9E0C17;
-  font-size: 15px;
+  gap: 8px;
+  border-radius: 9999px;
+  padding: 0 24px;
+  background: var(--calc-gold-light);
+  border: 1px solid var(--calc-gold);
+  color: var(--calc-ink-soft);
+  font-size: 14.5px;
   font-weight: 800;
   text-decoration: none;
-  box-shadow: none;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: all 180ms ease;
 }
 
 .home-quotation-calculator__btn:hover {
+  background: var(--calc-gold-hover);
   transform: translateY(-2px);
-  background: #f8fafc;
-  box-shadow: none;
+  box-shadow: 0 6px 18px rgba(245, 217, 138, 0.45);
 }
 
 .home-quotation-calculator__btn svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
-/* --------------------------------------------------------------------------
-   Information Note
-   -------------------------------------------------------------------------- */
+/* Information Note */
 .home-quotation-calculator__disclaimer {
   margin: 18px 0 0;
-  color: #64748b;
-  font-size: 13.5px;
+  color: var(--calc-muted);
+  font-size: 13px;
   line-height: 1.55;
   text-align: left;
 }
@@ -366,11 +423,14 @@
     margin-inline: auto;
     max-width: 540px;
   }
+  .home-quotation-calculator__highlights {
+    align-items: center;
+  }
 }
 
 @media (max-width: 640px) {
   .home-quotation-calculator {
-    padding: 60px 0;
+    padding: 56px 0;
   }
   .home-quotation-calculator__form {
     border-radius: 20px;
@@ -396,20 +456,8 @@
     padding: 20px;
     gap: 18px;
   }
-  .home-quotation-calculator__total-info {
-    text-align: center;
-  }
   .home-quotation-calculator__btn {
     width: 100%;
-  }
-  .home-quotation-calculator__disclaimer {
-    text-align: center;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-quotation-calculator__package,
-  .home-quotation-calculator__btn {
-    transition: none;
+    justify-content: center;
   }
 }

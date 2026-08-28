@@ -1,5 +1,5 @@
 @php
-  $ctaWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Medan, saya mau konsultasi desain dan harga lanyard custom.');
+  $ctaWhatsappUrl = 'https://wa.me/6282210200700?text='.rawurlencode('Halo Lanyard Palembang, saya mau konsultasi desain dan harga lanyard custom.');
 @endphp
 
 <section class="home-cta" id="cta-section" aria-labelledby="home-cta-title">
@@ -92,7 +92,7 @@
         <img
           class="home-cta__img"
           src="/uploads/home-cta-banner.webp"
-          alt="Lanyard custom berkualitas tinggi Lanyard Medan"
+          alt="Lanyard custom berkualitas tinggi Lanyard Palembang"
           width="800"
           height="600"
           loading="lazy"

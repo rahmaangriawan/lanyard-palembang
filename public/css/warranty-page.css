@@ -1,19 +1,51 @@
 /* ==========================================================================
-   Warranty Page — Modern, Minimal & Clean (#9E0C17 on White)
+   Warranty Page — Lanyard Palembang
+   Theme: Modern Warm Editorial & Antique Gold
    ========================================================================== */
 
+:root {
+  --war-ink: #151515;
+  --war-ink-soft: #1A1510;
+  --war-muted: #5C4F3E;
+  --war-subtle: #8A837A;
+  
+  --war-gold: #C3944B;
+  --war-gold-dark: #A07A2B;
+  --war-gold-strong: #8C6D1D;
+  --war-gold-light: #F5D98A;
+  --war-gold-hover: #E4C469;
+  --war-gold-soft: #FAF3E0;
+  --war-gold-border: #E5D2A8;
+
+  --war-bg: #ffffff;
+  --war-surface: #FAF7F2;
+  --war-surface-warm: #F7F3E8;
+  --war-border: #EDE4D1;
+  --war-border-subtle: #F0E4D5;
+  --war-line: #F2ECE1;
+}
+
+.warranty-page,
+.warranty-page *,
+.warranty-page *::before,
+.warranty-page *::after {
+  box-sizing: border-box;
+}
+
 .warranty-page {
-  background: #ffffff;
-  color: #0f172a;
+  background: var(--war-bg);
+  color: var(--war-ink);
+  overflow-x: hidden;
+  font-family: inherit;
 }
 
 /* --------------------------------------------------------------------------
    1. Hero Section
    -------------------------------------------------------------------------- */
 .warranty-hero {
-  padding: clamp(48px, 6vw, 76px) 0 clamp(40px, 4vw, 56px);
+  padding: clamp(56px, 7vw, 88px) 0 clamp(44px, 5vw, 64px);
   background: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--war-line);
 }
 
 .warranty-hero__container {
@@ -27,18 +59,18 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 580px;
+  max-width: 620px;
 }
 
 .warranty-hero__eyebrow-wrap {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   padding: 6px 14px 6px 10px;
   border-radius: 9999px;
-  background: #fff5f5;
-  border: 1px solid #fee2e2;
+  background: var(--war-gold-soft);
+  border: 1px solid var(--war-gold-border);
 }
 
 .warranty-hero__sparkle {
@@ -47,41 +79,44 @@
   justify-content: center;
   width: 16px;
   height: 16px;
-  color: #9E0C17;
+  color: var(--war-gold-dark);
 }
 
 .warranty-hero__sparkle svg {
-  width: 15px;
-  height: 15px;
+  width: 100%;
+  height: 100%;
 }
 
 .warranty-hero__eyebrow {
-  color: #9E0C17;
-  font-size: 11.5px;
+  color: var(--war-gold-dark);
+  font-size: 12px;
   font-weight: 850;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   line-height: 1.2;
   text-transform: uppercase;
 }
 
 .warranty-hero__title {
   margin: 0 0 16px;
-  color: #0f172a;
+  color: var(--war-ink);
   font-size: clamp(2.2rem, 3.8vw, 3.4rem);
   font-weight: 850;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   line-height: 1.15;
 }
 
 .warranty-hero__title-accent {
-  color: #9E0C17;
+  color: var(--war-gold);
+  background: linear-gradient(135deg, var(--war-gold-dark) 0%, var(--war-gold) 60%, var(--war-gold-strong) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .warranty-hero__desc {
   margin: 0 0 28px;
-  color: #475569;
+  color: var(--war-muted);
   font-size: 16px;
-  line-height: 1.65;
+  line-height: 1.68;
 }
 
 .warranty-hero__actions {
@@ -98,14 +133,14 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 12px;
-  padding: 0 22px;
+  border-radius: 9999px;
+  padding: 0 24px;
   font-size: 14.5px;
   font-weight: 800;
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
-  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .warranty-btn__icon {
@@ -131,26 +166,30 @@
 }
 
 .warranty-btn--primary {
-  background: #9E0C17;
-  color: #ffffff;
-  border: 1.5px solid #9E0C17;
+  background: var(--war-gold-light);
+  color: var(--war-ink-soft);
+  border: 1.5px solid var(--war-gold);
+  box-shadow: 0 4px 16px rgba(245, 217, 138, 0.4);
 }
 
 .warranty-btn--primary:hover {
-  background: #800a12;
-  border-color: #800a12;
+  background: var(--war-gold-hover);
+  border-color: var(--war-gold-dark);
   transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(245, 217, 138, 0.55);
 }
 
 .warranty-btn--secondary {
   background: #ffffff;
-  color: #9E0C17;
-  border: 1.5px solid #9E0C17;
+  color: var(--war-gold-strong);
+  border: 1.5px solid var(--war-gold);
 }
 
 .warranty-btn--secondary:hover {
-  background: #fff5f5;
+  background: var(--war-gold-light);
+  color: var(--war-ink-soft);
   transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(245, 217, 138, 0.35);
 }
 
 .warranty-hero__visual {
@@ -161,9 +200,9 @@
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-  border: 1px solid #e8e8e8;
-  background: #ffffff;
-  box-shadow: 0 12px 32px rgb(15 23 42 / 0.06);
+  border: 1px solid var(--war-border);
+  background: var(--war-surface);
+  box-shadow: 0 14px 36px rgba(26, 21, 16, 0.07);
 }
 
 .warranty-hero__image-card img {
@@ -176,220 +215,179 @@
 }
 
 /* --------------------------------------------------------------------------
-   Shared Section Intro
-   -------------------------------------------------------------------------- */
-.warranty-section-intro {
-  max-width: 760px;
-  margin: 0 auto clamp(36px, 4vw, 48px);
-  text-align: center;
-}
-
-.warranty-section-eyebrow {
-  margin: 0 0 12px;
-  color: #9E0C17;
-  font-size: 13.5px;
-  font-weight: 850;
-  letter-spacing: 0.1em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.warranty-section-title {
-  margin: 0 0 14px;
-  color: #0f172a;
-  font-size: clamp(2.1rem, 3.5vw, 3.2rem);
-  font-weight: 850;
-  letter-spacing: -0.04em;
-  line-height: 1.2;
-}
-
-.warranty-section-lead {
-  margin: 0;
-  color: #64748b;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-/* --------------------------------------------------------------------------
-   2. 4 Pillars of Warranty Commitment
+   2. Commitments Grid (4 Columns)
    -------------------------------------------------------------------------- */
 .warranty-commitments {
-  padding: clamp(56px, 6vw, 80px) 0;
-  background: #fafafa;
-  border-bottom: 1px solid #f1f5f9;
+  padding: clamp(56px, 7vw, 88px) 0;
+  background: var(--war-surface);
+  border-bottom: 1px solid var(--war-line);
 }
 
 .warranty-commitments__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 24px);
+  gap: clamp(18px, 2vw, 24px);
 }
 
 .warranty-commitment-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid #e8e8e8;
-  border-radius: 20px;
   background: #ffffff;
-  padding: 26px 24px;
-  box-shadow: 0 4px 16px rgb(15 23 42 / 0.02);
+  border: 1px solid var(--war-border);
+  border-radius: 20px;
+  padding: 26px 22px;
+  box-shadow: 0 4px 18px rgba(26, 21, 16, 0.03);
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 
 .warranty-commitment-card:hover {
   transform: translateY(-3px);
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 28px rgb(15 23 42 / 0.05);
+  border-color: var(--war-gold);
+  box-shadow: 0 10px 28px rgba(26, 21, 16, 0.06);
 }
 
 .warranty-commitment-card__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: #fff5f5;
-  border: 1px solid #fee2e2;
-  color: #9E0C17;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--war-gold-soft);
+  border: 1px solid var(--war-gold-border);
+  color: var(--war-gold-dark);
   margin-bottom: 18px;
 }
 
 .warranty-commitment-card__icon svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 .warranty-commitment-card__title {
   margin: 0 0 8px;
-  color: #0f172a;
+  color: var(--war-ink);
   font-size: 17px;
-  font-weight: 800;
+  font-weight: 850;
   letter-spacing: -0.02em;
-  line-height: 1.3;
 }
 
 .warranty-commitment-card__desc {
   margin: 0;
-  color: #64748b;
-  font-size: 14px;
+  color: var(--war-muted);
+  font-size: 13.5px;
   line-height: 1.6;
 }
 
 /* --------------------------------------------------------------------------
-   3. Coverage Matrix Section (2 Comparison Cards)
+   3. Coverage Matrix (2 Cards)
    -------------------------------------------------------------------------- */
 .warranty-coverage {
-  padding: clamp(56px, 6vw, 88px) 0;
+  padding: clamp(64px, 7vw, 96px) 0;
   background: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--war-line);
+}
+
+.warranty-section-intro {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(36px, 5vw, 52px);
+}
+
+.warranty-section-eyebrow {
+  margin: 0 0 10px;
+  color: var(--war-gold-dark);
+  font-size: 12.5px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.warranty-section-title {
+  margin: 0 0 12px;
+  color: var(--war-ink);
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.warranty-section-lead {
+  margin: 0;
+  color: var(--war-muted);
+  font-size: 15.5px;
+  line-height: 1.6;
 }
 
 .warranty-coverage__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(24px, 3vw, 36px);
+  gap: clamp(24px, 3vw, 32px);
 }
 
 .warranty-coverage-card {
   display: flex;
   flex-direction: column;
-  border: 1.5px solid #e8e8e8;
+  background: var(--war-surface);
+  border: 1px solid var(--war-border);
   border-radius: 24px;
-  background: #ffffff;
-  padding: clamp(28px, 4vw, 40px);
-  box-shadow: 0 4px 20px rgb(15 23 42 / 0.03);
-  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
-}
-
-.warranty-coverage-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgb(15 23 42 / 0.06);
-}
-
-.warranty-coverage-card--covered {
-  border-color: #bbf7d0;
-  background: #fafdfa;
-}
-
-.warranty-coverage-card--covered:hover {
-  border-color: #86efac;
-}
-
-.warranty-coverage-card--excluded {
-  border-color: #fed7aa;
-  background: #fffdfb;
-}
-
-.warranty-coverage-card--excluded:hover {
-  border-color: #fdba74;
+  padding: clamp(28px, 4vw, 36px);
+  box-shadow: 0 4px 20px rgba(26, 21, 16, 0.03);
 }
 
 .warranty-coverage-card__header {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--war-border);
 }
 
 .warranty-coverage-card__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: #dcfce7;
-  color: #16a34a;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--war-gold-soft);
+  border: 1px solid var(--war-gold-border);
+  color: var(--war-gold-dark);
   flex-shrink: 0;
 }
 
 .warranty-coverage-card__icon svg {
-  width: 26px;
-  height: 26px;
-}
-
-.warranty-coverage-card__icon--excluded {
-  background: #ffedd5;
-  color: #ea580c;
+  width: 22px;
+  height: 22px;
 }
 
 .warranty-coverage-card__badge {
   display: inline-block;
   padding: 3px 10px;
   border-radius: 6px;
+  background: var(--war-gold-soft);
+  border: 1px solid var(--war-gold-border);
+  color: var(--war-gold-strong);
   font-size: 11px;
   font-weight: 850;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 4px;
 }
 
-.warranty-coverage-card__badge--covered {
-  background: #dcfce7;
-  color: #15803d;
-}
-
-.warranty-coverage-card__badge--excluded {
-  background: #ffedd5;
-  color: #c2410c;
-}
-
 .warranty-coverage-card__title {
   margin: 0;
-  color: #0f172a;
-  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  color: var(--war-ink);
+  font-size: 19px;
   font-weight: 850;
   letter-spacing: -0.02em;
-  line-height: 1.25;
 }
 
 .warranty-coverage-card__list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -399,97 +397,86 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  color: #334155;
-  font-size: 14.5px;
-  line-height: 1.55;
+  font-size: 14px;
+  color: var(--war-ink);
+  line-height: 1.5;
 }
 
 .warranty-coverage-card__check {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 18px;
   height: 18px;
-  color: #16a34a;
+  color: var(--war-gold-dark);
   flex-shrink: 0;
   margin-top: 2px;
 }
 
 .warranty-coverage-card__check svg {
-  width: 17px;
-  height: 17px;
-}
-
-.warranty-coverage-card__bullet {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  color: #ea580c;
-  font-size: 18px;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 1px;
+  width: 16px;
+  height: 16px;
 }
 
 /* --------------------------------------------------------------------------
-   4. 4 Claim Steps Section
+   4. Claim Steps (4 Columns + Notice Box)
    -------------------------------------------------------------------------- */
-.warranty-steps {
-  padding: clamp(56px, 6vw, 88px) 0;
-  background: #fafafa;
-  border-bottom: 1px solid #f1f5f9;
+.warranty-claim {
+  padding: clamp(64px, 7vw, 96px) 0;
+  background: var(--war-surface);
+  border-bottom: 1px solid var(--war-line);
 }
 
-.warranty-steps__grid {
+.warranty-claim__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 24px);
+  gap: clamp(18px, 2vw, 24px);
   margin-bottom: 32px;
 }
 
 .warranty-step-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid #e8e8e8;
-  border-radius: 20px;
   background: #ffffff;
-  padding: 24px;
-  box-shadow: 0 4px 14px rgb(15 23 42 / 0.02);
+  border: 1px solid var(--war-border);
+  border-radius: 20px;
+  padding: 24px 22px;
+  box-shadow: 0 4px 18px rgba(26, 21, 16, 0.03);
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 
 .warranty-step-card:hover {
   transform: translateY(-3px);
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 24px rgb(15 23 42 / 0.05);
+  border-color: var(--war-gold);
+  box-shadow: 0 8px 24px rgba(26, 21, 16, 0.06);
 }
 
-.warranty-step-card__meta {
+.warranty-step-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
 .warranty-step-card__num {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 850;
-  color: #9E0C17;
+  color: var(--war-gold-strong);
   letter-spacing: -0.04em;
+  line-height: 1;
 }
 
 .warranty-step-card__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
-  background: #fff5f5;
-  border: 1px solid #fee2e2;
-  color: #9E0C17;
+  background: var(--war-gold-soft);
+  border: 1px solid var(--war-gold-border);
+  color: var(--war-gold-dark);
 }
 
 .warranty-step-card__icon svg {
@@ -499,60 +486,69 @@
 
 .warranty-step-card__title {
   margin: 0 0 8px;
-  color: #0f172a;
+  color: var(--war-ink);
   font-size: 16.5px;
-  font-weight: 800;
-  letter-spacing: -0.015em;
+  font-weight: 850;
+  letter-spacing: -0.02em;
   line-height: 1.35;
 }
 
 .warranty-step-card__desc {
   margin: 0;
-  color: #64748b;
+  color: var(--war-muted);
   font-size: 13.5px;
   line-height: 1.6;
 }
 
-.warranty-steps__notice {
+/* Notice Box */
+.warranty-claim__notice {
   display: flex;
   align-items: center;
-  gap: 14px;
-  border-radius: 16px;
-  padding: 16px 24px;
-  background: #ffffff;
-  border: 1.5px solid #fee2e2;
-  box-shadow: 0 4px 16px rgb(158 12 23 / 0.04);
+  gap: 18px;
+  background: var(--war-gold-soft);
+  border: 1.5px solid var(--war-gold-border);
+  border-radius: 18px;
+  padding: 18px 24px;
 }
 
-.warranty-steps__notice-icon {
+.warranty-claim__notice-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  color: #9E0C17;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid var(--war-gold-border);
+  color: var(--war-gold-dark);
   flex-shrink: 0;
 }
 
-.warranty-steps__notice-icon svg {
-  width: 22px;
-  height: 22px;
+.warranty-claim__notice-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
-.warranty-steps__notice p {
-  margin: 0;
-  color: #334155;
-  font-size: 14px;
-  line-height: 1.55;
+.warranty-claim__notice-text strong {
+  display: block;
+  color: var(--war-ink);
+  font-size: 14.5px;
+  font-weight: 850;
+}
+
+.warranty-claim__notice-text p {
+  margin: 2px 0 0;
+  color: var(--war-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
 }
 
 /* --------------------------------------------------------------------------
    5. FAQ Section
    -------------------------------------------------------------------------- */
 .warranty-faq {
-  padding: clamp(56px, 6vw, 84px) 0;
+  padding: clamp(64px, 7vw, 96px) 0;
   background: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
 }
 
 .warranty-faq__container {
@@ -569,8 +565,8 @@
 
 .warranty-faq__eyebrow {
   margin: 0 0 10px;
-  color: #9E0C17;
-  font-size: 13.5px;
+  color: var(--war-gold-dark);
+  font-size: 12.5px;
   font-weight: 850;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -578,16 +574,16 @@
 
 .warranty-faq__title {
   margin: 0 0 12px;
-  color: #0f172a;
-  font-size: clamp(2.1rem, 3.5vw, 3.2rem);
+  color: var(--war-ink);
+  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
   font-weight: 850;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   line-height: 1.2;
 }
 
 .warranty-faq__lead {
   margin: 0;
-  color: #64748b;
+  color: var(--war-muted);
   font-size: 15px;
   line-height: 1.6;
 }
@@ -599,17 +595,17 @@
 }
 
 .warranty-faq__item {
-  border: 1.5px solid #e8e8e8;
-  border-radius: 18px;
-  background: #ffffff;
+  border: 1px solid var(--war-border);
+  border-radius: 16px;
+  background: var(--war-surface);
   overflow: hidden;
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .warranty-faq__item[open] {
-  border-color: #9E0C17;
-  background-color: #ffffff;
-  box-shadow: 0 6px 20px rgb(158 12 23 / 0.05);
+  border-color: var(--war-gold);
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(26, 21, 16, 0.05);
 }
 
 .warranty-faq__summary {
@@ -617,10 +613,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 20px 24px;
+  padding: 18px 22px;
   cursor: pointer;
   list-style: none;
-  color: #0f172a;
+  color: var(--war-ink);
   font-size: 15.5px;
   font-weight: 750;
   line-height: 1.35;
@@ -631,19 +627,15 @@
   display: none;
 }
 
-.warranty-faq__item[open] .warranty-faq__summary {
-  color: #9E0C17;
-}
-
 .warranty-faq__chevron {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  color: #64748b;
+  width: 20px;
+  height: 20px;
+  color: var(--war-subtle);
+  transition: transform 200ms ease, color 200ms ease;
   flex-shrink: 0;
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease;
 }
 
 .warranty-faq__chevron svg {
@@ -653,12 +645,12 @@
 
 .warranty-faq__item[open] .warranty-faq__chevron {
   transform: rotate(180deg);
-  color: #9E0C17;
+  color: var(--war-gold-dark);
 }
 
 .warranty-faq__answer {
-  padding: 0 24px 22px;
-  color: #475569;
+  padding: 0 22px 20px;
+  color: var(--war-muted);
   font-size: 14.5px;
   line-height: 1.65;
 }
@@ -679,10 +671,11 @@
     max-width: 100%;
   }
   .warranty-commitments__grid,
-  .warranty-steps__grid {
+  .warranty-claim__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+    gap: 18px;
   }
+  .warranty-coverage__grid,
   .warranty-faq__container {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -697,7 +690,7 @@
     padding: 36px 0 40px;
   }
   .warranty-hero__title {
-    font-size: 26px;
+    font-size: clamp(1.85rem, 7vw, 2.4rem);
   }
   .warranty-hero__desc {
     font-size: 14.5px;
@@ -712,19 +705,23 @@
     width: 100%;
   }
   .warranty-commitments__grid,
-  .warranty-coverage__grid,
-  .warranty-steps__grid {
+  .warranty-claim__grid {
     grid-template-columns: 1fr;
     gap: 14px;
   }
-  .warranty-commitment-card,
-  .warranty-coverage-card,
-  .warranty-step-card {
+  .warranty-coverage-card {
     padding: 22px 18px;
     border-radius: 18px;
   }
-  .warranty-steps__notice {
-    padding: 14px 16px;
+  .warranty-step-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+  .warranty-claim__notice {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 18px;
+    gap: 12px;
   }
   .warranty-faq__summary {
     padding: 16px 18px;
@@ -740,7 +737,6 @@
   .warranty-btn,
   .warranty-btn__arrow,
   .warranty-commitment-card,
-  .warranty-coverage-card,
   .warranty-step-card,
   .warranty-faq__item,
   .warranty-faq__chevron {

@@ -32,7 +32,7 @@
     <div class="home-price-packages__grid" aria-label="Pilihan paket harga lanyard">
       @foreach ($pricePackages as $package)
         @php
-          $quotationUrl = 'https://wa.me/6282210200700?text=' . rawurlencode('Halo Lanyard Medan, saya ingin pesan paket ' . $package['name'] . '.');
+          $quotationUrl = 'https://wa.me/6282210200700?text=' . rawurlencode('Halo Lanyard Palembang, saya ingin pesan paket ' . $package['name'] . '.');
         @endphp
         <article class="home-price-packages__card{{ !empty($package['featured']) ? ' is-featured' : '' }}" data-sr="fade" data-sr-delay="{{ $loop->index * 90 }}">
           @if (!empty($package['featured']))

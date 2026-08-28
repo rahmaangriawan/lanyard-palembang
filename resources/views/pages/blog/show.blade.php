@@ -60,7 +60,7 @@
   $rawTags = (string) ($post->tags ?? '');
   $parsedTags = collect(explode(',', $rawTags))->map(fn ($tag) => trim($tag))->filter()->unique();
 
-  $authorName = $post->author?->name ?: 'Tim Lanyard Medan';
+  $authorName = $post->author?->name ?: 'Tim Lanyard Palembang';
   $authorAvatar = $imageUrl($post->author?->avatar);
   $authorBio = $post->author ? $post->author->bio : AuthorProfile::DEFAULT_BIO;
   $authorSlug = $post->author?->slug ?: Str::slug($authorName);
@@ -68,7 +68,7 @@
   $blogShowCssVersion = file_exists($blogShowCssPath) ? filemtime($blogShowCssPath) : 1;
 @endphp
 
-@section('title', $post->metaTitle ?: $post->title . ' | Lanyard Medan')
+@section('title', $post->metaTitle ?: $post->title . ' | Lanyard Palembang')
 @section('meta_description', $post->metaDescription)
 @section('seo_type', 'article')
 @section('seo_canonical', route('blog.show', ['slug' => $post->slug]))
@@ -100,7 +100,7 @@
               <a href="/kategori/{{ $post->category->slug }}">{{ $post->category->name }}</a>
               <span class="article-breadcrumb__sep" aria-hidden="true">/</span>
             @endif
-            <span class="article-breadcrumb__current" aria-current="page">Panduan</span>
+            <span class="article-breadcrumb__current" aria-current="page">{{ Str::limit($post->title, 60) }}</span>
           </nav>
 
           <div class="article-eyebrow-wrap">
@@ -325,7 +325,7 @@
             <div class="article-sidebar-cta">
               <h4>Butuh Lanyard Custom?</h4>
               <p>Konsultasikan logo, bahan, dan estimasi biaya secara gratis bersama tim kami.</p>
-              <a href="https://wa.me/6282210200700?text={{ rawurlencode('Halo Lanyard Medan, saya membaca artikel ' . $post->title . ' dan ingin konsultasi pesanan.') }}" target="_blank" rel="noopener noreferrer" class="article-sidebar-cta__btn">
+              <a href="https://wa.me/6282210200700?text={{ rawurlencode('Halo Lanyard Palembang, saya membaca artikel ' . $post->title . ' dan ingin konsultasi pesanan.') }}" target="_blank" rel="noopener noreferrer" class="article-sidebar-cta__btn">
                 <span>Chat via WhatsApp</span>
                 <span aria-hidden="true">&rarr;</span>
               </a>

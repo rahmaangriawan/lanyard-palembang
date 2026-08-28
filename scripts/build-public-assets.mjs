@@ -20,6 +20,7 @@ const bundles = {
   'public/build/public/home.min.css': [
     'public/css/homepage.css',
     'public/css/home-quotation-calculator.css',
+    'public/css/home-fast-checkout.css',
     'public/css/home-blog.css',
   ],
   'public/build/public/site.min.js': [
@@ -34,6 +35,7 @@ const bundles = {
     'public/js/home-blog-preview.js',
     'public/js/home-metrics-scroll.js',
     'public/js/home-quotation-calculator.js',
+    'public/js/home-fast-checkout.js',
   ],
 };
 

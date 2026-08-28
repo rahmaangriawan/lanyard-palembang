@@ -2,14 +2,14 @@
   $siteUrlRaw = config('app.url');
   if (empty($siteUrlRaw)) { $siteUrlRaw = url('/'); }
   $siteUrl = rtrim($siteUrlRaw, '/');
-  $logoUrl = $siteUrl . '/uploads/lanyard-medan-logo.webp';
-  $logoHeaderUrl = $siteUrl . '/uploads/lanyard-medan-logo.webp';
+  $logoUrl = $siteUrl . '/uploads/lanyard-palembang-logo.webp';
+  $logoHeaderUrl = $siteUrl . '/uploads/lanyard-palembang-logo.webp';
 
   $orgSchema = [
     '@context' => 'https://schema.org',
     '@type' => 'Organization',
     '@id' => $siteUrl . '/#organization',
-    'name' => 'Lanyard Medan',
+    'name' => 'Lanyard Palembang',
     'url' => $siteUrl . '/',
     'logo' => [
       '@type' => 'ImageObject',
@@ -19,16 +19,16 @@
     ],
     'image' => $logoUrl,
     'telephone' => '+6282210200700',
-    'email' => 'info@lanyardmedan.com',
+    'email' => 'info@lanyardpalembang.com',
     'description' => 'Cetak lanyard custom premium di Indonesia dengan pilihan bahan berkualitas, desain profesional, dan layanan pemesanan mudah. Bebas ongkir Indonesia Raya.',
     'sameAs' => [
       'https://wa.me/6282210200700',
     ],
     'address' => [
       '@type' => 'PostalAddress',
-      'streetAddress' => 'Jl. Soekarno-Hatta, Medan',
-      'addressLocality' => 'Medan',
-      'addressRegion' => 'Sumatera Utara',
+      'streetAddress' => 'Jl. Sultan Mahmud Badaruddin II, Sukarami',
+      'addressLocality' => 'Palembang',
+      'addressRegion' => 'Sumatera Selatan',
       'addressCountry' => 'ID',
     ],
   ];
@@ -37,33 +37,32 @@
     '@context' => 'https://schema.org',
     '@type' => 'LocalBusiness',
     '@id' => $siteUrl . '/#localbusiness',
-    'name' => 'Lanyard Medan',
+    'name' => 'Lanyard Palembang',
     'url' => $siteUrl . '/',
     'logo' => $logoUrl,
     'image' => $logoHeaderUrl,
     'telephone' => '+6282210200700',
     'priceRange' => 'Rp 1000 - Rp 50000',
-    'description' => 'Cetak lanyard custom premium dari Medan, Sumatera Utara dengan pengiriman ke seluruh Indonesia.',
+    'description' => 'Cetak lanyard custom premium dari Palembang, Sumatera Selatan dengan pengiriman ke seluruh Indonesia.',
     'address' => [
       '@type' => 'PostalAddress',
-      'streetAddress' => 'Jl. Soekarno-Hatta, Medan',
-      'addressLocality' => 'Medan',
-      'addressRegion' => 'Sumatera Utara',
-      'postalCode' => '20125',
+      'streetAddress' => 'Jl. Sultan Mahmud Badaruddin II, Sukarami',
+      'addressLocality' => 'Palembang',
+      'addressRegion' => 'Sumatera Selatan',
       'addressCountry' => 'ID',
     ],
     'geo' => [
       '@type' => 'GeoCoordinates',
-      'latitude' => 3.5952,
-      'longitude' => 98.6722,
+      'latitude' => -2.9761,
+      'longitude' => 104.7754,
     ],
     'openingHours' => 'Mo-Sa 08:00-20:00',
     'areaServed' => [
-      ['@type' => 'City', 'name' => 'Medan'],
-      ['@type' => 'City', 'name' => 'Deli Serdang'],
-      ['@type' => 'City', 'name' => 'Binjai'],
-      ['@type' => 'City', 'name' => 'Percut Sei Tuan'],
-      ['@type' => 'City', 'name' => 'Lubuk Pakam'],
+      ['@type' => 'City', 'name' => 'Palembang'],
+      ['@type' => 'City', 'name' => 'Banyuasin'],
+      ['@type' => 'City', 'name' => 'Ogan Ilir'],
+      ['@type' => 'City', 'name' => 'Indralaya'],
+      ['@type' => 'City', 'name' => 'Prabumulih'],
     ],
   ];
 
@@ -72,7 +71,7 @@
     '@type' => 'WebSite',
     '@id' => $siteUrl . '/#website',
     'url' => $siteUrl . '/',
-    'name' => 'Lanyard Medan',
+    'name' => 'Lanyard Palembang',
     'publisher' => ['@id' => $siteUrl . '/#organization'],
     'inLanguage' => 'id-ID',
     'potentialAction' => [
